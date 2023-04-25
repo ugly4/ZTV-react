@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+.Plashka{
+  height: 100px;
+  width: 100%;
+  background-color: #141414;
+}
