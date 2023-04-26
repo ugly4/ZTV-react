@@ -1,8 +1,8 @@
 import React from "react";
-import "./Teams.css"
+import "./Top.css"
 import "../../src/auto-layout.css"
 
-const Teams = () => (
+const Top = () => (
     <div class="top_teams">
           <p id="top_date">Топ команд на 01.04.2023</p>
           <div class="col_center_gap10">
@@ -148,4 +148,4 @@ const Teams = () => (
         </div>
 );
 
-export default Teams;
+export default Top;
