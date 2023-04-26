@@ -1,5 +1,5 @@
 .user_back{
-    width: 745px;
+    width: 715px;
     height: auto;
 
     margin-left: auto;
@@ -51,7 +51,7 @@
 }
 
 .player_info{
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -61,8 +61,95 @@
 }
 
 .player_nick p{
-    font-size: 20px;
+    font-size: 18px;
     font-family: var(--text-medium-lcg);
     color: white;
     margin: 0;
+}
+
+/*Отображение Название-инфа со строкой снизу*/
+.devider_info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.devider_info_line{
+    height: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.devider_info_line p{
+    font-size: 12px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+    margin: 0;
+}
+.devider_info_line span{
+    font-size: 12px;
+    font-family: var(--text-medium-lcg);
+    color: white;
+    margin: 0;
+}
+.devider_subline{
+    width: 100%;
+    border: 1px solid var(--base-08);
+}
+
+.devider_team{
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 4px
+}
+
+.devider_team_logo{
+    width: 20px;
+    height: 20px;
+}
+.devider_team img{
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+
+.social_media{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 5px;
+}
+.social_media img{
+    height: 13px;
+    user-select: none;
+}
+
+/*Так как у нас через <img> задаётся всё, то цвет меняется через filter*/
+/*Тут регулируем цвет для неактивного элемента*/
+.inactive_colored{
+    filter: invert(29%) sepia(19%) saturate(0%) hue-rotate(254deg) brightness(75%) contrast(96%);
+}
+.inactive{
+    filter: invert(29%) sepia(19%) saturate(0%) hue-rotate(254deg) brightness(50%) contrast(99%);
+}
+
+/*Тут регулируем цвет для активного элемента*/
+.active_colored:hover{
+    filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(190%) contrast(101%);
+}
+.active:hover{
+    filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(280%) contrast(121%);
 }

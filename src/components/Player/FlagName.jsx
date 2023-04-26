@@ -1,7 +1,7 @@
 import React from "react";
 import "./FlagName.css"
 
-function FlagName(props) {
+export default function FlagName(props) {
     return(
     <div class="flag_name">
         <img src={props.flagPath} alt={props.country}/>
@@ -9,5 +9,3 @@ function FlagName(props) {
     </div>
     );
 }
-
-export default FlagName;
