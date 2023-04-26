@@ -1,5 +1,6 @@
 import React from "react";
 import FlagName from "../components/Player/FlagName";
+import Trophies from "../components/Player/Trophies";
 import "./Player.css"
 import "../../src/Team/Team.css"
 
@@ -10,21 +11,39 @@ function Player(){
     const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
     const social = {
         items : [
-            {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white"}, 
-            {id: 2, src: "img/social/Steam.svg", alt: "Steam", active: true, color: "white"},
-            {id: 3, src: "img/social/Discord.svg", alt: "Discord", active: true, color: "colored"},
-            {id: 4, src: "img/social/Faceit.svg", alt: "Faceit", active: true, color: "colored"}
+            {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white", link: "https://vk.com/tarnada"}, 
+            {id: 2, src: "img/social/Steam.svg", alt: "Steam", active: true, color: "white", link: "https://steamcommunity.com/id/tamada4a"},
+            {id: 3, src: "img/social/Discord.svg", alt: "Discord", active: false, color: "colored", link:""},
+            {id: 4, src: "img/social/Faceit.svg", alt: "Faceit", active: true, color: "colored", link: "https://www.faceit.com/ru/players/VolceChat"}
         ]
     }
 
     const trophies = {
         items : [
             {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
-            {id: 1, src: "img/trophies/cup2.svg", alt: "cup2"},
-            {id: 1, src: "img/trophies/cup3.svg", alt: "cup3"},
-            {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
-            {id: 1, src: "img/trophies/cup2.svg", alt: "cup2"},
-            {id: 1, src: "img/trophies/cup3.svg", alt: "cup3"}
+            {id: 2, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 3, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 4, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 5, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 6, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 7, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 8, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 9, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 10, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 11, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 12, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 13, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 14, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 15, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 16, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 17, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 18, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 19, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 20, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 21, src: "img/trophies/cup3.svg", alt: "cup3"},
+            {id: 22, src: "img/trophies/cup1.svg", alt: "cup1"},
+            {id: 23, src: "img/trophies/cup2.svg", alt: "cup2"},
+            {id: 24, src: "img/trophies/cup3.svg", alt: "cup3"}
         ]
     }
 
@@ -62,7 +81,9 @@ function Player(){
                         <span>Социальные сети</span>
                         <div class="social_media">
                             {social.items.map((item) => 
-                            <img key={item.id} className={item.active === true ? item.color === "white" ? 'active' : 'active_colored': item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
+                            item.active === true ? <a href={item.link}><img key={item.id} className={item.color === "white" ? 'active' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
+                            <img key={item.id} className={item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
+                            // <img key={item.id} className={item.active === true ? item.color === "white" ? 'active' : 'active_colored': item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
                             )}
                         </div>
                     </div>
@@ -70,9 +91,8 @@ function Player(){
             </div>
         </div>
         <div class="devider_line"></div>
-        
+        <Trophies items={trophies.items}/>
     </div>
-    
     );
 }
 

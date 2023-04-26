@@ -114,8 +114,8 @@
 }
 
 .devider_team_logo{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 .devider_team img{
     width: 100%;
@@ -136,6 +136,14 @@
     height: 13px;
     user-select: none;
 }
+.social_media a{
+    height: 13px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+}
 
 /*Так как у нас через <img> задаётся всё, то цвет меняется через filter*/
 /*Тут регулируем цвет для неактивного элемента*/
@@ -147,8 +155,15 @@
 }
 
 /*Тут регулируем цвет для активного элемента*/
+.active_colored{
+    cursor: pointer;
+}
 .active_colored:hover{
     filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(190%) contrast(101%);
+}
+
+.active{
+    cursor: pointer;
 }
 .active:hover{
     filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(280%) contrast(121%);
