@@ -13,7 +13,7 @@ const Main = () => (
             <Route path="/" element={<Matches/>} />
             <Route path="/results" element={<Results/>} />
             <Route path="/top" element={<Top/>} />
-            <Route path="/player" element={<Player/>} />
+            <Route path="/player/*" element={<Player/>} />
         </Routes>
       </main>
 );

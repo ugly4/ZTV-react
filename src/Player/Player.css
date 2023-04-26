@@ -150,7 +150,7 @@
 .inactive_colored{
     filter: invert(29%) sepia(19%) saturate(0%) hue-rotate(254deg) brightness(75%) contrast(96%);
 }
-.inactive{
+.inactive_elem{
     filter: invert(29%) sepia(19%) saturate(0%) hue-rotate(254deg) brightness(50%) contrast(99%);
 }
 
@@ -162,9 +162,9 @@
     filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(190%) contrast(101%);
 }
 
-.active{
+.active_elem{
     cursor: pointer;
 }
-.active:hover{
+.active_elem:hover{
     filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(280%) contrast(121%);
 }

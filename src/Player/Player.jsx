@@ -1,6 +1,7 @@
 import React from "react";
-import FlagName from "../components/Player/FlagName";
-import Trophies from "../components/Player/Trophies";
+import FlagName from "../components/FlagName/FlagName";
+import Trophies from "../components/Trophies/Trophies";
+import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
 import "./Player.css"
 import "../../src/Team/Team.css"
 
@@ -47,6 +48,17 @@ function Player(){
         ]
     }
 
+    const stats = {
+        kills : 99999,
+        deaths : 3131,
+        kd : 31.93,
+        kdd : "+96868",
+        hsp : 49.3,
+        dpr : 60.2,
+        maps : 6250,
+        kpm : 16
+    }
+
     return(
     <div>
         <div class="user_back">
@@ -81,8 +93,8 @@ function Player(){
                         <span>Социальные сети</span>
                         <div class="social_media">
                             {social.items.map((item) => 
-                            item.active === true ? <a href={item.link}><img key={item.id} className={item.color === "white" ? 'active' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
-                            <img key={item.id} className={item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
+                            item.active === true ? <a href={item.link}><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
+                            <img key={item.id} className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={item.src} alt={item.alt}/>
                             // <img key={item.id} className={item.active === true ? item.color === "white" ? 'active' : 'active_colored': item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
                             )}
                         </div>
@@ -92,6 +104,7 @@ function Player(){
         </div>
         <div class="devider_line"></div>
         <Trophies items={trophies.items}/>
+        <PlayerTabs stat={stats}/>
     </div>
     );
 }
