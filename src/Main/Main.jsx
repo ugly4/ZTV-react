@@ -2,16 +2,18 @@ import {Routes, Route} from 'react-router-dom'
 import Matches from '../Matches/Matches'
 import Tournaments from '../Tournaments/Tournaments'
 import Results from '../Results/Results'
-import Teams from '../Teams/Teams'
+import Top from '../Top/Top'
+import Player from '../Player/Player'
 import './Main.css'
 
 const Main = () => (
     <main>
         <Routes>
             <Route path="/tournaments" element={<Tournaments/>} />
-            <Route path="/matches" element={<Matches/>} />
-            <Route path="/" element={<Results/>} />
-            <Route path="/teams" element={<Teams/>} />
+            <Route path="/" element={<Matches/>} />
+            <Route path="/results" element={<Results/>} />
+            <Route path="/top" element={<Top/>} />
+            <Route path="/player" element={<Player/>} />
         </Routes>
       </main>
 );

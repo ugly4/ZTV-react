@@ -23,19 +23,19 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li className='Navigation-link'>
-                        <NavLink to='/matches' style={({ isActive }) => ({ 
+                        <NavLink to='/' style={({ isActive }) => ({ 
                             color: isActive ? 'var(--text-01)' : 'var(--text-02)'})}>
                                 Матчи
                         </NavLink>
                     </li>
                     <li className='Navigation-link' >
-                        <NavLink to='/' style={({ isActive }) => ({ 
+                        <NavLink to='/results' style={({ isActive }) => ({ 
                             color: isActive ? 'var(--text-01)' : 'var(--text-02)' })}>
                                 Результаты
                         </NavLink>
                     </li>
                     <li className='Navigation-link'>
-                        <NavLink to='/teams' style={({ isActive }) => ({ 
+                        <NavLink to='/top' style={({ isActive }) => ({ 
                             color: isActive ? 'var(--text-01)' : 'var(--text-02)' })}>
                                 Топ команд
                         </NavLink>
