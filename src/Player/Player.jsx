@@ -71,7 +71,7 @@ function Player(){
         kills : 99999,
         deaths : 3131,
         kd : 31.93,
-        kdd : "+96868",
+        kdd : 96868,
         hsp : 49.3,
         dpr : 60.2,
         maps : 6250,
