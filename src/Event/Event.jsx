@@ -21,6 +21,9 @@ function Event(){
         {place: "7-16ое", prize: "Сертификаты клуба"}
     ]
 
+    const type = "team";
+    const part_header = type === "team" ? "Команды" : "Участники";
+
     return(
         <div>
             <div className="event_image_header">
@@ -64,7 +67,7 @@ function Event(){
             </div>
             <div className="space_wrapper">
                 <div className="container_name">
-                    <div className="event_col"><p>Команды</p></div>
+                    <div className="event_col"><p>{part_header}</p></div>
                     <div className="participants_wrapper">
                         <Participant registred={registred} total={total}/>
                     </div>
@@ -74,14 +77,6 @@ function Event(){
                     <div className="event_col"><p>Призовые места</p></div>
                     <div className="participants_wrapper">
                         <PrizePlace prize={prizePlace}/>
-                        {/* <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div>
-                        <div className="item"><div className="tba_team"></div></div> */}
                     </div>
                 </div>
 
