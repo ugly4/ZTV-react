@@ -1,8 +1,8 @@
 import React from "react";
-import ResultMaker from "../components/ResultMaker/ResultMaker";
-import "./Results.css";
+import ResultMaker from "../../components/ResultMaker/ResultMaker";
+import "../../Results/Results.css";
 
-function Results() {
+function TeamResults() {
 
     const results = [
         {date: "15.03.2023", matches: [
@@ -29,4 +29,4 @@ function Results() {
     );
 }
 
-export default Results;
+export default TeamResults;
