@@ -1,0 +1,164 @@
+.event_header{
+    margin: 0 auto;
+
+    width: 715px;
+    height: auto;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--base-09);
+}
+
+.info_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 3px;
+}
+.info_wrapper p{
+    font-family: var(--text-regular-lcg);
+    color: white;
+    font-size: 14px;
+    margin: 0;
+
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.info_wrapper span{
+    font-family: var(--text-regular-lcg);
+    color: var(--white40);
+    font-size: 12px;
+}
+
+.event_date_wrapper{
+    width: 179px;
+}
+
+.event_prize_wrapper{
+    width: 83px;
+}
+
+.event_fee_wrapper{
+    width: 60px;
+}
+
+.event_team_wrapper{
+    width: 63px;
+}
+
+.event_type_wrapper{
+    width: 45px;
+}
+
+.event_format_wrapper{
+    width: 47px;
+}
+
+.event_location_wrapper{
+    width: 135px;
+}
+
+.event_image_header{
+    margin: 0 auto;
+
+    width: 745px;
+    height: 148px;
+    overflow: hidden;
+    object-position: center;
+    position: relative;
+}
+.event_image_header img{
+    margin: -5px 0px 0px -100px;
+}
+
+.crop_header img{
+    width: 940px;
+    height: 230px;
+}
+
+.participants_wrapper{
+    width: 640px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+/* .event_col{
+    width: 640px;
+    margin: 0 auto;
+} */
+.event_col p{
+    font-size: 12px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+    margin: 0;
+}
+
+.container_name{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 5px;
+}
+
+.space_wrapper{
+    padding-top: 25px;
+
+    width: 640px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.maps{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.event_info{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+
+    width: 280px;
+
+    background: var(--base-09);
+}
+.event_info p{
+    font-size: 12px;
+    font-family: var(--text-regular-lcg);
+    color: var(--white50);
+    margin: 0;
+}
+
+.event_info_bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0px;
+}
