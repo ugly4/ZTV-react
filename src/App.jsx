@@ -1,6 +1,8 @@
 import logotype from './logo.svg';
 import './App.css';
 import './variables.css'
+import './buttons.css'
+import './auto-layout.css'
 import Header from './Header/Header';
 import Main from './Main/Main'
 import Footer from './Footer/Footer';

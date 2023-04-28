@@ -1,7 +1,6 @@
 import React from "react";
 import './Login.css'
 import './splash_window.css'
-import './buttons.css'
 import './text_fields.css'
 
 const Login = ({active, setActive, children}) =>(
