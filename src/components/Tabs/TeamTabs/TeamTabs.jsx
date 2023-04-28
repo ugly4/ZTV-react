@@ -1,12 +1,12 @@
 import React from "react";
-import {Routes, Route, NavLink} from 'react-router-dom'
-import Team from "../../../Team/Team"
-import Description from "./Tabs/Description/Description"
-import Matches from "./Tabs/Matches/Matches"
-import Achievments from "./Tabs/Achievments/Achievments"
-import Events from "./Tabs/Events/Events"
-import Structure from "./Tabs/Structure/Structure"
-import "./TeamTabs.css"
+import {Routes, Route, NavLink} from 'react-router-dom';
+import Team from "../../../Team/Team";
+import Description from "./Tabs/Description/Description";
+import Achievments from "./Tabs/Achievments/Achievments";
+import Events from "./Tabs/Events/Events";
+import Structure from "./Tabs/Structure/Structure";
+import Matches from "../Matches/Matches";
+import "./TeamTabs.css";
 
 function TeamTabs(props){
     console.log(props.location);

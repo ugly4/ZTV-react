@@ -1,7 +1,7 @@
 import React from "react";
 import {Routes, Route, NavLink} from 'react-router-dom'
 import Stats from "./Tabs/Stats/Stats";
-import Matches from "./Tabs/Matches/Matches";
+import Matches from "../Matches/Matches";
 import Rosters from "./Tabs/Rosters/Rosters";
 import "./PlayerTabs.css"
 
