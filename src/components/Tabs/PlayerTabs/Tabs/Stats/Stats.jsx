@@ -32,7 +32,7 @@ function Stats(props){
             <div class="devider_stats">
                 <div class="devider_stats_line">
                     <span>Убийства - Смерти</span>
-                    <p style={{color: props.stats.kdd.includes('+') ? 'var(--base-11)' : props.stats.kdd.includes('-') ? 'red' : 'white'}}>{props.stats.kdd}</p>
+                    <p style={{color: props.stats.kdd > 0 ? 'var(--base-11)' : props.stats.kdd < 0 ? 'red' : 'white'}}>{props.stats.kdd}</p>
                 </div>
                 <div class="devider_subline"></div>
             </div>
