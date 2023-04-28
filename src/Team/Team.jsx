@@ -9,7 +9,7 @@ import InfoContainer from "./InfoContainer/InfoContainer";
 function Team() {
     
     const trophies = {
-        items : [
+      trophies : [
             {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
             {id: 2, src: "img/trophies/cup2.svg", alt: "cup2"},
             {id: 3, src: "img/trophies/cup3.svg", alt: "cup3"},
@@ -102,7 +102,7 @@ function Team() {
 
             <div class="devider_line"></div>
 
-            <Trophies items={trophies.items}/>
+            <Trophies items={trophies}/>
 
         </div>
           
