@@ -2,6 +2,7 @@ import React from "react";
 import {Routes, Route, NavLink} from 'react-router-dom'
 import Stats from "./Tabs/Stats/Stats";
 import Matches from "./Tabs/Matches/Matches";
+import Rosters from "./Tabs/Rosters/Rosters";
 import "./PlayerTabs.css"
 
 function PlayerTabs(props){
@@ -44,7 +45,7 @@ function PlayerTabs(props){
                 <Route path="matches" element={<Matches/>}/>
                 <Route path="events" element={<p>Турниры игрока</p>}/>
                 <Route path="achievements" element={<p>Достижения игрока</p>}/>
-                <Route path="teams" element={<p>Команды игрока</p>}/>
+                <Route path="teams" element={<Rosters rosters={props.rosters}/>}/>
             </Routes>
         </div>
     );

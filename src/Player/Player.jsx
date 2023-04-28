@@ -20,7 +20,7 @@ function Player(){
     }
 
     const trophies = {
-        items : [
+        trophies : [
             {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
             {id: 2, src: "img/trophies/cup2.svg", alt: "cup2"},
             {id: 3, src: "img/trophies/cup3.svg", alt: "cup3"},
@@ -48,6 +48,25 @@ function Player(){
         ]
     }
 
+    const rosters = {
+        teams: [
+            {period: "Сентябрь 2020 - Настоящее время", team: "Amfier", teamLogo: "img/teams_logo/Amfier.png", id: 1, trophies:[
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 414, src: "img/trophies/cup3.svg", alt: "cup3"}
+            ]},
+            {period: "Август 2020 - Сентябрь 2020", team: "Walhalla", teamLogo: "img/teams_logo/Walhalla.png", id: 2, trophies:[]},
+            {period: "Февраль 2019 - Июнь 2019", team: "Amfier", teamLogo: "img/teams_logo/Amfier.png", id: 3, trophies:[
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
+                {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"}]}
+        ]
+    }
+
     const stats = {
         kills : 99999,
         deaths : 3131,
@@ -70,7 +89,7 @@ function Player(){
             </div>
             <div class="player_info">
                 <div class="player_nick"><p>{nick}</p></div>
-                <FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин"/>
+                <FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин" height='11px'/>
                 <div class="devider_info">
                     <div class="devider_info_line">
                         <span>Возраст</span>
@@ -95,7 +114,6 @@ function Player(){
                             {social.items.map((item) => 
                             item.active === true ? <a href={item.link}><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
                             <img key={item.id} className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={item.src} alt={item.alt}/>
-                            // <img key={item.id} className={item.active === true ? item.color === "white" ? 'active' : 'active_colored': item.color === "white" ? 'inactive' : 'inactive_colored'} src={item.src} alt={item.alt}/>
                             )}
                         </div>
                     </div>
@@ -103,8 +121,8 @@ function Player(){
             </div>
         </div>
         <div class="devider_line"></div>
-        <Trophies items={trophies.items}/>
-        <PlayerTabs stat={stats}/>
+        <Trophies items={trophies}/>
+        <PlayerTabs stat={stats} rosters={rosters.teams}/>
     </div>
     );
 }
