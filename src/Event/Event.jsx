@@ -3,22 +3,29 @@ import FlagName from "../components/FlagName/FlagName";
 import Map from "../components/Map/Map";
 import Participant from "../components/Participant/Participant";
 import PrizePlace from "../components/PrizePlace/PrizePlace";
-import "./Event.css"
+import "./Event.css";
 
 function Event(){
     const maps = ["Ancient", "Anubis", "Inferno", "Mirage", "Nuke", "Overpass", "Vertigo"]
     const registred = [
         {name: "Tamada", src: "img/players/Tamada.png", team: "Amfier", teamsrc: "img/teams_logo/Amfier.png", status: "await", type: "player"},
         {name: "rusttle", src: "img/players/rusttle.png", team: "", teamsrc: "", status: "accepted", type: "player"},
-        {name: "Walhalla", src: "img/teams_logo/Walhalla.png", status: "kicked", type: "team"}
+        {name: "Walhalla", src: "img/teams_logo/Walhalla.png", status: "kicked", type: "team"},
+        {name: "Walhalla", src: "img/teams_logo/Walhalla.png", status: "", type: "team"}
     ];
     const total = 16;
 
     const prizePlace = [
-        {place: "1-2ое", prize: "10.000р"},
-        {place: "3-4е", prize: "5.000р"},
-        {place: "5-6ое", prize: "2.500р"},
-        {place: "7-16ое", prize: "Сертификаты клуба"}
+        {place: "1-2ое", prize: "10.000р", winner: "", src: ""},
+        {place: "1-2ое", prize: "10.000р", winner: "", src: ""},
+        {place: "3-4е", prize: "5.000р", winner: "", src: ""},
+        {place: "3-4е", prize: "5.000р", winner: "", src: ""},
+        {place: "5-6ое", prize: "2.500р", winner: "", src: ""},
+        {place: "5-6ое", prize: "2.500р", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "ПУПА", src: "img/teams_logo/pupa.svg"},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "Amfier", src: "img/teams_logo/Walhalla.png"},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "Walhalla", src: "img/teams_logo/Walhalla.png"}
     ]
 
     const type = "team";
@@ -89,13 +96,22 @@ function Event(){
                             )}
                         </div>
                     </div>
-
-                    <div className="container_name">
-                    <div className="event_col"><p>Формат игр</p></div>
-                        <div className="event_info">
-                            <p>Ну тут описание турнира, всё такое, карты всякие и тд, и тп.
-                            Ну тут описание турнира, всё такое, карты всякие и тд, и тп
-                            </p>
+                    
+                    <div className="event_info_bottom_wrapper">
+                        <div className="container_name">
+                            <div className="event_col"><p>Формат игр</p></div>
+                            <div className="event_info">
+                                <p>Ну тут описание турнира, всё такое, карты всякие и тд, и тп.
+                                Ну тут описание турнира, всё такое, карты всякие и тд, и тп. 
+                                </p>
+                            </div>
+                        </div>
+                        <div className="container_name">
+                            <div className="event_col"><p>Архив с фотографиями</p></div>
+                            <div className="event_info">
+                                <a href="https://disk.yandex.ru/d/5DJs4LKcEYfYxA" target="_blank" rel="noopener noreferrer">disk.yandex.ru/d/5DJs4LKcEYfYxA</a>
+                                {/* <p>disk.yandex.ru/d/5DJs4LKcEYfYxA</p> */}
+                            </div>
                         </div>
                     </div>
                 </div>
