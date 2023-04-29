@@ -7,6 +7,7 @@ import Player from '../Player/Player'
 import Event from '../Event/Event'
 import Team from '../Team/Team'
 import TeamResults from '../Team/TeamResults/TeamResults'
+import Match from '../Match/Match'
 import './Main.css'
 
 const Main = () => (
@@ -21,6 +22,7 @@ const Main = () => (
             <Route path="/player" element={<Player/>} />
             <Route path="/event/*" element={<Event/>} />
             <Route path="/team_results" element={<TeamResults/>} />
+            <Route path="/match" element={<Match/>} />
         </Routes>
       </main>
 );
