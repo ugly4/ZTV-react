@@ -1,6 +1,6 @@
 import React from "react";
-import ResultMaker from "../../components/ResultMaker/ResultMaker";
-import "../../Results/Results.css";
+import ResultMaker from "../components/ResultMaker/ResultMaker";
+import "../Results/Results.css";
 
 function TeamResults() {
 
@@ -19,7 +19,7 @@ function TeamResults() {
 
     return(
         <div>
-            <div class="results_header"><p>Результаты команды *ПРОПСЫ*</p></div>
+            <div class="results_header"><p>Результаты команды</p></div>
             <div className="results">
                 {results.map((day) =>
                     <ResultMaker day={day}/>
