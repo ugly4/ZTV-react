@@ -112,7 +112,7 @@ function Player(){
                         <span>Социальные сети</span>
                         <div class="social_media">
                             {social.items.map((item) => 
-                            item.active === true ? <a href={item.link}><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
+                            item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
                             <img key={item.id} className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={item.src} alt={item.alt}/>
                             )}
                         </div>

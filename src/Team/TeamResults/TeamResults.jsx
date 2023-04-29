@@ -19,7 +19,7 @@ function TeamResults() {
 
     return(
         <div>
-            <div class="results_header"><p>Результаты</p></div>
+            <div class="results_header"><p>Результаты команды *ПРОПСЫ*</p></div>
             <div className="results">
                 {results.map((day) =>
                     <ResultMaker day={day}/>
