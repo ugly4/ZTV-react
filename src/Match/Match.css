@@ -1,6 +1,3 @@
-
-
- 
 .container{
     display: flex;
     flex-direction: column;
@@ -11,55 +8,6 @@
     line-height: 120%;
     color: white;
 }
-.container_time_match{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin:13px auto;
-    height: 130px;
-    width: 100%;
-}
-.container_time_match_time a{
-    font-size: 32px;
-    font-weight: 500;
-    font-family: "GraphikLCGMedium";
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-}
-.container_time_match_date{
-    color: rgba(255,255,255,0.5);
-    font-weight: 400;
-    font-size: 14px;
-    font-style: normal;
-    margin-top: 16px;
-    font-family: "GraphikLCGRegular";
-}
-.container_time_match_cup{
-    color: #1cbcff;
-    font-weight: 400;
-    font-size: 14px;
-    font-style: normal;
-    font-family: "GraphikLCGRegular";
-}
-.container_time_match_cup a{
-    text-decoration: none;
-    color: #1cbcff;
-}
-.container_time_match_cup a:hover{
-    transition: color 0.2s 0s ease-in-out;
-    color: #8dddff;
-}
-.container_time_match_live{
-    color: white;
-    font-family: "GraphikLCGMedium";
-    font-weight: 500;
-    font-size: 20px;
-    margin-top: 15px;
-}
 .match_info_upcoming{
     margin: 0 auto;
     margin-top: 60px;
@@ -68,64 +16,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-.match_info_upcoming_maps_desc{
-    /* display: flex;
-    width: 330px;
-    height: 73px;
-    background-color: #191919;
-    margin-bottom: 25px; */
-
-    width: 330px;
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 0px 10px 10px;
-
-    margin-bottom: 25px;
-
-    background-color: var(--base-09);
-}
-.match_info_upcoming_maps_desc p{
-    color: #ffffff;
-   
-    font-family: var(--text-regular-lcg);
-    font-size: 12px;
-    
-    line-height: 120%;
-    opacity: 0.5;
-    /* margin-left: 10px; */
-    margin: 0;
-}
-.maps_news{
-    /* width: 330px;
-    height: 148px;
-    background-color: #191919;
-    padding: 5px;
-    margin-bottom: 25px; */
-
-    width: 330px;
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 0px 10px 10px;
-
-    margin-bottom: 25px;
-
-    background-color: var(--base-09);
-}
-.maps_news p{
-    font-family: var(--text-regular-lcg);
-    font-size: 12px;
-    line-height: 120%;
-    margin: 0;
-    margin-top: 5px;
-    color: white;
-    opacity: 0.5;
 }
 .match_info_upcoming_stream{
     display: flex;
@@ -146,42 +36,7 @@
     margin-left: 5px;
 
 }
-.stream{
-    width: 100%;
-    height: 32px;
-    background-color: #191919;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-.stream p{
-    margin: 0;
-    margin-left: 5px;
-    margin-top: 9px;
-    font-size: 12px;
-}
-.stream_country{
-    width: 20px;
-    height: 15px;
-    margin-left: 6px;
-    margin-top: 9px;
-}
 
-.stream_viewers {
-    display: flex;
-    margin-right: 5px;
-    align-content: center;
-    flex-wrap: wrap;
-}
-.stream_viewers p{
-    margin: 0;
-}
-.stream_viewers a{
-    width: 10px;
-    height: 10px;
-    margin-left: 5px;
-    /* background-image: url("img/twitch_link.svg"); */
-}
 .map_upcoming{
     width: 330px;
     height: 30px;
@@ -339,40 +194,14 @@
     color: white;
     
 }
-.scoreboard{
-    width: 648px;
-    height: 475px;
-    background-color: #1cbcff;
-}
+
 .scroll_logs_block{
     width: 651px;
     height: 378px;
     margin: 0 auto;
     margin-top: 30px;
 }
-.scroll_logs{
-    overflow: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: hsl(0, 75%, 5%);
-    width: 648px;
-    height: 356px;
-    
-    background-color: #1cbcff;
-}
-.scroll_logs::-webkit-scrollbar {
-    width: 8px;               /* ширина scrollbar */
-  }
-  .scroll_logs::-webkit-scrollbar-track {
-    background: #242424;        /* цвет дорожки */
-  }
-  .scroll_logs::-webkit-scrollbar-thumb {
-    background-color: #191919;    /* цвет плашки */
-    border-radius: 20px;       /* закругления плашки */
-    /*border: 3px solid orange;   padding вокруг плашки */
-  }
-  .scroll_logs::-webkit-scrollbar-corner {
-    background: #242424;
-  }
+
   .match_statistic_block{
     margin: 0 auto;
     background-color: var(--base);

@@ -1,0 +1,23 @@
+.scroll_logs{
+    overflow: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0, 75%, 5%);
+    width: 648px;
+    height: 356px;
+    
+    background-color: #1cbcff;
+}
+.scroll_logs::-webkit-scrollbar {
+    width: 8px;               /* ширина scrollbar */
+  }
+  .scroll_logs::-webkit-scrollbar-track {
+    background: #242424;        /* цвет дорожки */
+  }
+  .scroll_logs::-webkit-scrollbar-thumb {
+    background-color: #191919;    /* цвет плашки */
+    border-radius: 20px;       /* закругления плашки */
+    /*border: 3px solid orange;   padding вокруг плашки */
+  }
+  .scroll_logs::-webkit-scrollbar-corner {
+    background: #242424;
+  }
