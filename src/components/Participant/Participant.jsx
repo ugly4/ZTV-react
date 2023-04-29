@@ -55,7 +55,7 @@ function Participant(props) {
     return(
         <div className="item">
             {props.registred.map((participant) =>
-                <div className={participant.status === "accepted" ? "accepted_participant" : participant.status === "await" ? "await_participant" : "kicked_participant"}>
+                <div className={participant.status === "accepted" ? "accepted_participant" : participant.status === "await" ? "await_participant" : participant.status === "kicked" ? "kicked_participant" : "tba_participant"}>
                     {participant_type(participant)}
                 </div>
             )}
