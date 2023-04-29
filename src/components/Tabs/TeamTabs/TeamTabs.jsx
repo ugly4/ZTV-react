@@ -1,6 +1,5 @@
 import React from "react";
-import {Routes, Route, NavLink} from 'react-router-dom';
-import Team from "../../../Team/Team";
+import {Routes, Route, NavLink, Navigate} from 'react-router-dom';
 import Description from "./Tabs/Description/Description";
 import Achievments from "../Achievments/Achievments";
 import Events from "../Events/Events";
@@ -9,7 +8,7 @@ import Matches from "../Matches/Matches";
 import "./TeamTabs.css";
 
 function TeamTabs(props){
-    console.log(props.location);
+    console.log("ТЕСТ", props);
     return(
         <div>
             <ul className="teamTab">
@@ -44,12 +43,13 @@ function TeamTabs(props){
                     </NavLink>
                 </li>
             </ul>
-            <Routes location={props.location}>
-                <Route path="description" element={<Description />}/>
-                <Route path="matches" element={<Matches />}/>
-                <Route path="events" element={<Events />}/>
-                <Route path="achievements" element={<Achievments />}/>
-                <Route path="structure" element={<Structure />}/>
+            <Routes>
+                <Route index element={<Navigate replace to="/team/description" />}/>
+                <Route path="description" element={<Description desc={props.description}/>}/>
+                <Route path="matches" element={<Matches matches_upcoming={props.matches_upcoming} matches_ended={props.matches_ended} type="team"/>}/>
+                <Route path="events" element={<Events ongoing={props.ongoing_events} ended={props.ended_events} type="team"/>}/>
+                <Route path="achievements" element={<Achievments lan={props.lan_events} online={props.online_events}/>}/>
+                <Route path="structure" element={<Structure roster={props.players} ex_players={props.ex_players}/>}/>
             </Routes>
         </div>
     );
