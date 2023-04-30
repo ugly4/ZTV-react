@@ -6,14 +6,14 @@ function Results() {
 
     const results = [
         {date: "15.03.2023", matches: [
-            {series: "Zasada2", event: "Zasada Summer Cup Major", leftTeam: "Walhalla", rightTeam: "Amfier", leftScore: 16, rightScore: 8, tier: 5, map: "nuke"},
-            {series: "Zasada2", event: "Zasada Summer Cup", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 9, rightScore: 16, tier: 0, map: "trn"},
-            {series: "Zasada2", event: "Zasada Cup", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 22, rightScore: 20, tier: 4, map: "cbble"}
+            {series: "Zasada2", event: "Zasada Summer Cup", eventSrc: "img/event_logo/Zasada2.svg", leftTeam: "Walhalla", leftTeamSrc: "img/teams_logo/Walhalla.png", rightTeam: "Amfier", rightTeamSrc: "img/teams_logo/Amfier.png", leftScore: 16, rightScore: 8, tier: 5, tierSrc: "img/Top_star.svg", map: "nuke"},
+            {series: "BLAST", event: "BLAST Summer Cup", eventSrc: "img/event_logo/BLAST.svg", leftTeam: "Amfier", leftTeamSrc: "img/teams_logo/Amfier.png", rightTeam: "Walhalla", rightTeamSrc: "img/teams_logo/Walhalla.png", leftScore: 9, rightScore: 16, tier: 0, tierSrc: "img/Top_star.svg", map: "trn"},
+            {series: "Zasada2", event: "Zasada Summer Cup by Tamada", eventSrc: "img/event_logo/Zasada2.svg", leftTeam: "Amfier", leftTeamSrc: "img/teams_logo/Amfier.png", rightTeam: "Walhalla", rightTeamSrc: "img/teams_logo/Walhalla.png", leftScore: 22, rightScore: 20, tier: 4, tierSrc: "img/Top_star.svg", map: "cbble"}
         ]},
         {date: "17.03.2023", matches: [
-            {series: "Zasada2", event: "Zasada Summer Cup Major", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 16, rightScore: 8, tier: 1, map: "dust 2"},
-            {series: "Zasada2", event: "Zasada Summer Cup", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 9, rightScore: 16, tier: 3, map: "anb"},
-            {series: "BLAST", event: "BLAST Cup", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 2, rightScore: 0, tier: 4, map: "bo3"}
+            {series: "Zasada2", event: "Zasada Summer Cup", eventSrc: "img/event_logo/Zasada2.svg", leftTeam: "Amfier", leftTeamSrc: "img/teams_logo/Amfier.png", rightTeam: "Walhalla", rightTeamSrc: "img/teams_logo/Walhalla.png", leftScore: 16, rightScore: 8, tier: 1, tierSrc: "img/Top_star.svg", map: "dust 2"},
+            {series: "BLAST", event: "BLAST Cup", eventSrc: "img/event_logo/BLAST.svg", leftTeam: "Amfier", leftTeamSrc: "img/teams_logo/Amfier.png", rightTeam: "Walhalla", rightTeamSrc: "img/teams_logo/Walhalla.png", leftScore: 9, rightScore: 16, tier: 3, tierSrc: "img/Top_star.svg", map: "anb"},
+            {series: "Zasada2", event: "Zasada Summer Cup", eventSrc: "img/event_logo/Zasada2.svg", leftTeam: "Amfier", leftTeamSrc: "img/teams_logo/Amfier.png", rightTeam: "Walhalla", rightTeamSrc: "img/teams_logo/Walhalla.png", leftScore: 2, rightScore: 0, tier: 4, tierSrc: "img/Top_star.svg", map: "bo3"}
         ]}
     ]
 

@@ -6,13 +6,13 @@ function Participant(props) {
     // тут мы отрисовываем в конец пустые места
     const tba_participant = () => {
         let content = [];
-        let size = props.total - props.registred.length;
+        let size = props.total - props.part.length;
         for(let i = 0; i < size; ++i){
             content.push(
                 <div className="tba_participant">
                     <div className="tba_wrapper">
                         <div className="participant_team">
-                            <img src="img/teams_logo/TBAParticipant.svg" alt="Неизвестно"/>
+                            <img src="../img/teams_logo/TBAParticipant.svg" alt="Неизвестно"/>
                         </div>
                         <p>Неизвестно</p> 
                     </div>
@@ -30,7 +30,7 @@ function Participant(props) {
             return(
                 <div className="participant_wrapper">
                     <div className="participant_team">
-                        <img src={src} alt={name}/>
+                        <img src={"../" + src} alt={name}/>
                     </div>      
                     <p>{name}</p>  
                 </div>
@@ -40,10 +40,10 @@ function Participant(props) {
             return(
                 <div className="participant_wrapper">
                     {participant.team === "" ? <></> : 
-                    <div className="participant_player_logo"><img src={participant.teamsrc} alt={participant.team}/></div>
+                    <div className="participant_player_logo"><img src={"../" + participant.teamsrc} alt={participant.team}/></div>
                     }
                     <div className="participant_player">
-                        <div className="crop_participant_player"><img src={src} alt={name} /></div>
+                        <div className="crop_participant_player"><img src={"../" + src} alt={name} /></div>
                     </div>
                     <p>{name}</p>
                 </div>
@@ -54,12 +54,12 @@ function Participant(props) {
 
     return(
         <div className="item">
-            {props.registred.map((participant) =>
+            {props.part.map((participant) =>
                 <div className={participant.status === "accepted" ? "accepted_participant" : participant.status === "await" ? "await_participant" : participant.status === "kicked" ? "kicked_participant" : "tba_participant"}>
                     {participant_type(participant)}
                 </div>
             )}
-            {tba_participant()}
+            {props.status === "registration" ? tba_participant() : <></>}
         </div>
     );
 }
