@@ -1,5 +1,97 @@
 .scoreboard{
+    position: absolute;
     width: 648px;
     height: 475px;
-    background-color: #1cbcff;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+.scoreboard_score_block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    position: absolute;
+    width: 648px;
+    height: 29px;
+    left: 0px;
+    top: 10px;
+}
+.scoreboard_score{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 2px;
+
+    width: 66px;
+    height: 29px;
+}
+.scoreboard_score p{
+    color: white;
+    font-size: 24px;
+    font-family: var(--text-semibold-lcg);
+}
+.t_score{
+    color: var(--t-color);
+    font-size: 24px;
+    font-family: var(--text-semibold-lcg);
+}
+.ct_score{
+    color: var(--ct-color);
+    font-size: 24px;
+    font-family: var(--text-semibold-lcg);
+}
+.round{
+    position: absolute;
+    height: 13px;
+    left: 9px;
+    top: 26px;
+
+    font-family: var(--text-regular-lcg);
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.5);
+}
+.team_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 6px;
+    
+    width: 630px;
+    height: 180px;
+}
+.team_row{
+    width: 620px;
+    height: 20px;
+    padding: 2px 5px 3px 5px;
+    background: var(--ct-color);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+}
+.team_row_name{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+
+    position: absolute;
+    height: 23px;
+    
+}
+.team_row_name p{
+    color: white;
+    font-family: var(--text-medium-lcg);
+    size: 13px;
+    margin: 0;
 }

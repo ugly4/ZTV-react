@@ -4,8 +4,9 @@
     scrollbar-color: hsl(0, 75%, 5%);
     width: 648px;
     height: 356px;
+    background-size: cover;
     
-    background-color: #1cbcff;
+    
 }
 .scroll_logs::-webkit-scrollbar {
     width: 8px;               /* ширина scrollbar */
@@ -20,4 +21,16 @@
   }
   .scroll_logs::-webkit-scrollbar-corner {
     background: #242424;
+  }
+  .logs_container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 600px;
+    height: 316px;
+    left: 8px;
+    top: 10px;
+    gap: 3px;
   }

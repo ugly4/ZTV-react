@@ -65,21 +65,21 @@ function Match(props){
             {match.MatchStatus == 1 && 
                 <div class="scoreboard_block">
                     <p>Таблица</p>
-                    <Scoreboard></Scoreboard>
+                    <Scoreboard props={match} map={match.maps[0]}></Scoreboard>
                 </div>
             }
 
             {match.MatchStatus == 1 && 
-                <div class="scoreboard_block">
+                <div class="scroll_logs_block">
                     <p>Игровые события</p>
-                    <ScrollLog></ScrollLog>
+                    <ScrollLog props={match} map={match.maps[0]}></ScrollLog>
                 </div>
             }
                 
             {match.MatchStatus == 2 && 
                 <div class="scoreboard_block">
                     <p>Статистика матча</p>
-                    <Statistic></Statistic>
+                    <Statistic ></Statistic>
                 </div>
             }
         </div>   

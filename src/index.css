@@ -81,6 +81,15 @@ url("fonts/GraphikLCGMedium.ttf") format("truetype");
 font-style: normal;
 font-weight: 500;
 }
+@font-face {
+  font-family: 'GraphikLCGSemibold';
+  src: local('Graphik LCG Semibold'), local('Graphik-LCG-Semibold'),
+      url('fonts/GraphikLCG-Semibold.woff2') format('woff2'),
+      url('fonts/GraphikLCG-Semibold.woff') format('woff'),
+      url('fonts/GraphikLCG-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
 @font-face { 
 font-family: "GraphikLCGBold";
 src: url("fonts/GraphikLCGBold.eot");
