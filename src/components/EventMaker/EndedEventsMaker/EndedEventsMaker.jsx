@@ -1,6 +1,5 @@
 import React from "react";
 import FlagName from "../../FlagName/FlagName";
-import "../../../Tournaments/EndedEvents/EndedEvents.css";
 import './EndedEventsMaker.css';
 import '../../ResultMaker/ResultMaker.css';
 

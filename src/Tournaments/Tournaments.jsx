@@ -39,7 +39,7 @@ function Tournaments() {
             {src: "img/event_logo/Zasada2.svg", series: "Zasada", event: "Zasada Super Cup", flagPath: "img/flags/mini/Russia.svg", country: "Россия", city: "Пугачёв", date: "3.05.23 - 4.05.23", format: "2x2", type: "Online", registred: 3, total: 16, fee: "22.000p", prize: "1.000.000p"},
             {src: "img/event_logo/BLAST.svg", series: "BLAST", event: "BLAST Cup", flagPath: "img/flags/mini/Albania.svg", country: "Албания", city: "", date: "3.05.23 - 4.05.23", format: "2x2", type: "Lan", registred: 0, total: 16, fee: "500p", prize: "2.000p"},
             {src: "img/event_logo/Zasada2.svg", series: "Zasada", event: "Zasada Super Cup", flagPath: "img/flags/mini/Spain.svg", country: "Испания", city: "Мадрид", date: "3.05 - 4.05", format: "5x5", type: "Lan", registred: 3, total: 16, fee: "22.000p", prize: "1.000.000p"},
-            {src: "img/event_logo/Zasada2.svg", series: "Zasada", event: "Zasada Super Cup", flagPath: "img/flags/mini/Spain.svg", country: "Испания", city: "Мадрид", date: "3.05 - 4.05", format: "5x5", type: "Lan", registred: 3, total: 16, fee: "22.000p", prize: "1.000.000p"}
+            {src: "img/event_logo/Zasada2.svg", series: "Zasada", event: "Zasada Super Cup", flagPath: "img/flags/mini/Spain.svg", country: "Испания", city: "Мадрид", date: "08.09 - 18.09", format: "5x5", type: "Lan", registred: 3, total: 16, fee: "22.000p", prize: "1.000.000p"}
         ]}
     ]
 
