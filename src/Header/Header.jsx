@@ -7,9 +7,22 @@ const Header = () => {
     const [loginActive, setLoginActive, children1] = useState(false); //состояния модального окна "логин"
     const [signupActive, setSignupActive, children2] = useState(false); // состояния модального окна "регистрации"
     const [selectorActive, setSelectorActive] = useState(false); // состояния селектора
+    
     const toggleClass = () => { // функция toggle для селектора
         setSelectorActive(!selectorActive);
-      };
+    };
+
+    const [value, setValue] = useState('Выберите страну'); //Для селектора страны
+
+    const countries =[
+        {name: "Россия", flagPath: "img/flags/mini/Russia.svg"},
+        {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg"},
+        {name: "Албания", flagPath: "img/flags/mini/Albania.svg"},
+        {name: "Испания", flagPath: "img/flags/mini/Spain.svg"},
+        {name: "Белиз", flagPath: "img/flags/mini/Belize.svg"},
+        {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg"}
+    ]
+
     return(
         <header className='Header'>
         <div className='Header-content'>
@@ -42,10 +55,10 @@ const Header = () => {
                     </li>
                 </ul>
             </nav>
-            <div class="Login">
-                <button class="Login-btn" onClick={() => setLoginActive(true)}>
+            <div className="Login">
+                <button className="Login-btn" onClick={() => setLoginActive(true)}>
                 
-                    <span class="Login-btn-name" >
+                    <span className="Login-btn-name" >
                         <a>Личный кабинет</a>
                     </span>
                     <div className="Login-btn-icon">
@@ -65,30 +78,30 @@ const Header = () => {
             </div>
         </div>
         <Login active={loginActive} setActive={setLoginActive}>
-        <div class="header_splash_window">
-                <div class="logo_splash_window"></div>
+        <div className="header_splash_window">
+                <div className="logo_splash_window"></div>
             </div>
-            <div class="col_center_gap30">
-                <div class="col_right_gap20">
-                <div class="col_center_gap10">
-                    <div class="text-field">
-                    <input class="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
+            <div className="col_center_gap30">
+                <div className="col_right_gap20">
+                <div className="col_center_gap10">
+                    <div className="text-field">
+                    <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
                     </div>
-                    <div class="text-field">
-                    <input class="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
+                    <div className="text-field">
+                    <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
                     </div>
                 </div>
-                <div class="keeplogin">
+                <div className="keeplogin">
                     <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping"/>
                     <label for="loginkeeping">Запомнить меня</label>
                 </div>
                 </div>
-                <div class ="col_center_gap_20">
-                <div class="full_grey_button">
+                <div className ="col_center_gap_20">
+                <div className="full_grey_button">
                     <input type="submit" id="loginsubmit" value="Войти" />
                 </div>
-                <div class="transparent_grey_border_button text">
-                    <a class="close">
+                <div className="transparent_grey_border_button text">
+                    <a className="close">
                     <input type="submit" id="loginsubmit" value="Регистрация"  onClick={() => {setSignupActive(true); setLoginActive(false)}} />
                     </a>
                 </div>
@@ -96,68 +109,50 @@ const Header = () => {
             </div>
         </Login>
         <Login active={signupActive} setActive={setSignupActive} >
-            <div class="header_splash_window" onClick={() => selectorActive ? toggleClass() : null}>
-                <div class="logo_splash_window"></div>
+            <div className="header_splash_window" onClick={() => selectorActive ? toggleClass() : null}>
+                <div className="logo_splash_window"></div>
             </div>
-            <div class="col_center_gap30" onClick={() => selectorActive ? toggleClass() : null}>
-                <div class="col_center_gap10">
-                <div class="row_center_6">
-                    <div class="text-field_half">
-                    <input class="text-field_half input" type="text" name="login" id="login" placeholder="Имя пользователя"/>
+            <div className="col_center_gap30" onClick={() => selectorActive ? toggleClass() : null}>
+                <div className="col_center_gap10">
+                <div className="row_center_6">
+                    <div className="text-field_half">
+                    <input className="text-field_half input" type="text" name="login" id="login" placeholder="Имя пользователя"/>
                     </div>
-                    <div class="text-field_half">
-                    <input class="text-field_half input" type="text" name="login" id="login" placeholder="Фамилия пользователя"/>
-                    </div>
-                </div>
-                <div class="row_center_6">
-                    <div class="text-field_half">
-                    <input class="text-field_half input" type="password" name="login" id="login" placeholder="Пароль"/>
-                    </div>
-                    <div class="text-field_half">
-                    <input class="text-field_half input" type="text" name="login" id="login" placeholder="Почта"/>
+                    <div className="text-field_half">
+                    <input className="text-field_half input" type="text" name="login" id="login" placeholder="Фамилия пользователя"/>
                     </div>
                 </div>
-                <div class="row_center_6">
-                    <div class="text-field_half">
-                    <input class="text-field_half input" type="text" name="login" id="login" placeholder="Никнейм пользователя"/>
+                <div className="row_center_6">
+                    <div className="text-field_half">
+                    <input className="text-field_half input" type="password" name="login" id="login" placeholder="Пароль"/>
                     </div>
-                    <div class="text-field_half">
-                    <div class="text-field_half_selector">
+                    <div className="text-field_half">
+                    <input className="text-field_half input" type="text" name="login" id="login" placeholder="Почта"/>
+                    </div>
+                </div>
+                <div className="row_center_6">
+                    <div className="text-field_half">
+                    <input className="text-field_half input" type="text" name="login" id="login" placeholder="Никнейм пользователя"/>
+                    </div>
+                    <div className="text-field_half">
+                    <div className="text-field_half_selector">
                         <div className="text_field_half_select" onClick={() => toggleClass()}>
-                            <p className="selectText">Выберите страну</p>
-                            <img src="img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null}/>
+                            <p className={value === "Выберите страну" ? "onStart_country" : "choosed_country"}>{value}</p>
+                            <img src="img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
                         </div>
                         <ul className={ selectorActive ? 'select_list' : 'select_list hide'}>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/Russia.svg"/>
-                                <p>Россия</p>
-                            </li>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/IsleOfMan.svg"/>
-                                <p>Остров Мэн</p>
-                            </li>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/Albania.svg"/>
-                                <p>Албания</p>
-                            </li>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/Spain.svg"/>
-                                <p>Испания</p>
-                            </li>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/Belize.svg"/>
-                                <p>Белиз</p>
-                            </li>
-                            <li class="text_field_half_options" onClick={() => toggleClass()}>
-                                <img src="img/flags/mini/Kosovo.svg"/>
-                                <p>Косово</p>
-                            </li>
+                            {countries.map((country) =>
+                                <li className='text_field_half_options' onClick={setValue.bind(this, country.name)}>
+                                    <img src={country.flagPath} alt={country.name}/>
+                                    <p>{country.name}</p>
+                                </li>
+                            )}
                         </ul>
                     </div>
                     </div>
                 </div>
                 </div>
-                <div class="full_grey_button">
+                <div className="full_grey_button">
                 <input type="submit" id="loginsubmit" value="Зарегистрироваться"/>
                 </div>
             </div>

@@ -50,15 +50,27 @@
     justify-content: space-between;
     cursor: pointer;
 }
-.text_field_half_select input::placeholder{
+.text_field_half_select p{
     color: #ffffff 70%;
-    opacity: 0.4;
+    opacity: 1;
     font-family: var(--text-regular-lcg);
 }
 .text_field_half_select img{
     width: 12px;
     transition: transform 0.5s;
 }
+
+.onStart_country{
+    color: white 70%;
+    opacity: 1;
+    font-family: var(--text-regular-lcg);
+}
+.choosed_country{
+    color: white;
+    opacity: 1;
+    font-family: var(--text-regular-lcg);
+}
+
 .select_list{
     width: 227px;
     height: 196px;
