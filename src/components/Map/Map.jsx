@@ -10,10 +10,7 @@ function Map(props){
     }
 
     return(
-        <div className="map_wrapper">
-            <img src= {"../img/map_preview/" + (isFound(props.map) ? props.map : "TBA") + ".png"} alt={props.map}/>
-            <div className="map_name_wrapper"><p>{props.map}</p></div>
-        </div>
+            <img src= {"../img/map_preview/" + (isFound(props.map) ? props.map : "TBA") + ".png"} alt={props.map}/>     
     );
 }
 

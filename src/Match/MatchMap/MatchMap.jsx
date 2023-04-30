@@ -1,61 +1,79 @@
 import React from "react";
+import Map from "../../components/Map/Map";
 import "./MatchMap.css"
 
-function MatchMap(){
+function MatchMap({props, map}){
+  
     return(
-        <div class="map" id="map_1">
-            <div class="map_img"></div>
-            <div class="map_points">
-
-                <div class="first_team" id="first_team_first_match">
-                    <div class="container">
-                        <div class="logo_first_team">
+        <div class={props.MatchStatus == 0 ? "map_upcoming" : "map"} style={(map.scoreFirst == null)&&(map.scoreSecond == null)&&(props.MatchStatus != 0) ? {opacity: "0.3"}: null} >
+            {props.MatchStatus == 0 ? 
+              <Map map={"TBA"}/> 
+              : 
+              <div style={{height: "30px", objectPosition: "center", position: "relative"}}>
+                <Map map={map.mapName}/>
+                <div style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
+                  <p style={{margin: "0", fontFamily: "var(--text-regular-lcg)"}}>{map.mapName}</p>
+                </div>
+              </div>
+            }
+            {props.MatchStatus == 0 ? null :
+                
+                    <div class="map_points">
+                      <div class="first_team" style={!((map.scoreFirst == null)&&(map.scoreSecond == null)) ? map.scoreSecond > map.scoreFirst ? {opacity: "0.3"} : null : null}>
+                        <div class="container">
+                          <img src={props.LogoFirst} class="logo_team" />
+                          <img src="/img/pick.svg"class="pick"/>
                         </div>
-                        <div class="pick" id="fg_ft_pick"></div>
-                    </div>
                         
-                    <div class="container" >
-                        <div class="name_first_team">
-                            <p>AbuDabi</p>
+                        <div class="container" >
+                          <div class="name_first_team">
+                            <p>{props.NameFirst}</p>
+                          </div>
+                          <div class="score_first_team">
+                            <p style={!((map.scoreFirst == null)&&(map.scoreSecond == null)) ? map.scoreSecond > map.scoreFirst ?  {color: "red"} : {color: "green"} : {color: "white"}}>
+                              {map.scoreFirst == null ? "-" : map.scoreFirst}
+                            </p>
+                          </div>
                         </div>
-                        <div class="score_first_team">
-                            <p>10</p>
-                        </div>
-                    </div>
                         
-                </div>
+                      </div>
 
-                <div class="score" id="fg_score">
-                    (
-                    <p id="fg_fh_ft">5</p>
-                    :
-                    <p id="fg_fh_st">10</p>
-                    ;&nbsp;
-                    <p id="fg_sh_ft">5</p>
-                    :
-                    <p id="fg_sh_st">6</p>
-                    )
-                </div>
+                      <div class="score" id="fg_score" style={(map.scoreFirst == null)&&(map.scoreSecond == null) ? {opacity: "0"} : null}>
+                        (
+                          <p >{map.firstRound[0] == null ? "-": map.firstRound[0]}</p>
+                        :
+                          <p >{map.firstRound[1] == null ? "-": map.firstRound[1]}</p>
+                        ;&nbsp;
+                          <p >{map.secondRound[0] == null ? "-": map.secondRound[0]}</p>
+                        :
+                          <p >{map.secondRound[1] == null ? "-": map.secondRound[1]}</p>
+                        )
+                      </div>
 
-                <div class="second_team">
-                    <div class="container">
-                        <div class="logo_second_team">
+                      <div class="second_team" style={!((map.scoreFirst == null)&&(map.scoreSecond == null)) ? map.scoreSecond > map.scoreFirst ? null : {opacity: "0.3"} : null}>
+                        <div class="container">
+                          <img src={props.LogoSecond} class="logo_team" />
+                          <div class="pick"></div>
                         </div>
-                        <div class="pick" id="fg_st_pick"></div>
-                    </div>
 
-                    <div class="container">
-                        <div class="name_second_team">
-                            <p>ПУПА</p>
+                        <div class="container">
+                          <div class="name_second_team">
+                            <p>{props.NameSecond}</p>
+                          </div>
+                          <div class="score_second_team">
+                            <p style={!((map.scoreFirst == null)&&(map.scoreSecond == null)) ? map.scoreSecond > map.scoreFirst ? {color: "green"} : {color: "red"} : {color: "white"}}>
+                              {map.scoreSecond == null ? "-" : map.scoreSecond}
+                            </p>
+                          </div>
                         </div>
-                        <div class="score_second_team">
-                            <p>16</p>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
+                        </div>
+                      </div>
+                  
+            }
+                    
         </div>
+                  
     )
     
 }

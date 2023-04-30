@@ -37,39 +37,7 @@
 
 }
 
-.map_upcoming{
-    width: 330px;
-    height: 30px;
-    
-    /* background-image: url('img/maps/desc/TBA.svg'); */
-    margin-bottom: 5px;
 
-}
-.map{
-    display: flex;
-    width: 330px;
-    height: 77px;
-    margin-bottom: 5px;
-    flex-direction: column;
-}
-
-.map_points .score{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: white;
-    opacity: 0.7;
-    
-    align-content: flex-end;
-    font-family: "GraphikLCGRegular";
-    font-size: 12px;
-}
-.map_points .score p{
-    margin: 0;
-    color: white;
-    font-family: "GraphikLCGRegular";
-    font-size: 12px;
-}
 #map_1 .map_img{
     /* background-image: url("img/maps/desc/overpass.jpg"); */
     height: 30px;
@@ -177,7 +145,7 @@
 #first_team_first_match{
     opacity: 0.4;
 }
-.score{}
+
 .scoreboard_block{
     width: 648px;
     height: 497px;

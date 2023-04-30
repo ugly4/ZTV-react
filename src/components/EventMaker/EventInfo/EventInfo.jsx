@@ -35,8 +35,11 @@ function EventInfo(props) {
                 <div className="container_name">
                     <div className="event_col"><p>Пул карт</p></div>
                     <div className="maps">
-                        {props.maps.map((map_name) => 
-                            <Map map={map_name}/>
+                        {props.maps.map((map_name) =>
+                            <div className="map_wrapper">
+                                <Map map={map_name}/>
+                                <div className="map_name_wrapper"><p>{map_name}</p></div>
+                            </div>   
                         )}
                     </div>
                 </div>

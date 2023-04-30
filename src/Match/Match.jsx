@@ -12,13 +12,20 @@ function Match(props){
     const match = {
         MatchStatus: 1,
         NameFirst: "AbuDabi",
+        LogoFirst: "/img/teams_logo/AbuDabi.svg",
         NameSecond: "ПУПА",
-        MatchDate: "31 сентября 2023",
-        ScoreFirst: 2,
-        ScoreSecond: 0,
-        MatchTimeBegin: "09:59"
+        LogoSecond: "/img/teams_logo/pupa.svg",
+        MatchDate: new Date(2023, 4, 5, 8, 0, 0),
+        ScoreFirst: 0,
+        ScoreSecond: 2,
+        maps: [
+            {mapName: "Overpass", scoreFirst: 10, scoreSecond: 16, firstRound:[5, 10], secondRound: [5, 6]},
+            {mapName: "Anubis", scoreFirst: 5, scoreSecond: 10, firstRound:[5, 10], secondRound: [null, null]},
+            {mapName: "Nuke", scoreFirst: null, scoreSecond: null, firstRound:[null,null], secondRound: [null, null]}
+        ]
+        
     }
-
+    
     const stream = {
         name: "(название стрима)",
         viewers: 8948,
@@ -34,12 +41,12 @@ function Match(props){
             <div class="match_info_upcoming">
                 <div class="container">
                     {/* Описание матча */}
-                    <Description></Description>
+                    <Description {...match}></Description>
                     {/* Карты */}
                     <div class="container">
-                        <MatchMap></MatchMap>
-                        <MatchMap></MatchMap>
-                        <MatchMap></MatchMap>
+                        <MatchMap props={match} map={match.maps[0]}></MatchMap>
+                        <MatchMap props={match} map={match.maps[1]}></MatchMap>
+                        <MatchMap props={match} map={match.maps[2]}></MatchMap>
                     </div>
                 </div>
                 {/* В зависмости от того, какой тип матча, выводятся стримы */}
