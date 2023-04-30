@@ -45,17 +45,12 @@ function ResultMaker(props) {
                         </div>
                     </div>
                     <div className="row_center_gap3">
-                        <div className="tournament_logo"><img src={"img/event_logo/" + match.series + ".svg"}/></div>
+                        <div className="tournament_logo"><img src={"img/event_logo/" + match.series + ".svg"} alt={match.series}/></div>
                         <div className="tournament_name"><p>{match.event}</p></div>
                     </div>
                     <div className="top_tier">
                         <div className="row_center_gap3">
                             {setTier(match.tier)}
-                            {/* <img src="img/Top_star.svg"/>
-                            <img src="img/Top_star.svg"/>
-                            <img src="img/Top_star.svg"/>
-                            <img src="img/Top_star.svg"/>
-                            <img src="img/Top_star.svg"/> */}
                         </div>
                         <p>{match.map}</p>
                     </div>

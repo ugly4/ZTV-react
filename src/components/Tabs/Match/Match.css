@@ -117,7 +117,7 @@
 /*Настройки для отображения названия левой команды*/
 .left_team_tag{
     width: 78px;
-
+ 
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

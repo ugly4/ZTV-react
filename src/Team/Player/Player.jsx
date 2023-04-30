@@ -4,12 +4,12 @@ import "./Player.css"
 function Player(props){
 
     return(
-        <div class="player_card_wrapper">
-            <div class="players_team">
-                <div class="crop_team"><img id="team_player1" src={props.photo} alt={props.nick}/></div>
+        <div className="player_card_wrapper">
+            <div className="players_team">
+                <div className="crop_team"><img src={props.photo} alt={props.nick}/></div>
             </div>
-            <div class="nick_team">
-            <img id="team_player1_flag" src={props.flagPath} alt="Испания"/>
+            <div className="nick_team">
+            <img src={props.flagPath} alt={props.country}/>
             <p>{props.nick}</p>
             </div>
         </div>

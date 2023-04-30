@@ -1,8 +1,8 @@
 import React from "react";
-import ResultMaker from "../../components/ResultMaker/ResultMaker";
-import "../../Results/Results.css";
+import ResultMaker from "../components/ResultMaker/ResultMaker";
+import "../Results/Results.css";
 
-function TeamResults() {
+function PlayerResults() {
 
     const results = [
         {date: "15.03.2023", matches: [
@@ -19,7 +19,7 @@ function TeamResults() {
 
     return(
         <div>
-            <div class="results_header"><p>Результаты команды *ПРОПСЫ*</p></div>
+            <div class="results_header"><p>Результаты игрока</p></div>
             <div className="results">
                 {results.map((day) =>
                     <ResultMaker day={day}/>
@@ -29,4 +29,4 @@ function TeamResults() {
     );
 }
 
-export default TeamResults;
+export default PlayerResults;

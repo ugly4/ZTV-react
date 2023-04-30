@@ -48,8 +48,7 @@ function Player(){
         ]
     }
 
-    const rosters = {
-        teams: [
+    const rosters = [
             {period: "Сентябрь 2020 - Настоящее время", team: "Amfier", teamLogo: "img/teams_logo/Amfier.png", id: 1, trophies:[
                 {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
                 {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
@@ -65,7 +64,6 @@ function Player(){
                 {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"},
                 {id: 313131, src: "img/trophies/cup2.svg", alt: "cup2"}]}
         ]
-    }
 
     const stats = {
         kills : 99999,
@@ -77,6 +75,70 @@ function Player(){
         maps : 6250,
         kpm : 16
     }
+
+    const matches_upcoming = [
+        {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
+            {date: "14.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+            {date: "14.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+        ]},
+        {event: "Zasada League", type: "upcoming", place: "", matches: [
+            {date: "15.02.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+            {date: "16.03.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+        ]},
+    ]
+  
+    const matches_ended = [
+        {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
+            {date: "13.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 16, rightScore: 7},
+            {date: "13.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 14, rightScore: 16},
+        ]},
+        {event: "Zasada League", type: "upcoming", place: "", matches: [
+            {date: "05.02.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 19, rightScore: 17},
+            {date: "06.03.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 22, rightScore: 20},
+        ]},
+    ]
+
+    const ongoing_events = [
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", participants:[
+          {src: "img/teams_logo/AbuDabi.svg", name: "AbuDabi"},
+          {src: "img/teams_logo/Walhalla.png", name: "Walhalla"},
+          {src: "img/teams_logo/NoLogo.svg", name: "G2"},
+          {src: "img/players/Hitriy_Kazah.png", name: "Hitriy_Kazah"},
+          {src: "img/players/rusttle.png", name: "rusttle"},
+        ]},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event",  participants:[
+          {src: "img/teams_logo/AbuDabi.svg", name: "AbuDabi"},
+          {src: "img/teams_logo/Walhalla.png", name: "Walhalla"},
+          {src: "img/teams_logo/NoLogo.svg", name: "G2"},
+          {src: "img/players/Hitriy_Kazah.png", name: "Hitriy_Kazah"},
+          {src: "img/players/_SD_.png", name: "_SD_"},
+        ]}
+    ]
+  
+    const ended_events = [
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"},
+    ]
+
+    const lan_events = [
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
+    ]
+  
+    const online_events = [
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+        {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
+    ]
 
     return(
     <div>
@@ -122,7 +184,16 @@ function Player(){
         </div>
         <div class="devider_line"></div>
         <Trophies items={trophies}/>
-        <PlayerTabs stat={stats} rosters={rosters.teams}/>
+        <PlayerTabs 
+        stat={stats} 
+        rosters={rosters}
+        matches_upcoming={matches_upcoming}
+        matches_ended={matches_ended}
+        ongoing_events={ongoing_events}
+        ended_events={ended_events}
+        lan_events={lan_events}
+        online_events={online_events}
+        />
     </div>
     );
 }

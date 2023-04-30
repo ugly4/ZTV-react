@@ -36,11 +36,7 @@ function Team() {
             {id: 24, src: "img/trophies/cup3.svg", alt: "cup3"}
         ]
     }
-    const tamada = {
-        nick: "Tamada",
-        photo: "img/players/Tamada.png",
-        flagPath: "img/flags/mini/Spain.svg"
-    }
+
     const team = {
         logo: "img/teams_logo/Amfier.png",
         flagPath: "img/flags/mini/Russia.svg",
@@ -49,51 +45,109 @@ function Team() {
         name: "Amfier",
         topPosition: 1
     }
+
+    const players = [
+      {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
+      {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
+      {nick: "Hitriy_Kazah", photo: "img/players/Hitriy_Kazah.png", flagPath: "img/flags/mini/Kosovo.svg", country: "Косово"},
+      {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
+      {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
+    ]
+
+    const ex_players = [
+      {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
+      {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
+      {nick: "Hitriy_Kazah", photo: "img/players/Hitriy_Kazah.png", flagPath: "img/flags/mini/Kosovo.svg", country: "Косово"},
+      {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
+      {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
+      {nick: "Hitriy_Kazah", photo: "img/players/Hitriy_Kazah.png", flagPath: "img/flags/mini/Kosovo.svg", country: "Косово"},
+      {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
+      {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
+      {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
+      {nick: "Hitriy_Kazah", photo: "img/players/Hitriy_Kazah.png", flagPath: "img/flags/mini/Kosovo.svg", country: "Косово"},
+      {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
+      {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
+      {nick: "Hitriy_Kazah", photo: "img/players/Hitriy_Kazah.png", flagPath: "img/flags/mini/Kosovo.svg", country: "Косово"},
+      {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
+      {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
+    ]
+
+    const matches_upcoming = [
+      {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
+          {date: "14.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+          {date: "14.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+      ]},
+      {event: "Zasada League", type: "upcoming", place: "", matches: [
+          {date: "15.02.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+          {date: "16.03.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: "-", rightScore: "-"},
+      ]},
+    ]
+
+  const matches_ended = [
+      {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
+          {date: "13.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 16, rightScore: 7},
+          {date: "13.01.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 14, rightScore: 16},
+      ]},
+      {event: "Zasada League", type: "upcoming", place: "", matches: [
+          {date: "05.02.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 19, rightScore: 17},
+          {date: "06.03.2023", leftTeam: "Amfier", rightTeam: "Walhalla", leftScore: 22, rightScore: 20},
+      ]},
+    ]
+
+    const ongoing_events = [
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", participants:[
+        {src: "img/teams_logo/AbuDabi.svg", name: "AbuDabi"},
+        {src: "img/teams_logo/Walhalla.png", name: "Walhalla"},
+        {src: "img/teams_logo/NoLogo.svg", name: "G2"},
+        {src: "img/players/Hitriy_Kazah.png", name: "Hitriy_Kazah"},
+        {src: "img/players/rusttle.png", name: "rusttle"},
+      ]},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event",  participants:[
+        {src: "img/teams_logo/AbuDabi.svg", name: "AbuDabi"},
+        {src: "img/teams_logo/Walhalla.png", name: "Walhalla"},
+        {src: "img/teams_logo/NoLogo.svg", name: "G2"},
+        {src: "img/players/Hitriy_Kazah.png", name: "Hitriy_Kazah"},
+        {src: "img/players/_SD_.png", name: "_SD_"},
+      ]}
+    ]
+
+    const ended_events = [
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"},
+    ]
+
+    const lan_events = [
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
+    ]
+
+    const online_events = [
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "1-3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "2ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3е"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/BLAST.svg", link: "/event", place: "3-4ое"},
+      {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
+    ]
+
+    const description = "Самая командная команда из всех командных команд, которые только могут быть. Да, мы лучшие и мы этого не скрываем, да. А всё почему? Потому что мы ПУПА - ПУзатые Пупсы в Автозаке.";
+
     return(
         <div >
           
           <div>
             <div class="team_rectangle">
-                <Link to="/player" style={{textDecoration: "none"}}>
-                    <Player {...tamada}/>
+              {players.map((player) => 
+                <Link to="/player" style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
+                    <Player {...player}/>
                 </Link>
-                
-                <div class="player_card_wrapper">
-                  <div class="players_team">
-                      <div class="crop_team"><img id="team_player2" src="img/players/Hitriy_Kazah.png" alt="Hitriy_Kazah"/></div>
-                  </div>
-                  <div class="nick_team">
-                    <img id="team_player2_flag" src="img/flags/mini/Kosovo.svg" alt="Косово"/>
-                    <p>Hitriy_Kazah</p>
-                  </div>
-                </div>
-                <div class="player_card_wrapper">
-                  <div class="players_team">
-                      <div class="crop_team"><img id="team_player3" src="img/players/_SD_.png" alt="_SD_"/></div>
-                  </div>
-                  <div class="nick_team">
-                    <img id="team_player3_flag" src="img/flags/mini/IsleOfMan.svg" alt="Остров Мэн"/>
-                    <p>_SD_</p>
-                  </div>
-                </div>
-                <div class="player_card_wrapper">
-                  <div class="players_team">
-                      <div class="crop_team"><img id="team_player4" src="img/players/rusttle.png" alt="rusttle"/></div>
-                  </div>
-                  <div class="nick_team">
-                    <img id="team_player4_flag" src="img/flags/mini/Belize.svg" alt="Белиз"/>
-                    <p>rusttle</p>
-                  </div>
-                </div>
-                <div class="player_card_wrapper">
-                  <div class="players_team">
-                      <div class="crop_team"><img id="team_player5" src="img/players/ugly4.png" alt="ugly4"/></div>
-                  </div>
-                  <div class="nick_team">
-                    <img id="team_player5_flag" src="img/flags/mini/Russia.svg" alt="Россия"/>
-                    <p>ugly4</p>
-                  </div>
-                </div>
+                )}
             </div>
 
             <div class="devider_line"></div>
@@ -106,7 +160,17 @@ function Team() {
 
         </div>
           
-        <TeamTabs/>
+        <TeamTabs 
+        description={description}
+        players={players} 
+        matches_upcoming={matches_upcoming} 
+        matches_ended={matches_ended}
+        ongoing_events={ongoing_events}
+        ended_events={ended_events}
+        lan_events={lan_events}
+        online_events={online_events}
+        ex_players={ex_players}
+        />
           
     </div>
     )
