@@ -4,17 +4,17 @@ import "../Tabs/Match/Match.css"
 import "../ResultMaker/ResultMaker.css"
 
 function CurrentMatchMaker(props){
-    const setTier = (tier) =>{
+    const setTier = (tier, tierSrc) =>{
         let content = [];
         for(let i = 0; i < 5; ++i){
             if (i < tier){
                 content.push(
-                    <img src="img/Top_star.svg" alt="star"/>
+                    <img src={tierSrc} alt="star"/>
                 );
             }
             else{
                 content.push(
-                    <img src="img/Top_star.svg" style={{opacity: 0.3}} alt="faded_star"/>
+                    <img src={tierSrc} style={{opacity: 0.3}} alt="faded_star"/>
                 );
             }
         }
@@ -36,7 +36,7 @@ function CurrentMatchMaker(props){
                 <div className="matches_frame">
                     <div className="row_center_gap3">
                         <div className="left_team_tag"><p>{props.leftTeam}</p></div>
-                        <img src={"img/teams_logo/" + props.leftTeam + ".png"} alt={props.leftTeam}/>
+                        <img src={props.leftTeamSrc} alt={props.leftTeam}/>
                     </div>
                     <div className="match_score">
                         <div className="upper_score">
@@ -50,14 +50,14 @@ function CurrentMatchMaker(props){
                         </div>
                     </div>
                     <div className="row_center_gap3">
-                        <img src={"img/teams_logo/" + props.rightTeam + ".png"} alt={props.rightTeam}/>
+                        <img src={props.rightTeamSrc} alt={props.rightTeam}/>
                         <div className="right_team_tag"><p>{props.rightTeam}</p></div>
                     </div>
                 </div>
             </div>
             <div className="row_center_gap3">
                 <div className="tournament_logo">
-                    <img src={"img/event_logo/" + props.series + ".svg"} alt={props.series}/>
+                    <img src={props.eventSrc} alt={props.series}/>
                 </div>
                 <div className="event">
                     <p>{props.event}</p>
@@ -65,7 +65,7 @@ function CurrentMatchMaker(props){
             </div>
             <div className="match_tier">
                 <div className="row_center_gap3">
-                    {setTier(props.tier)}
+                    {setTier(props.tier, props.tierSrc)}
                 </div>
                 <p>{props.map}</p>
             </div>

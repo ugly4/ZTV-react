@@ -4,17 +4,17 @@ import "./ResultMaker.css";
 
 function ResultMaker(props) {
 
-    const setTier = (tier) =>{
+    const setTier = (tier, tierSrc) =>{
         let content = [];
         for(let i = 0; i < 5; ++i){
             if (i < tier){
                 content.push(
-                    <img src="img/Top_star.svg" alt="star"/>
+                    <img src={tierSrc} alt="star"/>
                 );
             }
             else{
                 content.push(
-                    <img src="img/Top_star.svg" style={{opacity: 0.3}} alt="faded_star"/>
+                    <img src={tierSrc} style={{opacity: 0.3}} alt="faded_star"/>
                 );
             }
         }
@@ -30,7 +30,7 @@ function ResultMaker(props) {
 
                         <div className="match_team" style={{opacity: match.leftScore < match.rightScore ? 0.3 : 1}}>
                             <div className="left_team_tag"><p>{match.leftTeam}</p></div>
-                            <img src={"img/teams_logo/" + match.leftTeam + ".png"} alt={match.leftTeam}/>
+                            <img src={match.leftTeamSrc} alt={match.leftTeam}/>
                         </div>
 
                         <div className="row_center_gap3">
@@ -40,17 +40,17 @@ function ResultMaker(props) {
                         </div>
 
                         <div className="match_team" style={{opacity: match.rightScore < match.leftScore ? 0.3 : 1}}>
-                            <img src={"img/teams_logo/" + match.rightTeam + ".png"} alt={match.rightTeam}/>
+                            <img src={match.rightTeamSrc} alt={match.rightTeam}/>
                             <div className="right_team_tag"><p id="right_match_team">{match.rightTeam}</p></div>
                         </div>
                     </div>
                     <div className="row_center_gap3">
-                        <div className="tournament_logo"><img src={"img/event_logo/" + match.series + ".svg"} alt={match.series}/></div>
+                        <div className="tournament_logo"><img src={match.eventSrc} alt={match.series}/></div>
                         <div className="tournament_name"><p>{match.event}</p></div>
                     </div>
                     <div className="top_tier">
                         <div className="row_center_gap3">
-                            {setTier(match.tier)}
+                            {setTier(match.tier, match.tierSrc)}
                         </div>
                         <p>{match.map}</p>
                     </div>
