@@ -1,30 +1,32 @@
 import React from "react";
 import "./NonFirstTeam.css"
+import "../../../components/ResultMaker/ResultMaker.css"
 
 function NonFirstTeam(props){
+
+    const color = props.changedPosition > 0 ? "green" : props.changedPosition < 0 ? "red" : "var(--base-08)";
+    const posChanged = props.changedPosition > 0 ? ("+" + props.changedPosition) : props.changedPosition < 0 ? props.changedPosition : "-";
+
     return(
-        <div class="rectangle_50px_top">
-                <div class="row_center_6">
-                  <div class="rectangle_50px_top_text"><p>#{props.topPosition}</p></div>
-                  <div class="row_center_gap3">
-                    <img src={props.logo} id="top_2_team_logo" />
-                    <div class="col_right_gap3">
-                      <div class="rectangle_50px_top_text"><p id="top_2_team_name">{props.name}</p></div>
-                      <div class="row_center_6">
-                        {props.players.map((item) => 
-                            <div class="rectangle_50px_top_nick">
-                                <p id="top_2_team_player1">
-                                    {item.nick}
-                                </p>
-                            </div>
-                        )}
-                        
-                      </div>
+        <div className="rectangle_50px_top">
+          <div className="row_center_6">
+            <div className="rectangle_50px_top_text"><p>#{props.topPosition}</p></div>
+            <div className="row_center_gap3">
+            <div className="tournament_logo"><img src={props.logo} alt={props.name}/></div>
+              <div className="col_right_gap3">
+                <div className="rectangle_50px_top_text"><p>{props.name}</p></div>
+                <div className="row_center_6">
+                  {props.players.map((item) => 
+                    <div className="rectangle_50px_top_nick">
+                      <p>{item.nick}</p>
                     </div>
-                  </div>
+                  )}
                 </div>
-                <div class="rectangle_50px_top_text"><p id="top_2_team_change" style={props.changedPosition>0 ? {color: "green"} : {color: "red"}}>{props.changedPosition>0 ? "+" : null}{props.changedPosition}</p></div>
               </div>
+            </div>
+          </div>
+          <div className="rectangle_50px_top_text"><p style={{color: color}}>{posChanged}</p></div>
+        </div>
     )
 }
 

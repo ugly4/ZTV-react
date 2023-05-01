@@ -1,11 +1,55 @@
 import React from "react";
+import { useRef } from 'react';
 import "./InfoContainer.css"
 
 function InfoContainer(props){
+
+  const ImageToggleOnMouseOver = ({primaryImg, secondaryImg, alt}) => {
+    const imageRef = useRef(null);
+  
+    return (
+      <img 
+        onMouseOver={() => {
+          imageRef.current.src = secondaryImg;
+          imageRef.current.className = "hovered";
+        }}
+        onMouseOut={() => {
+          imageRef.current.src= primaryImg;
+          imageRef.current.className = "";
+        }}
+        src={primaryImg} 
+        alt={alt}
+        ref={imageRef}
+        className=""
+      />
+    )
+  }
+
+  const showLogo = () => {
+    return(
+      props.isCapAdmin ? 
+      <div className="team_logo">
+        <label for="file-input">
+          <ImageToggleOnMouseOver
+            primaryImg={props.logo}
+            secondaryImg={"../img/PhotoHover.svg"}
+            alt={props.name} 
+          />
+        </label>
+        <input id="file-input" type="file"/>
+      </div>
+      :
+      <div className="team_logo">
+        <img src={props.logo} alt={props.name}/>
+      </div>
+    );
+    
+  }
+
     return(
         <div class="info_container">
               <div class="team_info">
-                <img src={props.logo} id="team_logo"/>
+                {showLogo()}
                 <div class="info_teamname">
                   <div class="flag_location">
                     <img id="team_flag" src={props.flagPath} alt={props.country}/>

@@ -1,21 +1,23 @@
 import React from "react";
+import { useRef, useState } from 'react';
 import FlagName from "../components/FlagName/FlagName";
 import Trophies from "../components/Trophies/Trophies";
 import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
+import Editor from "../components/Editor/Editor";
+import Login from "../Login/Login";
 import "./Player.css"
 import "../../src/Team/Team.css"
 
 function Player(){
     //Короче, про отображение лого, фотки, ника и, соответственно, alt в фотках - 
     //всё это как-то из БД должно тянуться, может через пропсы
-    const isAdmin = true;
-    const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
+    
     const social = {
         items : [
-            {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white", link: "https://vk.com/tarnada"}, 
-            {id: 2, src: "img/social/Steam.svg", alt: "Steam", active: true, color: "white", link: "https://steamcommunity.com/id/tamada4a"},
-            {id: 3, src: "img/social/Discord.svg", alt: "Discord", active: false, color: "colored", link:""},
-            {id: 4, src: "img/social/Faceit.svg", alt: "Faceit", active: true, color: "colored", link: "https://www.faceit.com/ru/players/VolceChat"}
+            {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white", link: "https://vk.com/tarnada", displayed: "Кирилл Симовин"}, 
+            {id: 2, src: "img/social/Steam.svg", alt: "Steam", active: true, color: "white", link: "https://steamcommunity.com/id/tamada4a", displayed: "STEAM_0:1:102762735"},
+            {id: 3, src: "img/social/Discord.svg", alt: "Discord", active: false, color: "colored", link:"", displayed: ""},
+            {id: 4, src: "img/social/Faceit.svg", alt: "Faceit", active: true, color: "colored", link: "https://www.faceit.com/ru/players/VolceChat", displayed: "VolceChat2003"}
         ]
     }
 
@@ -140,39 +142,100 @@ function Player(){
         {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
     ]
 
+    const isAdmin = true;
+    const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
+
+    const [nickEditorActive, setNickEditorActive] = useState(false); //состояния модального окна для редактирования описания
+    const [socialEditorActive, setSocialEditorActive] = useState(false); //состояния модального окна для редактирования описания
+    const [socialUnbindActive, setSocialUnbindActive] = useState(false); //состояния модального окна для редактирования описания
+    
+    const [mouseOutCard, setMouseOutCard] = useState(true); //Для ховера игрока
+    const [mouseOnCard, setMouseOnCard] = useState(false); //Для ховера игрока
+
+    const [socialToUnbind, setSocialToUnbind] = useState('');
+
+    const [valueNick, setValueNick] = useState(nick); //Для селектора команды
+
+    const nickRef = useRef(null);
+
+    const handleClick = () => {
+        let newNick = nickRef.current.value;
+        if(newNick !== ""){
+            setValueNick(isAdmin ? (newNick + " (Админ)") : newNick);
+        }
+        setNickEditorActive(!nickEditorActive);
+    };
+    
+    const toggleOnMouseOver = () => {
+        return(
+            mouseOutCard ? 
+                <div>
+                    <div className="player_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                    <div className="player">
+                        <div className="crop_player"><img src="../img/players/Tamada.png" alt="Tamada"/></div>
+                    </div>
+                </div>
+            : 
+                <div className="img_hover_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}}>
+                    <label for="file-input">
+                        <img src="../img/PlayerHovered.svg" alt="Выбор фотографии игрока"/>
+                    </label>
+                    <input id="file-input" type="file"/>
+                </div>
+        );
+    }
+
+    const toggleClass = () => {
+        
+    }
+
     return(
     <div>
-        <div class="user_back">
-            <div class="player_card_wrapper">
-                <div class="player_team_logo"><img src="img/teams_logo/Amfier.png" alt="Amfier"/></div>
-                <div class="player">
-                    <div class="crop_player"><img src="img/players/Tamada.png" alt="Tamada"/></div>
-                </div>
+        <div className="user_back">
+            <div className="player_card_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onMouseOver={() => {setMouseOutCard(false); setMouseOnCard(true)}}>
+                {isAdmin ? toggleOnMouseOver() : 
+                    <div>
+                        <div className="player_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                        <div className="player">
+                            <div className="crop_player"><img src="../img/players/Tamada.png" alt="Tamada"/></div>
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="player_info">
-                <div class="player_nick"><p>{nick}</p></div>
+            <div className="player_info">
+                <div className="player_nick">
+                    <p>{valueNick}</p>
+                    {isAdmin ? <Editor size="18px" depth={1} onClick={() => setNickEditorActive(true)}/>
+                    : <></>}
+                </div>
                 <FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин" height='11px'/>
-                <div class="devider_info">
-                    <div class="devider_info_line">
+                <div className="devider_info">
+                    <div className="devider_info_line">
                         <span>Возраст</span>
                         <p>Не указано</p>
                     </div>
-                    <div class="devider_subline"></div>
+                    <div className="devider_subline"></div>
                 </div>
-                <div class="devider_info">
-                    <div class="devider_info_line">
+                <div className="devider_info">
+                    <div className="devider_info_line">
                         <span>Текущая команда</span>
-                        <div class="devider_team">
-                            <div class="devider_team_logo"><img src="img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                        <div className="devider_team">
+                            <div className="devider_team_logo"><img src="img/teams_logo/Amfier.png" alt="Amfier"/></div>
                             <p>ПУПА</p>
                         </div>
                     </div>
-                    <div class="devider_subline"></div>
+                    <div className="devider_subline"></div>
                 </div>
-                <div class="devider_info">
-                    <div class="devider_info_line">
-                        <span>Социальные сети</span>
-                        <div class="social_media">
+                <div className="devider_info">
+                    <div className="devider_info_line">
+                        <div className="row_center_5px">
+                            <span>Социальные сети</span>
+                            {/* ТУТ НАДО БУДЕТ ПОМЕНЯТЬ УСЛОВИЕ НА OnClick. Если игрок - на карандаш срабатывает его окно, если админ - его
+                            Также условие на то, игрок или админ смотрит страницу!!!!!!*/}
+                            {isAdmin ? <Editor size="12px" depth={1} onClick={() => setSocialEditorActive(true)}/>
+                            : <></>}
+                        </div>
+                        <div className="social_media">
                             {social.items.map((item) => 
                             item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
                             <img key={item.id} className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={item.src} alt={item.alt}/>
@@ -182,7 +245,7 @@ function Player(){
                 </div>
             </div>
         </div>
-        <div class="devider_line"></div>
+        <div className="devider_line"></div>
         <Trophies items={trophies}/>
         <PlayerTabs 
         stat={stats} 
@@ -194,6 +257,69 @@ function Player(){
         lan_events={lan_events}
         online_events={online_events}
         />
+
+        <Login active={nickEditorActive} setActive={setNickEditorActive}>
+            <div className="header_splash_window">
+                 <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Укажите ник игрока</p>
+            </div>
+            <div className="col_center_gap30">
+                <div className="text-field">
+                    <input className="text-field_input" type="text" name="nick" placeholder="Введите ник игрока" ref={nickRef}/>
+                </div>
+                <div className="full_grey_button">
+                    <input type="submit" value="Сохранить" onClick={handleClick}/>
+                </div>
+            </div>
+        </Login>
+
+        <Login active={socialEditorActive} setActive={setSocialEditorActive}>
+            <div className="header_splash_window">
+                 <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Управление социальными сетями</p>
+            </div>
+            {social.items.map((item) => 
+                <div>
+                    <div className="social_row">
+                        <div className="logo_social_wrap">
+                            <div className={item.color === "white" ? "social_logo" : "social_logo colored_to_white"}><img src={"../" + item.src} alt={item.alt} /></div>
+                            <div className="social_wrapper">
+                                <span>{item.alt}</span>
+                                {item.displayed === "" ? <p>Не указано</p> :
+                                    <p>{item.displayed}</p>
+                                }
+                            </div>
+                        </div>
+                        {item.displayed === "" ? <></> :
+                            <span className="unbind" onClick={() => {setSocialUnbindActive(true); setSocialEditorActive(false); setSocialToUnbind(item.alt)}}>Отвязать</span>
+                        }
+                    </div>
+                    {/* {item.alt === "Faceit" ? <></> : <div className="social_devider"></div>} */}
+                    <div className="social_devider"></div>
+                </div>
+            )}
+        </Login>
+
+        <Login active={socialUnbindActive} setActive={setSocialUnbindActive}>
+            <div className="header_splash_window">
+                 <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Вы уверены, что хотите отвязать {socialToUnbind} игрока {valueNick}?</p>
+            </div>
+            <div className="small_buttons_wrapper">
+                <div className="small_dark_button">
+                    <input type="submit" value="Нет" onClick={() => socialUnbindActive ? setSocialUnbindActive(!socialUnbindActive) : null}/>
+                </div>
+                <div className="small_grey_button">
+                    <input type="submit" value="Да" onClick={() => socialUnbindActive ? setSocialUnbindActive(!socialUnbindActive) : null}/>
+                </div>
+            </div>
+        </Login>
     </div>
     );
 }

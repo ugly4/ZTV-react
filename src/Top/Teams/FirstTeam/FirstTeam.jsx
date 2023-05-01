@@ -1,75 +1,39 @@
 import React from "react";
-import "./FirstTeam.css"
 import { Link } from "react-router-dom";
 import Player from "./Player/Player"
+import "./FirstTeam.css"
+import "../../../components/ResultMaker/ResultMaker.css"
 
 function FirstTeam(props){
+
+  const color = props.changedPosition > 0 ? "green" : props.changedPosition < 0 ? "red" : "var(--base-08)";
+  const posChanged = props.changedPosition > 0 ? ("+" + props.changedPosition) : props.changedPosition < 0 ? props.changedPosition : "-";
+
     return(
         <div>
-              <div class="rectangle_50px_top">
-                <div class="row_center_6">
-                  <div class="rectangle_50px_top_text"><p>#{props.topPosition}</p></div>
-                  <div class="row_center_gap3">
-                    <img src={props.logo} id="top_1_team_logo" />
-                    <div class="rectangle_50px_top_text">
-                        <p id="top_1_team_name">{props.name}</p>
-                        </div>
-                  </div>
+          <div className="rectangle_50px_top">
+            <div className="row_center_6">
+              <div className="rectangle_50px_top_text"><p>#{props.topPosition}</p></div>
+              <div className="row_center_gap3">
+                <div className="tournament_logo"><img src={props.logo} alt={props.name}/></div>
+                <div className="rectangle_50px_top_text">
+                  <p>{props.name}</p>
                 </div>
-                <div class="rectangle_50px_top_text"><p id="top_1_team_change">-</p></div>
-              </div>
-              <div class="top1_team_rectangle">
-                <div class="row_left_gap20">
-                {props.players.map((item) => 
-                            <Link to="/player" style={{textDecoration: "none"}} >
-                                <Player {...item} />
-                            </Link>
-                        )}
-                
-                  
-                  <div class="player_top">
-                    <div class="players_background">
-                      <div class="crop"><img id="top_team_player1" src="img/players/Hitriy_Kazah.png" alt="Hitriy_Kazah" /></div>
-                    </div>
-                    <div class="nick">
-                      <img id="top_team_player1_flag" src="img/flags/mini/Kosovo.svg" alt="Косово" />
-                      <p>Hitriy_Kazah</p>
-                    </div>
-                  </div>
-                  <div class="player_top">
-                    <div class="players_background">
-                      <div class="crop"><img id="top_team_player1" src="img/players/_SD_.png" alt="_SD_" /></div>
-                    </div>
-                    <div class="nick">
-                      <img id="top_team_player1_flag" src="img/flags/mini/IsleOfMan.svg" alt="Остров Мэн" />
-                      <p>_SD_</p>
-                    </div>
-                  </div>
-                  <div class="player_top">
-                    <div class="players_background">
-                      <div class="crop"><img id="top_team_player1" src="img/players/rusttle.png" alt="rusttle" /></div>
-                    </div>
-                    <div class="nick">
-                      <img id="top_team_player1_flag" src="img/flags/mini/Belize.svg" alt="Белиз" />
-                      <p>rusttle</p>
-                    </div>
-                  </div>
-                  <div class="player_top">
-                    <div class="players_background">
-                      <div class="crop"><img id="top_team_player1" src="img/players/ugly4.png" alt="ugly4" /></div>
-                    </div>
-                    <div class="nick">
-                      <img id="top_team_player1_flag" src="img/flags/mini/Russia.svg" alt="Россия" />
-                      <p>ugly4</p>
-                    </div>
-                  </div>
-                </div>
-                
-                
-                <Link to="/team">Профиль команды</Link>
-              
               </div>
             </div>
+            <div className="rectangle_50px_top_text"><p style={{color: color}}>{posChanged}</p></div>
+          </div>
+          <div className="top1_team_rectangle">
+            <div className="row_left_gap20">
+                {props.players.map((item) => 
+                  <Link to="/player" style={{textDecoration: "none"}} >
+                    <Player {...item} />
+                  </Link>
+                )}
+            </div>
+            <Link to="/team">Профиль команды</Link> 
+          </div>
+        </div>
     )
 }
 

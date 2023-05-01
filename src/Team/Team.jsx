@@ -38,7 +38,7 @@ function Team() {
     }
 
     const team = {
-        logo: "img/teams_logo/Amfier.png",
+        logo: "../img/teams_logo/NoLogo.svg",
         flagPath: "img/flags/mini/Russia.svg",
         country: "Россия",
         city: "Пугачёв",
@@ -138,9 +138,11 @@ function Team() {
 
     const description = "Самая командная команда из всех командных команд, которые только могут быть. Да, мы лучшие и мы этого не скрываем, да. А всё почему? Потому что мы ПУПА - ПУзатые Пупсы в Автозаке.";
 
+    const type = "admin";
+    const isCapAdmin = type === "admin" ? true : type === "captain" ? true : false;
+
     return(
         <div >
-          
           <div>
             <div class="team_rectangle">
               {players.map((player) => 
@@ -152,7 +154,7 @@ function Team() {
 
             <div class="devider_line"></div>
 
-            <InfoContainer {...team}/>
+            <InfoContainer {...team} isCapAdmin={isCapAdmin}/>
 
             <div class="devider_line"></div>
 
@@ -160,7 +162,8 @@ function Team() {
 
         </div>
           
-        <TeamTabs 
+        <TeamTabs
+        isCapAdmin={isCapAdmin}
         description={description}
         players={players} 
         matches_upcoming={matches_upcoming} 

@@ -50,15 +50,30 @@
     justify-content: space-between;
     cursor: pointer;
 }
-.text_field_half_select input::placeholder{
+.text_field_half_select p{
     color: #ffffff 70%;
-    opacity: 0.4;
+    opacity: 1;
     font-family: var(--text-regular-lcg);
 }
 .text_field_half_select img{
     width: 12px;
     transition: transform 0.5s;
 }
+.non_selectable_half_select{
+    cursor: default;
+}
+
+.onStart{
+    color: white 70%;
+    opacity: 1;
+    font-family: var(--text-regular-lcg);
+}
+.choosed{
+    color: white;
+    opacity: 1;
+    font-family: var(--text-regular-lcg);
+}
+
 .select_list{
     width: 227px;
     height: 196px;
@@ -72,19 +87,19 @@
     overflow-y: auto;
 }
 .select_list::-webkit-scrollbar {
-    width: 8px;               /* ширина scrollbar */
+    width: 8px;               
 }
 .select_list::-webkit-scrollbar-track {
-    background: #242424;        /* цвет дорожки */
+    background: #242424;
 }
 .select_list::-webkit-scrollbar-thumb {
-    background-color: #191919;    /* цвет плашки */
-    border-radius: 20px;       /* закругления плашки */
-    /*border: 3px solid orange;   padding вокруг плашки */
+    background-color: #191919;
+    border-radius: 20px;
 }
 .select_list::-webkit-scrollbar-corner {
     background: #242424;
 }
+
 .text_field_half_options{
     width: 227px;
     list-style: none;
@@ -112,6 +127,30 @@
     filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(190%) contrast(101%);
 }
 
+.non_selectable{
+    pointer-events: none;
+    background-color: #121212;
+}
+.non_selectable p{
+    opacity: 0.15;
+}
+.non_selectable img{
+    opacity: 0.15;
+}
+
+.list_logo{
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.list_logo img{
+    user-select: none;
+}
+
 /*Длинные текстовые поля(логин)*/
 .text-field input{
     margin: 0 auto;
@@ -133,4 +172,39 @@
     color: #ffffff 70%;
     opacity: 0.4;
     font-family: var(--text-regular-lcg);
+}
+
+.description_field textarea{
+    width: 440px;
+    height: 90px;
+    background-color: var(--plashka);
+    padding: 15px;
+
+    display: flex;
+    align-items: flex-start;
+
+    overflow-y: auto;
+
+    margin: 0;
+    font-family: var(--text-regular-lcg);
+    font-size: 14px;
+    color: var(--white50);
+    outline: none;
+    border: none;
+
+    resize: none;
+}
+.description_field textarea::-webkit-scrollbar {
+    width: 8px;               
+}
+.description_field textarea::-webkit-scrollbar-track {
+    background: #242424;
+
+}
+.description_field textarea::-webkit-scrollbar-thumb {
+    background-color: #191919;
+    border-radius: 20px;
+}
+.description_field textarea::-webkit-scrollbar-corner {
+    background: #242424;
 }

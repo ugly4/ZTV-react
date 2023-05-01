@@ -87,3 +87,50 @@
 .button_match:hover{
     border-color: var(--base-05);
 }
+
+/*Кнопка с серым фоном, при наведении темнеет. Текст белый(логин, регистрация)*/
+.small_grey_button{
+    padding: 0px;
+    margin: 0;
+    width: 60px;
+}
+.small_grey_button input{
+    width: 60px;
+    height: 35px;
+    outline: none;
+
+    font-size: 16px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+
+    border: 1px solid var(--base-07);
+    background-color: var(--base-07);
+
+    cursor: pointer;
+}
+.small_grey_button input:hover{
+    background-color: #3c3c3c;
+}
+
+.small_dark_button{
+    padding: 0px;
+    margin: 0;
+    width: 60px;
+}
+.small_dark_button input{
+    width: 60px;
+    height: 35px;
+    outline: none;
+
+    font-size: 16px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+
+    border: 1px solid var(--base-09);
+    background-color: var(--base-09);
+
+    cursor: pointer;
+}
+.small_dark_button input:hover{
+    background-color: var(--plashka);
+}
