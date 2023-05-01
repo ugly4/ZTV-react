@@ -44,6 +44,8 @@
     left: 337px;
     background: rgba(255,255,255,0.3);
     border-radius: 100px;
+
+    overflow: hidden;
 }
 .HP{
     position: absolute;
