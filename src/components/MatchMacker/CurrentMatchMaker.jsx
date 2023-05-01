@@ -2,6 +2,7 @@ import React from "react";
 import "../../Matches/Matches.css";
 import "../Tabs/Match/Match.css"
 import "../ResultMaker/ResultMaker.css"
+import { Link } from "react-router-dom";
 
 function CurrentMatchMaker(props){
     const setTier = (tier, tierSrc) =>{
@@ -30,7 +31,8 @@ function CurrentMatchMaker(props){
     const rightSubOpacity = rightSubColor === "var(--white40)" ? 1 : 0.9;
 
     return(
-        <div className="match_frame">
+        <Link to="/match" style={{textDecoration: "none"}}>
+            <div className="match_frame">
             <div className="status_match_wrapper">
                 <div className="live"><p>LIVE</p></div>
                 <div className="matches_frame">
@@ -69,7 +71,9 @@ function CurrentMatchMaker(props){
                 </div>
                 <p>{props.map}</p>
             </div>
-        </div>
+            </div>
+        </Link>
+        
     );
 }
 

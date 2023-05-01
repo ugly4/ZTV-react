@@ -2,6 +2,7 @@ import React from "react";
 import "../../Matches/Matches.css";
 import "../Tabs/Match/Match.css"
 import "../ResultMaker/ResultMaker.css"
+import { Link } from "react-router-dom";
 
 function OngoingMatchMaker(props){
     const setTier = (tier, tierSrc) =>{
@@ -25,6 +26,7 @@ function OngoingMatchMaker(props){
         <div className="col_center_gap10">
             <div className="results_date"><p>Матчи {props.date}</p></div>
             {props.matches.map((match) =>
+            <Link to="/match" style={{textDecoration: "none"}}>
                 <div className="match_frame">
                     <div className="status_match_wrapper">
                         <div className="ongoing"><p>{match.time}</p></div>
@@ -56,6 +58,7 @@ function OngoingMatchMaker(props){
                         <p>{match.map}</p>
                     </div>
                 </div>
+            </Link>
             )}
         </div>
     );
