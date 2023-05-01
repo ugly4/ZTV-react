@@ -12,18 +12,18 @@
     cursor: pointer;
     user-select: none;
 }
-.rectangle_50px_top_text{
+.top_teams .rectangle_50px_top_text{
     font-family: var(--text-medium-lcg);
 }
-.rectangle_50px_top_text p{
+.top_teams .rectangle_50px_top_text p{
     color: var(--base-08);
     font-size: 20px;
     margin: 0;
 }
-.rectangle_50px_top_nick{
+.top_teams .rectangle_50px_top_nick{
     font-family: var(--text-regular-lcg);
 }
-.rectangle_50px_top_nick p{
+.top_teams .rectangle_50px_top_nick p{
     color: var(--base-08);
     padding: 0;
     margin: 0;

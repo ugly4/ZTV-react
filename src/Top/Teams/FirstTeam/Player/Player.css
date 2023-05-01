@@ -30,21 +30,21 @@
 }
 
 /*Всё связанное с никами с топа*/
-.nick{
+.top_teams .nick{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0px;
     gap: 3px;
 }
-.nick p{
+.top_teams .nick p{
     font-family: var(--text-regular-lcg);
     font-size: 16px;
     margin: 0;
     color: var(--base-08);
     pointer-events: none; /*вроде отключил ховер*/
 }
-.nick img{
+.top_teams .nick img{
     height: 12px;
 }
 
