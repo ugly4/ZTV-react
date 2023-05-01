@@ -30,8 +30,13 @@
     --white40: #757575;
     --white50: #8C8C8C;
     --white70: #363636;
-    --ct-color: #1CBCFF;
-    --t-color: #F44E1C;
+
+    --ct-color: #1cbcff;
+    --t-color: #f44e1c;
+
+    --hp-high: #00FF90;
+    --hp-medium: #FFDC24;
+    --hp-low: #FF1E1E;
     --base-04: #1f1f1f;
     --base-05: #00ff90;
     --base-06: rgba(0, 0, 0, 0.2);

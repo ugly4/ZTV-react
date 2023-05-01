@@ -13,11 +13,14 @@ function Match(props){
         MatchStatus: 1,
         NameFirst: "AbuDabi",
         LogoFirst: "/img/teams_logo/AbuDabi.svg",
+        SideFirst: "ct",
+        ScoreFirst: 0,
+
         NameSecond: "ПУПА",
         LogoSecond: "/img/teams_logo/pupa.svg",
-        MatchDate: new Date(2023, 4, 5, 8, 0, 0),
-        ScoreFirst: 0,
+        SideSecond: "t",
         ScoreSecond: 2,
+        MatchDate: new Date(2023, 4, 5, 8, 0, 0),
         maps: [
             {mapName: "Overpass", scoreFirst: 10, scoreSecond: 16, firstRound:[5, 10], secondRound: [5, 6]},
             {mapName: "Anubis", scoreFirst: 5, scoreSecond: 10, firstRound:[5, 10], secondRound: [null, null]},
