@@ -1,12 +1,10 @@
 .scroll_logs{
-    overflow: scroll;
+    overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: hsl(0, 75%, 5%);
     width: 648px;
     height: 356px;
     background-size: cover;
-    
-    
 }
 .scroll_logs::-webkit-scrollbar {
     width: 8px;               /* ширина scrollbar */

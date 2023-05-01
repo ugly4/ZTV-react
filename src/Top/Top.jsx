@@ -178,7 +178,7 @@ function Top(){
               {generateSelectors()}
             </div>
             <div className="full_grey_button">
-              <input type="submit" value="Сохранить" />
+              <input type="submit" value="Сохранить" onClick={() => editorActive ? setEditorActive(false) : null}/>
             </div>
           </div>
       </Login>

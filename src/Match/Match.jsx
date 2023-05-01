@@ -33,7 +33,8 @@ function Match(props){
         name: "(название стрима)",
         viewers: 8948,
         flagPath: "img/flags/mini/Russia.svg",
-        link: "https://www.twitch.tv/csgo_paragon"
+        link: "https://www.twitch.tv/csgo_paragon",
+        country: "Россия"
     } 
 
     return(

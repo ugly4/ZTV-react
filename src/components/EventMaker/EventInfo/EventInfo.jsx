@@ -137,32 +137,36 @@ function EventInfo(props) {
                     </div>
                 </div>
 
-            <div className="event_info_bottom">
-                <div className="container_name">
-                    <div className="event_col"><p>Пул карт</p></div>
-                    <div className="maps">
-                        {props.maps.map((map_name) =>
-                            <div className="map_wrapper">
-                                <Map map={map_name}/>
-                                <div className="map_name_wrapper"><p>{map_name}</p></div>
-                            </div>   
-                        )}
-                    </div>
-                </div>
-                
-                <div className="event_info_bottom_wrapper">
+                <div className="event_info_bottom">
                     <div className="container_name">
-                        <div className="event_col"><p>Формат игр</p></div>
-                        <div className="event_info">
-                            <p>Ну тут описание турнира, всё такое, карты всякие и тд, и тп.
-                            Ну тут описание турнира, всё такое, карты всякие и тд, и тп. 
-                            </p>
+                        <div className="event_col"><p>Пул карт</p></div>
+                        <div className="maps">
+                            {props.maps.map((map_name) =>
+                                <div className="map_wrapper">
+                                    <Map map={map_name}/>
+                                    <div className="map_name_wrapper"><p>{map_name}</p></div>
+                                </div>   
+                            )}
                         </div>
                     </div>
-                    <div className="container_name">
-                        <div className="event_col"><p>Архив с фотографиями</p></div>
-                        <div className="event_info">
-                            <a href={props.photoLink} target="_blank" rel="noopener noreferrer">{urlFix(props.photoLink)}</a>
+                    
+                    <div className="event_info_bottom_wrapper">
+                        <div className="container_name">
+                            <div className="event_col"><p>Формат игр</p></div>
+                            <div className="event_info">
+                                <p>Ну тут описание турнира, всё такое, карты всякие и тд, и тп.
+                                Ну тут описание турнира, всё такое, карты всякие и тд, и тп. 
+                                </p>
+                            </div>
+                        </div>
+                        <div className="container_name">
+                            <div className="row_center_5px">
+                                <div className="event_col"><p>Архив с фотографиями</p></div>
+                                <Editor size="12px" depth={1} onClick={() => setDiskLinkEditorActive(true)}/>
+                            </div>
+                            <div className="event_info">
+                                <a href={valueDiskLink} target="_blank" rel="noopener noreferrer">{urlFix(valueDiskLink)}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,7 +202,6 @@ function EventInfo(props) {
                     </div>
                 </div>
             </Login>
-        </div>
         </div>
     );
 }
