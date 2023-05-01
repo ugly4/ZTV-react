@@ -28,6 +28,25 @@
     user-select: none;
 }
 
+.team_logo{
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.team_logo input{
+    visibility:hidden;
+    width:0;
+    height:0
+}
+
+.hovered{
+    cursor: pointer;
+}
+
 /*Настройки для отображения локации и названия*/
 .info_teamname{
     display: flex;

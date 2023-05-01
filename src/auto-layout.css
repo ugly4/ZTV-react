@@ -39,6 +39,20 @@
     flex-grow: 0;
 }
 
+/*Отступ 5px, центрирование в строку*/
+.row_center_5px{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 5px;
+    
+    width: auto;
+    height: auto;
+    
+    flex: none;
+    flex-grow: 0;
+}
 
 /*Отступ 30px, центрирование в столбец*/
 .col_center_gap30{

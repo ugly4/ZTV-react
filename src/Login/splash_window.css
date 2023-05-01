@@ -59,3 +59,49 @@
 .splash_window.active{
     transform: scale(1);
 }
+
+
+.info_text{
+    width: 470px;
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 14px;
+}
+.info_text p{
+    font-family: var(--text-regular-lcg);
+    font-size: 16px;
+    color: white;
+}
+
+.inside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    position: relative;
+    width: auto;
+    height: 300px;
+}
+.inside::-webkit-scrollbar {
+    width: 8px;               /* ширина scrollbar */
+}
+.inside::-webkit-scrollbar-track {
+    background: #242424;        /* цвет дорожки */
+}
+.inside::-webkit-scrollbar-thumb {
+    background-color: #191919;    /* цвет плашки */
+    border-radius: 20px;       /* закругления плашки */
+    /*border: 3px solid orange;   padding вокруг плашки */
+}
+.inside::-webkit-scrollbar-corner {
+    background: #242424;
+}
+
+.scroll{
+    overflow-y: scroll;
+}
