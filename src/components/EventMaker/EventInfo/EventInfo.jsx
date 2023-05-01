@@ -199,6 +199,7 @@ function EventInfo(props) {
                 </div>
             </Login>
         </div>
+        </div>
     );
 }
 
