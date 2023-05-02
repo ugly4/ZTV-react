@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Player from "./Player/Player"
 import "./Team.css"
 import InfoContainer from "./InfoContainer/InfoContainer";
+import Login from "../Login/Login";
+import { useState } from "react";
 
 function Team() {
     
@@ -140,6 +142,10 @@ function Team() {
 
     const type = "admin";
     const isCapAdmin = type === "admin" ? true : type === "captain" ? true : false;
+    const [leaveWindowActive, setLeaveWindowActive] = useState(false);
+    const handleClick = () => {
+      setLeaveWindowActive(!leaveWindowActive);
+  };
 
     return(
         <div >
@@ -174,7 +180,32 @@ function Team() {
         online_events={online_events}
         ex_players={ex_players}
         />
+
+        {isCapAdmin && 
+        <div class="leave_team" onClick={() => setLeaveWindowActive(true)}>
+          <p>Покинуть команду</p>
+        </div>}
+        
+        <Login active={leaveWindowActive} setActive={setLeaveWindowActive}>
+          <div className="header_splash_window">
+            <div className="logo_splash_window"></div>
+          </div>
+          <div className="info_text">
+            <p>Вы уверены, что хотите покинуть команду *название*?</p>
+          </div>
+          <div style={{display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center"}}>
+            <div className="full_grey_button" >
+              <input type="submit" value="Нет" onClick={handleClick} style={{width: "57px", height: "34px"}}/>
+            </div>
+            <div className="full_grey_button" >
+              <input type="submit" value="Да" onClick={handleClick} style={{width: "57px", height: "34px"}}/>
+            </div>
+          </div>
           
+        </Login>
     </div>
     )
     
