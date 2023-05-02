@@ -1,0 +1,24 @@
+.statistic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    position: absolute;
+    width: 648px;
+    height: 456px;
+}
+.statistic_maps{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 5px;
+    gap: 10px;
+
+    width: 638px;
+    height: 16px;
+
+    background: #242424;
+}

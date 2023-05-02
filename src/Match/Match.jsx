@@ -10,7 +10,7 @@ import Statistic from "./Statistic/Statistic"
 
 function Match(props){
     const match = {
-        MatchStatus: 1,
+        MatchStatus: 2,
         NameFirst: "AbuDabi",
         LogoFirst: "/img/teams_logo/AbuDabi.svg",
         SideFirst: "ct",
@@ -81,9 +81,9 @@ function Match(props){
             }
                 
             {match.MatchStatus == 2 && 
-                <div class="scoreboard_block">
+                <div class="match_statistic_block">
                     <p>Статистика матча</p>
-                    <Statistic ></Statistic>
+                    <Statistic props={match} map={match.maps[0]}></Statistic>
                 </div>
             }
         </div>   

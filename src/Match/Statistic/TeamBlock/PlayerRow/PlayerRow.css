@@ -1,0 +1,23 @@
+.statistic_player_row{
+    width: 648px;
+    height: 32px;
+    background: #191919;
+    display: flex;
+    align-items: center;
+}
+.statistic_player_row_nick{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    width: 153px;
+    height: 16px;
+    left: 5.5px;
+    top: 8px;
+}
+.statistic_player_row_nick p{
+    font-family: var(--text-regular-lcg);
+    color: white;
+    margin-bottom: 0px;
+}
