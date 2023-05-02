@@ -147,6 +147,9 @@ function Team() {
       setLeaveWindowActive(!leaveWindowActive);
   };
 
+    const [mouseOutCard, setMouseOutCard] = useState(true); //Для ховера игрока
+    const [mouseOnCard, setMouseOnCard] = useState(false); //Для ховера игрока
+
     return(
         <div >
           <div>
@@ -191,7 +194,7 @@ function Team() {
             <div className="logo_splash_window"></div>
           </div>
           <div className="info_text">
-            <p>Вы уверены, что хотите покинуть команду *название*?</p>
+            <p>Вы уверены, что хотите покинуть команду {team.name}?</p>
           </div>
           <div style={{display: "flex",
                         flexDirection: "row",
