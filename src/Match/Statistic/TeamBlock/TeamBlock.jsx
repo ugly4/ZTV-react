@@ -3,14 +3,14 @@ import './TeamBlock.css'
 import PlayerRow from "./PlayerRow/PlayerRow";
 import TeamRow from "./TeamRow/TeamRow";
 
-function TeamBlock({team,map}){
+function TeamBlock({team, players, map}){
     return(
         <div class="statistic_team_block">
             <TeamRow team={team}/>
-            {/* {team.players.map((item) => 
+            {players.players.map((item) => 
                 <PlayerRow props={item} team={team}/>
-            )} */}
-            <PlayerRow props={team.players[0]} team={team} />
+            )}
+            
         </div>
     )
 }
