@@ -6,7 +6,7 @@ function Trophies(props){
         <div class="trophies_container">
             <div id="trophies">
             {props.items.trophies.map((item) => 
-                <img key={item.id} src={item.src} alt={item.alt}/>
+                <img key={item.id} src={"../" + item.src} alt={item.alt}/>
                 )}
             </div>
         </div>

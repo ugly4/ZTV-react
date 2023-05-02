@@ -52,7 +52,8 @@
     width:auto;
     height: auto;
 }
-.content{
+
+.statictic_content{
     display: none;
 
     width: 100%;
@@ -61,7 +62,7 @@
     margin: 0;
 }
 
-.active_content{
+.active_statictic_content{
     display: flex;
     flex-direction: column;
     justify-content: center;

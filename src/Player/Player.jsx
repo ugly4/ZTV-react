@@ -220,7 +220,7 @@ function Player(){
                     <div className="devider_info_line">
                         <span>Текущая команда</span>
                         <div className="devider_team">
-                            <div className="devider_team_logo"><img src="img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                            <div className="devider_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
                             <p>ПУПА</p>
                         </div>
                     </div>
@@ -237,8 +237,8 @@ function Player(){
                         </div>
                         <div className="social_media">
                             {social.items.map((item) => 
-                            item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img key={item.id} className={item.color === "white" ? 'active_elem' : 'active_colored'} src={item.src} alt={item.alt}/></a> : 
-                            <img key={item.id} className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={item.src} alt={item.alt}/>
+                            item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img className={item.color === "white" ? 'active_elem' : 'active_colored'} src={"../" + item.src} alt={item.alt}/></a> : 
+                            <img className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={"../" + item.src} alt={item.alt}/>
                             )}
                         </div>
                     </div>

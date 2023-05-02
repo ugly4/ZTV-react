@@ -83,15 +83,15 @@ function Statistic({props,map}){
                     onClick={() => toggleTab(3)}>Anubis</button>
                 </div>
             </div>
-            <div className={toggleState === 1 ? "content active_content" : "content"}>
+            <div className={toggleState === 1 ? "statictic_content active_statictic_content" : "statictic_content"}>
                 <TeamBlock team={firstTeam} players={firstTeam.maps[0]} map={map}/>
                 <TeamBlock team={secondTeam} players={secondTeam.maps[0]} map={map}/>
             </div>
-            <div className={toggleState === 2 ? "content active_content" : "content"}>
+            <div className={toggleState === 2 ? "statictic_content active_statictic_content" : "statictic_content"}>
                 <TeamBlock team={firstTeam} players={firstTeam.maps[1]} map={map}/>
                 <TeamBlock team={secondTeam} players={secondTeam.maps[1]} map={map}/>
             </div>
-            <div className={toggleState === 3 ? "content active_content" : "content"}>
+            <div className={toggleState === 3 ? "statictic_content active_statictic_content" : "statictic_content"}>
                 <TeamBlock team={firstTeam} players={firstTeam.maps[2]} map={map}/>
                 <TeamBlock team={secondTeam} players={secondTeam.maps[2]} map={map}/>
             </div>

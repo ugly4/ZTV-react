@@ -139,7 +139,7 @@ function Event(){
     return(
         <div>
             <div className="event_image_header">
-                <div className="crop_header"><img src="img/event_logo/IEMHeader.png" alt="IEM"/></div>
+                <div className="crop_header"><img src="../img/event_logo/IEMHeader.png" alt="IEM"/></div>
             </div>
             <div className="event_header">
                 <div className="info_wrapper">

@@ -23,7 +23,7 @@ function EndedEventsMaker(props){
                         <div class="sub_up_info_wrapper">
                             <div class="event_name"><p>{ev.event}</p></div>
                             <div class="sub_past_info">
-                                <FlagName flagPath={"../" + ev.flagPath} country={ev.country} name={getName(ev.country, ev.city, ev.type)} height="10px"/>
+                                <FlagName flagPath={ev.flagPath} country={ev.country} name={getName(ev.country, ev.city, ev.type)} height="10px"/>
                                 <p>|</p>
                                 <p>{ev.date}</p>
                             </div>

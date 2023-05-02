@@ -4,7 +4,7 @@ import "./FlagName.css"
 export default function FlagName(props) {
     return(
     <div class="flag_name">
-        <img src={props.flagPath} alt={props.country} style={{height: props.height}}/>
+        <img src={"../" + props.flagPath} alt={props.country} style={{height: props.height}}/>
         <p>{props.name}</p>
     </div>
     );

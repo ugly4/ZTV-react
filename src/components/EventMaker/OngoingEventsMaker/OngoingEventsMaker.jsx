@@ -33,7 +33,7 @@ function OngoingEventsMaker(props) {
                         <div className="info_loc_wrapper">
                             <p>{getEventName(event.event, event.type)}</p>
                             <div className="event_sub_info">
-                                <FlagName flagPath={"../" + event.flagPath} country={event.country} name={getname(event.type, event.country, event.city)} height="10px"/>
+                                <FlagName flagPath={event.flagPath} country={event.country} name={getname(event.type, event.country, event.city)} height="10px"/>
                                 <p>|</p>
                                 <p>{event.date}</p>
                                 <p>|</p>
