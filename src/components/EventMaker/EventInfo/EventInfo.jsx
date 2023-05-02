@@ -183,6 +183,9 @@ function EventInfo(props) {
                     <div className="inside">
                         {generateSelectors()}
                     </div>
+                    <div className="full_grey_button">
+                        <input type="submit" value="Сохранить" onClick={() => prizePlaceEditorActive ? setPrizePlaceEditorActive(false) : null}/>
+                    </div>
                 </div>
             </Login>
 

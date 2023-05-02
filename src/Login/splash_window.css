@@ -85,7 +85,8 @@
 
     position: relative;
     width: auto;
-    height: 300px;
+    height: fit-content;
+    max-height: 300px;
 }
 .inside::-webkit-scrollbar {
     width: 8px;               /* ширина scrollbar */
