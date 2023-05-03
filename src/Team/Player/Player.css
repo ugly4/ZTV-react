@@ -45,6 +45,12 @@
 
 /*С помощью неё мы регулируем положение ника и фотки*/
 .player_card_wrapper{
+    width: 156px;
+    height: 194px;
+    position: relative;
+    user-select: none;
+}
+.team_player_card_wrapper{
     width: 127px;
     height: 158px;
     position: relative;

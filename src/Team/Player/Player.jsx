@@ -43,7 +43,7 @@ function Player(props){
     };
 
     return(
-        <div className="player_card_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onMouseOver={() => {setMouseOutCard(false); setMouseOnCard(true)}}>
+        <div className="team_player_card_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onMouseOver={() => {setMouseOutCard(false); setMouseOnCard(true)}}>
             {isCap ? toggleOnMouseOver() :
             <div>
                 <div className="players_team">
