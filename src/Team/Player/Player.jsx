@@ -63,15 +63,12 @@ function Player(props){
             <div className="info_text">
                 <p>Вы уверены, что хотите исключить игрока {props.nick}?</p>
             </div>
-            <div style={{display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            alignItems: "center"}}>
-                <div className="full_grey_button" >
-                <input type="submit" value="Нет" onClick={handleClick} style={{width: "57px", height: "34px"}}/>
+            <div className="small_buttons_wrapper">
+                <div className="small_dark_button">
+                    <input type="submit" value="Нет" onClick={() => kickActive ? setkickActive(!kickActive) : null}/>
                 </div>
-                <div className="full_grey_button" >
-                <input type="submit" value="Да" onClick={handleClick} style={{width: "57px", height: "34px"}}/>
+                <div className="small_grey_button">
+                    <input type="submit" value="Да" onClick={() => kickActive ? setkickActive(!kickActive) : null}/>
                 </div>
             </div>
           

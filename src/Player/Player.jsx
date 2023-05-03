@@ -7,6 +7,7 @@ import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
 import "./Player.css"
 import "../../src/Team/Team.css"
+import '../components/Editor/Editor.css';
 
 function Player(){
     //Короче, про отображение лого, фотки, ника и, соответственно, alt в фотках - 
@@ -142,13 +143,18 @@ function Player(){
         {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
     ]
 
-    const isAdmin = true;
+    const isAdmin = false;
+    const isCap = true;
     const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
 
-    const [nickEditorActive, setNickEditorActive] = useState(false); //состояния модального окна для редактирования описания
-    const [socialEditorActive, setSocialEditorActive] = useState(false); //состояния модального окна для редактирования описания
-    const [socialUnbindActive, setSocialUnbindActive] = useState(false); //состояния модального окна для редактирования описания
-    
+    const [nickEditorActive, setNickEditorActive] = useState(false); //состояния модального окна для редактирования ника игрока
+    const [socialEditorActive, setSocialEditorActive] = useState(false); //состояния модального окна для редактирования соц сетей
+    const [socialUnbindActive, setSocialUnbindActive] = useState(false); //состояния модального окна для отвязки соц сети
+    const [ageEditorActive, setAgeEditorActive] = useState(false); //состояния модального окна для редактирования возраста
+    const [leaveTeamWindowActive, setLeaveTeamWindowActive] = useState(false); //состояния модального окна для выхода из команды
+    const [leaveTeamActive, setLeaveTeamActive] = useState(false); //состояния модального окна для выхода из команды
+    const [makeTeamActive, setMakeTeamActive] = useState(false); //состояния модального окна для создания команды
+
     const [mouseOutCard, setMouseOutCard] = useState(true); //Для ховера игрока
     const [mouseOnCard, setMouseOnCard] = useState(false); //Для ховера игрока
 
@@ -211,18 +217,37 @@ function Player(){
                 <FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин" height='11px'/>
                 <div className="devider_info">
                     <div className="devider_info_line">
-                        <span>Возраст</span>
+                        <div class="row_center_5px">
+                            <span>Возраст</span>
+                            {isCap ? <Editor size="12px" depth={1} onClick={() => setAgeEditorActive(true)}/>
+                            : <></>}
+                        </div>
                         <p>Не указано</p>
                     </div>
                     <div className="devider_subline"></div>
                 </div>
                 <div className="devider_info">
                     <div className="devider_info_line">
-                        <span>Текущая команда</span>
+                        <div class="row_center_5px">
+                            <span>Текущая команда</span>
+                            {isCap && !leaveTeamActive ?  
+                            <div className="editor" style={{width: "16px", height: "16px"}} onClick={() => setLeaveTeamWindowActive(true)}>
+                                <img src="../img/Cross.svg" alt="Editor"/>
+                            </div>
+                            :
+                            <div className="editor" style={{width: "17px", height: "17px"}} onClick={() => setMakeTeamActive(true)}>
+                                <img src="../img/MakeTeam.svg" alt="Editor"/>
+                            </div> 
+                            }
+
+                        </div>
+                        
+                        {leaveTeamActive ? <p>Отсутствует</p> :
                         <div className="devider_team">
                             <div className="devider_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
                             <p>ПУПА</p>
                         </div>
+                        }
                     </div>
                     <div className="devider_subline"></div>
                 </div>
@@ -232,8 +257,9 @@ function Player(){
                             <span>Социальные сети</span>
                             {/* ТУТ НАДО БУДЕТ ПОМЕНЯТЬ УСЛОВИЕ НА OnClick. Если игрок - на карандаш срабатывает его окно, если админ - его
                             Также условие на то, игрок или админ смотрит страницу!!!!!!*/}
-                            {isAdmin ? <Editor size="12px" depth={1} onClick={() => setSocialEditorActive(true)}/>
+                            {isAdmin || isCap ? <Editor size="12px" depth={1} onClick={() => setSocialEditorActive(true)}/>
                             : <></>}
+                            
                         </div>
                         <div className="social_media">
                             {social.items.map((item) => 
@@ -294,14 +320,24 @@ function Player(){
                                 }
                             </div>
                         </div>
-                        {item.displayed === "" ? <></> :
-                            <span className="unbind" onClick={() => {setSocialUnbindActive(true); setSocialEditorActive(false); setSocialToUnbind(item.alt)}}>Отвязать</span>
+                        {isAdmin && item.displayed !== "" ? 
+                        <span className="unbind" onClick={() => {setSocialUnbindActive(true); setSocialEditorActive(false); setSocialToUnbind(item.alt)}}>Отвязать</span> 
+                        : null    
+                        }
+                        {isCap && item.displayed === "" ? <span className="unbind">Подключить</span> :
+                            null
+                        }
+                        {isCap && item.displayed !== "" && (item.alt == "VK" || item.alt == "Discord") ? <span className="unbind">Редактировать</span> :
+                            null
                         }
                     </div>
                     {/* {item.alt === "Faceit" ? <></> : <div className="social_devider"></div>} */}
                     <div className="social_devider"></div>
                 </div>
             )}
+            <div className="full_grey_button" >
+                <input type="submit" value="Сохранить" onClick={() => socialEditorActive ? setSocialEditorActive(!socialEditorActive) : null} />
+            </div>
         </Login>
 
         <Login active={socialUnbindActive} setActive={setSocialUnbindActive}>
@@ -319,6 +355,70 @@ function Player(){
                     <input type="submit" value="Да" onClick={() => socialUnbindActive ? setSocialUnbindActive(!socialUnbindActive) : null}/>
                 </div>
             </div>
+        </Login>
+
+        <Login active={ageEditorActive} setActive={setAgeEditorActive}>
+            <div className="header_splash_window">
+                 <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Укажите дату рождения</p>
+            </div>
+            
+        </Login>
+
+        <Login active={leaveTeamWindowActive} setActive={setLeaveTeamWindowActive}>
+            <div className="header_splash_window">
+                 <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Вы уверены, что хотите покинуть команду ПУПА?</p>
+            </div>
+            <div className="small_buttons_wrapper">
+                <div className="small_dark_button">
+                    <input type="submit" value="Нет" onClick={() => leaveTeamWindowActive ? setLeaveTeamWindowActive(!leaveTeamWindowActive) : null}/>
+                </div>
+                <div className="small_grey_button">
+                    <input type="submit" value="Да" onClick={() => leaveTeamWindowActive ? (setLeaveTeamWindowActive(!leaveTeamWindowActive), setLeaveTeamActive(!leaveTeamActive)) : null}/>
+                </div>
+            </div>
+        </Login>
+
+        <Login active={makeTeamActive} setActive={setMakeTeamActive}>
+            <div className="header_splash_window">
+                <div className="logo_splash_window"></div>
+            </div>
+            <div className="info_text">
+                <p>Укажите информацию о команде</p>
+            </div> 
+            <div class="col_center_gap30">
+                 
+                <div class="col_center_gap10">
+                    <div className="text-field">
+                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Название. Максимум 15 символов" />
+                    </div>
+                    <div className="text-field">
+                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Тег. Максимум 8 символов" />
+                    </div>
+                    <div class="row_center_6">
+                        <div className="text-field_half">
+                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Укажите страну" />
+                        </div>
+                        <div className="text-field_half">
+                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Укажите город" />
+                        </div>
+                    </div>
+                </div>
+                <div className="small_buttons_wrapper">
+                    <div className="small_dark_button" style={{width: "122px", height: "48px"}} >
+                        <input type="submit" value="Отмена" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
+                    </div>
+                    <div className="small_grey_button"  style={{width: "122px", height: "48px"}}>
+                        <input type="submit" value="Создать" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
+                    </div>
+                </div>
+            </div>
+            
         </Login>
     </div>
     );
