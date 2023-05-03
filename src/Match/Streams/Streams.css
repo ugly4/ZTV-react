@@ -25,6 +25,7 @@
     margin-right: 5px;
     align-content: center;
     flex-wrap: wrap;
+    align-items: center;
 }
 .stream_viewers p{
     margin: 0;

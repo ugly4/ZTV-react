@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Match.css"
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
@@ -10,7 +10,7 @@ import Statistic from "./Statistic/Statistic"
 
 function Match(props){
     const match = {
-        MatchStatus: 2,
+        MatchStatus: 1,
         NameFirst: "AbuDabi",
         LogoFirst: "/img/teams_logo/AbuDabi.svg",
         SideFirst: "ct",
@@ -28,7 +28,7 @@ function Match(props){
         ]
         
     }
-    
+    const isCap = true;
     const stream = {
         name: "(название стрима)",
         viewers: 8948,
@@ -37,6 +37,8 @@ function Match(props){
         country: "Россия"
     } 
 
+
+    const [ipMatch, setActiveIpMatch] = useState(false);
     return(
         <div>
             {/* Хэдер матча со временем */}
@@ -61,7 +63,24 @@ function Match(props){
                         {match.MatchStatus == 1 ? <p>Zasada TV</p> : null}
                         {match.MatchStatus == 2 ? <p>Повторы отсутствуют</p> : null}
                     </div>
+                    { (isCap&& match.MatchStatus != 2) && 
+                    <div class="ip_match">
+                        {!ipMatch ? 
+                        <p class="ip_hidden">IP скрыт</p> : 
+                        <p class="ip_open" style={{color: "white", fontFamily: "var(--text-medium-lcg)"}}>321313131</p> 
+                        }
+                        <div class="ip_block_images">
+                            <img src="../img/Eye.svg" style={{cursor: "pointer"}} onClick={() => ipMatch ? setActiveIpMatch(!ipMatch) : setActiveIpMatch(true)}></img>
+                            <img src="../img/Copy.svg" style={{cursor: "pointer"}} onClick={() =>[navigator.clipboard.writeText("321313131")]}></img>
+                            <a href="">
+                                <img src="../img/twitch_link.svg"></img>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    }
                     {match.MatchStatus == 1 && <Streams {...stream}/>}
+                    
                 </div>
             </div>
 

@@ -177,3 +177,32 @@
     height: 475px;
     margin-top: 50px;
   }
+.ip_match{
+    padding: 9px 5px 8px 10px;
+    width: 315px;
+    height: 15px;
+    background: #191919;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ip_match p{
+    color: rgba(255, 255, 255, 0.25);
+    font-family: var(--text-regular-lcg);
+    font-size: 12px;
+    margin: 0;
+}
+.ip_block_images{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 25px;
+
+    
+    width: 110px;
+    height: 14px;
+    
+}
