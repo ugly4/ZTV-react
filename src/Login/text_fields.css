@@ -428,3 +428,120 @@
     overflow: hidden;
     padding: 0;
 }
+
+/*Половинчатые тектовые поля(регистрация, например)*/
+.text-field_third{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.text-field_third input{
+    width: 118px;
+    height: 30px;
+    font-family: var(--text-regular-lcg);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 10px 15px 10px 15px;
+    background-color: var(--plashka);
+    background-clip: padding-box;
+    color: white;
+    border: 1px solid var(--plashka);
+    outline: none;
+    margin: 0 auto;
+    display: block;
+}
+.text-field_third input::placeholder{
+    color: #ffffff 70%;
+    opacity: 0.4;
+    font-family: var(--text-regular-lcg);
+}
+
+/*Половинчатое поле-селектор(регистрация)*/
+.text-field_third_selector{
+    width: 150px;
+    height: 52px;
+    /* padding: 10px 15px 10px 15px; */
+}
+.text_field_third_select{
+    width: 118px;
+    height: 30px;
+    font-family: var(--text-regular-lcg);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--white70);
+    user-select: none;
+    padding: 10px 15px 10px 15px;
+    background-color: var(--plashka);
+    border: 1px solid var(--plashka);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.text_field_third_select p{
+    color: #ffffff 70%;
+    opacity: 1;
+    font-family: var(--text-regular-lcg);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text_field_third_select img{
+    width: 12px;
+    transition: transform 0.5s;
+}
+
+.select_list_third{
+    width: 150px;
+    height: 196px;
+    background: var(--plashka);
+    overflow: hidden;
+    padding: 0;
+    font-family: var(--text-regular-lcg);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+.select_list_third::-webkit-scrollbar {
+    width: 8px;               
+}
+.select_list_third::-webkit-scrollbar-track {
+    background: #242424;
+}
+.select_list_third::-webkit-scrollbar-thumb {
+    background-color: #191919;
+    border-radius: 20px;
+}
+.select_list_third::-webkit-scrollbar-corner {
+    background: #242424;
+}
+
+.text_field_third_options{
+    width: 150px;
+    list-style: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative; 
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: white;
+    gap: 6px;
+    padding: 0 15px 0 15px;
+}
+.text_field_half_options img{
+    width: 20px;
+}
+.text_field_half_options:hover{
+    background-color: #3c3c3c;
+}
+.text_field_half_options p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Match.css"
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
 import Streams from "./Streams/Streams"
@@ -7,12 +6,35 @@ import Description from "./Description/Description";
 import Scoreboard from "./Scoreboard/Scoreboard"
 import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
+import Editor from "../components/Editor/Editor";
+import Login from "../Login/Login";
+import "./Match.css"
 
 
 function Match(props){
     const isAdmin = true;
     const [isStart, setIsStart] = useState(true);
     const [teamsActive, setTeamsActive] = useState([false, false, false, false, false]); // состояния команд - выбрана ли команда(чтоб блокировать ее)
+    
+    const [streamsEditorActive, setStreamsEditorActive] = useState(false); //состояния модального окна для редактирования текущих матчей
+
+    const [selectorActive, setSelectorActive] = useState(false); // состояния селектора
+    
+    const toggleClass = () => { // функция toggle для селектора
+        setSelectorActive(!selectorActive);
+    };
+
+    const [value, setValue] = useState('Выберите страну'); //Для селектора страны
+
+    const countries =[
+        {name: "Россия", flagPath: "img/flags/mini/Russia.svg"},
+        {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg"},
+        {name: "Албания", flagPath: "img/flags/mini/Albania.svg"},
+        {name: "Испания", flagPath: "img/flags/mini/Spain.svg"},
+        {name: "Белиз", flagPath: "img/flags/mini/Belize.svg"},
+        {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg"}
+    ]
+    
     const match = {
         MatchStatus: 1,
         NameFirst: "AbuDabi",
@@ -90,7 +112,10 @@ function Match(props){
                 </div>
                 {/* В зависмости от того, какой тип матча, выводятся стримы */}
                 <div class="container">
-                    <p>{match.MatchStatus == 2 ? "Повтор" : "Просмотр"}</p>
+                <div className="row_center_5px">
+                        <p>{match.MatchStatus == 2 ? "Повтор" : "Просмотр"}</p>
+                        {isAdmin ?<Editor size="14px" depth={1} onClick={() => setStreamsEditorActive(true)}/> : <></>}
+                    </div>
                     <div class="match_info_upcoming_stream">
                         {match.MatchStatus == 0 ? <p>Трансляции отсутствуют</p> : null}
                         {match.MatchStatus == 1 ? <p>Zasada TV</p> : null}
@@ -138,6 +163,54 @@ function Match(props){
                     <Statistic props={match} map={match.maps[0]}></Statistic>
                 </div>
             }
+
+
+            <Login active={streamsEditorActive} setActive={setStreamsEditorActive}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Редактирование трансляций</p>
+                </div>
+                <div className="col_right_gap20">
+                    <div className="inside scroll" style={{paddingLeft: "8px", alignItems: "flex-start"}}>
+                        <div className="text-field">
+                            <input className="text-field_input" type="text" name="ip" id="ip" placeholder="Введите IP сервера" />
+                        </div>
+                        <div className="row_center_gap3">
+                            <div className="row_center_7">
+                            <div className="text-field_third">
+                                    <div className="text-field_third_selector">
+                                        <div className="text_field_third_select" onClick={() => toggleClass()}>
+                                            <p className={value === "Выберите страну" ? "onStart" : "choosed"}>{value}</p>
+                                            <img src="img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
+                                        </div>
+                                        <ul className={ selectorActive ? 'select_list_third' : 'select_list_third hide'}>
+                                            {countries.map((country) =>
+                                                <li className='text_field_third_options' onClick={setValue.bind(this, country.name)}>
+                                                    <img src={country.flagPath} alt={country.name}/>
+                                                    <p>{country.name}</p>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="text-field_third">
+                                    <input className="text-field_input" type="text" name="name" id="ip" placeholder="Название" />
+                                </div>
+                                <div className="text-field_third">
+                                    <input className="text-field_input" type="text" name="name" id="ip" placeholder="Ссылка" />
+                                </div>
+                            </div>
+                            <div className="minus"></div>
+                        </div>
+                    </div>
+                    <div className="add_stream">
+                        <p>Добавить трансляцию</p>
+                        <img src="img/Add.svg" alt="Плюс" />
+                    </div>
+                </div>
+            </Login>
         </div>   
     )
 }

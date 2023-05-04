@@ -40,7 +40,7 @@
 .splash_window {
     align-items: center;
     gap: 10px;
-    width: 500px;
+    width: 525px;
     height: fit-content;
     text-align: center;
     padding: 12px 0px 35px;
@@ -104,5 +104,6 @@
 }
 
 .scroll{
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

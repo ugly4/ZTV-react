@@ -1,16 +1,22 @@
 import React from "react";
+import { useState } from "react";
 import {Routes, Route, NavLink, Navigate} from 'react-router-dom'
 import FlagName from "../components/FlagName/FlagName";
 import EventInfo from "../components/EventMaker/EventInfo/EventInfo";
 import EventMatches from "../components/EventMaker/EventMatches";
 import EventResults from "../components/EventMaker/EventResults/EventResults";
-import "./Event.css";
-import '../components/Tabs/PlayerTabs/PlayerTabs.css';
-import { useState } from "react";
 import Login from "../Login/Login";
 import Notification from "../components/Notification/Notification";
+import DateSelector from "../components/MatchHelper/DateSelector";
+import Editor from "../components/Editor/Editor";
+import "./Event.css";
+import '../components/Tabs/PlayerTabs/PlayerTabs.css';
 
 function Event(){
+    const isAdmin = true;
+
+    const [registrationInfoEditorActive, setRegistrationInfoEditorActive] = useState(false);
+
     const tournament ={
         date: "03.12 - 05.12.2023",
         prize: "10.000.000",
@@ -26,10 +32,13 @@ function Event(){
             <div>
                 <ul className="event_tabs">
                     <li className="tab_link">
-                        <NavLink to="info" style={({ isActive }) => ({  // если активна, то текст белый
-                            color: isActive ? 'var(--text-01)' : 'var(--text-02)'})}>
-                            Информация
-                        </NavLink>
+                        <div className="row_center_5px">
+                            <NavLink to="info" style={({ isActive }) => ({  // если активна, то текст белый
+                                color: isActive ? 'var(--text-01)' : 'var(--text-02)'})}>
+                                Информация
+                            </NavLink>
+                            {isAdmin ?<Editor size="14px" depth={1} onClick={() => setEditOngoingActive(true)}/> : <></>}
+                        </div>
                     </li>
                     <li className="tab_link">
                         <NavLink to="matches" style={({ isActive }) => ({  // если активна, то текст белый
@@ -46,7 +55,7 @@ function Event(){
                 </ul>
                 <Routes>
                     <Route index element={<Navigate replace to="/event/info" />}/>
-                    <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended"/>}/>
+                    <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended" isAdmin={isAdmin}/>}/>
                     <Route path="matches" element={<EventMatches current_matches={current_matches} ongoing_matches={ongoing_matches}/>}/>
                     <Route path="results" element={<EventResults results={results}/>}/>
                 </Routes>
@@ -73,7 +82,7 @@ function Event(){
                 </ul>
                 <Routes>
                     <Route index element={<Navigate replace to="/event/info" />}/>
-                    <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended"/>}/>
+                    <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended" isAdmin={isAdmin}/>}/>
                     <Route path="results" element={<EventResults results={results}/>}/>
                 </Routes>
             </div>
@@ -107,6 +116,19 @@ function Event(){
         {place: "7-10ое", prize: "Сертификаты клуба", winner: "ПУПА", src: "img/teams_logo/pupa.svg"},
         {place: "7-10ое", prize: "Сертификаты клуба", winner: "Amfier", src: "img/teams_logo/Walhalla.png"},
         {place: "7-10ое", prize: "Сертификаты клуба", winner: "Walhalla", src: "img/teams_logo/Walhalla.png"}
+    ]
+
+    const prizePlace2 = [
+        {place: "1-2ое", prize: "10.000р", winner: "", src: ""},
+        {place: "1-2ое", prize: "10.000р", winner: "", src: ""},
+        {place: "3-4е", prize: "5.000р", winner: "", src: ""},
+        {place: "3-4е", prize: "5.000р", winner: "", src: ""},
+        {place: "5-6ое", prize: "2.500р", winner: "", src: ""},
+        {place: "5-6ое", prize: "2.500р", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "", src: ""},
+        {place: "7-10ое", prize: "Сертификаты клуба", winner: "", src: ""}
     ]
 
     const type = "team";
@@ -147,13 +169,107 @@ function Event(){
         ]}
     ]
 
-    const status = "ongoing" //registration, ongoing, ended
+    const status = "registration" //registration, ongoing, ended
     const isCap = true; //капитан ли смотрит
     const errors = false; // есть ли причины не попасть на турик
     const [activeJoinTourWindow, setJoinTourWindowActive] = useState(false); // окно уточнения для регистрации на турик
     const [activeLeaveTourWindow, setLeaveTourWindowActive] = useState(false); // окно уточнения "покидания" турика
     const [activeTour, setActiveTour] = useState(false); // переменная, отвечающая за то зарегана ли команда на турик
     const [activeEditTeamWindow, setActiveEditTeamWindow] = useState(false); // окно изменения состава на турик
+
+    const [dateSelected, setDateSelected] = useState('03.05.2023'); // здесь хранится выбраная дата
+    const [dateEndSelected, setDateEndSelected] = useState('05.05.2023'); // здесь хранится выбраная дата
+
+    const [valueStartDate, setValueStartDate] = useState('03.05.2023'); // Это для даты выбранного матча
+    const [valueEndDate, setValueEndDate] = useState('05.05.2023'); // Это для даты выбранного матча
+
+    const [dateSelectorActive, setDateSelectorActive] = useState(false); // открыт/закрыт календарь
+    const [dateEndSelectorActive, setDateEndSelectorActive] = useState(false); // открыт/закрыт календарь
+
+    const [citySelected, setCitySelected] = useState('Выберите город'); // здесь хранится выбраный турнир
+    const [valueCity, setValueCity] = useState('Выберите город'); //Для селектора страны
+
+    const [countrySelected, setCountrySelected] = useState('Выберите страну'); // здесь хранится выбраный турнир
+    const [valueCountry, setValueCountry] = useState('Выберите страну'); //Для селектора страны
+
+    const [countrySelectorActive, setCountrySelectorActive] = useState(false); 
+    const [citySelectorActive, setCitySelectorActive] = useState(false); 
+
+    const [valuePrize, setValuePrize] = useState('Укажите приз'); //Для селектора страны
+    const [valueFee, setValueFee] = useState('Укажите взнос'); //Для селектора страны
+    const [selectedPrize, setSelectedPrize] = useState('Укажите приз'); //Для селектора страны
+    const [selectedFee, setSelectedFee] = useState('Укажите взнос'); //Для селектора страны
+    
+
+    const [selectedFormat, setSelectedFormat] = useState('Выберите формат'); // формат (bo1 и тп)
+    const [valueFormat, setValueFormat] = useState('Выберите формат'); // формат (bo1 и тп)
+    const [formatSelectorActive, setFormatSelectorActive] = useState(false);
+
+    const [selectedType, setSelectedType] = useState('Выберите тип'); // тип (Лан/Онлайн)
+    const [valueType, setValueType] = useState('Выберите тип'); // тип (Лан/Онлайн)
+    const [typeSelectorActive, setTypeSelectorActive] = useState(false);
+    const [deleteEventActive, setDeleteEventActive] = useState(false);
+
+    const [editOngoingActive, setEditOngoingActive] = useState(false);
+    
+    const [selectedPath, setSelectedPath] = useState('Укажите путь до файла'); // тип (Лан/Онлайн)
+
+    const [valueName, setValueName] = useState('Укажите название'); // тип (Лан/Онлайн)
+    const [selectedName, setSelectedName] = useState('Укажите название'); // тип (Лан/Онлайн)
+
+    const countries =[
+        {name: "Россия", flagPath: "img/flags/mini/Russia.svg", cities: ["Пугачёв", "Самара", "Саратов", "Сызрань", "Балаково", "Тольятти"]},
+        {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg", cities: ["Дуглас", "Рамси", "Пил", "Каслтаун", "Лакси", "Онкан"]},
+        {name: "Албания", flagPath: "img/flags/mini/Albania.svg", cities: ["Берат", "Буррели", "Влёра", "Гирокастра", "Грамши", "Дуррес"]},
+        {name: "Испания", flagPath: "img/flags/mini/Spain.svg", cities: ["Барселона", "Мадрид", "Валенсия", "Севилья", "Мурсия", "Пальма"]},
+        {name: "Белиз", flagPath: "img/flags/mini/Belize.svg", cities: ["Белиз Сити", "Сан-Игнасио", "Бельмопан", "Сан-Педро", "Коросаль", "Дангрига"]},
+        {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg", cities: ["Витина", "Вучитрн", "Глоговац", "Гнилане", "Дечани", "Джяковица"]}
+    ]
+
+    const genMinDate = () =>{
+        const date = new Date();
+        let day = date.getDate();
+        day = day < 10 ? ("0" + day) : day;
+  
+        let month = date.getMonth() + 1;
+        month = month < 10 ? ("0" + month) : month;
+  
+        return (day + "." + month + "." + date.getFullYear());
+    }
+
+    const toggleEndDate = () => { 
+        setDateEndSelectorActive(!dateEndSelectorActive);
+        setDateSelectorActive(false);
+    };
+
+    const toggleDate = () => { 
+        setDateSelectorActive(!dateSelectorActive);
+        setDateEndSelectorActive(false);
+    };
+
+    const toggleCountry = () => { // функция toggle для селектора
+        setCountrySelectorActive(!countrySelectorActive);
+    };
+
+    const toggleCity = () => { // функция toggle для селектора
+        setCitySelectorActive(!citySelectorActive);
+    };
+
+    const toggleFormat = () => {
+        setFormatSelectorActive(!formatSelectorActive);
+    }
+  
+    const toggleType = () => {
+        setTypeSelectorActive(!typeSelectorActive);
+    }
+
+    const getElemByCountry = (country) => {
+        for(let i = 0; i < countries.length; ++i){
+            if(countries[i].name === country){
+                return countries[i];
+            }
+        }
+    }
 
     const [list, setList] = useState([]); //список уведомлений
     function showToast(type){ //"вывести уведомление"
@@ -263,7 +379,10 @@ function Event(){
             </div>
             <div className="event_header">
                 <div className="info_wrapper">
-                    <span>Дата</span>
+                    <div className="row_center_5px">
+                        <span>Дата</span>
+                        {isAdmin ? status === "registration" ? <Editor size="12px" depth={1} onClick={() => setRegistrationInfoEditorActive(true)}/> : <></> : <></>}
+                    </div>
                     <div className="event_date_wrapper"><p>{tournament.date}</p></div>
                 </div>
 
@@ -314,7 +433,7 @@ function Event(){
                     
                 </div>
             }
-            {status === "registration" ? <EventInfo maps={maps} part={registred} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="registration"/> : 
+            {status === "registration" ? <EventInfo maps={maps} part={registred} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="registration" isAdmin={isAdmin}/> : 
             status === "ongoing" ? drawOngoing() :
             drawEnded()}
             
@@ -373,6 +492,209 @@ function Event(){
             </Login>
 
             <Notification props={list}></Notification>
+
+            
+            <Login active={registrationInfoEditorActive} setActive={setRegistrationInfoEditorActive}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Укажите информацию о турнире</p>
+                </div>
+                <div className="col_center_gap30">
+                    <div className="inside scroll">
+                        <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={genMinDate()}/>
+                        <DateSelector toggleDate={toggleEndDate} dateSelected={dateEndSelected} valueDate={valueEndDate} dateSelectorActive={dateEndSelectorActive} setDate={setDateEndSelected} minDate={genMinDate()}/>
+                        <div className="row_center_6" style={{alignItems: "flex-start", width: "464px", zIndex: 2}}>
+                                    <div className="text-field_half">
+                                        <div className="text-field_half_selector">
+                                            <div className="text_field_half_select" onClick={() => toggleCountry()}>
+                                                <p className={countrySelected === valueCountry ? "onStart" : "choosed"}>{countrySelected}</p>
+                                                <img src="../img/arrow.svg" id="arrowIcon" className={countrySelectorActive ? 'rotate' : null} alt="arrow"/>
+                                            </div>
+                                            <ul className={ countrySelectorActive ? 'select_list' : 'select_list hide'}>
+                                                {countries.map((country) =>
+                                                    <li className='text_field_half_options' onClick={() => {setCountrySelected(country.name); toggleCountry()}}>
+                                                        <img src={"../" + country.flagPath} alt={country.name}/>
+                                                        <p>{country.name}</p>
+                                                    </li>
+                                                )}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {countrySelected !== "Выберите страну" ?
+                                        <div className="text-field_half">
+                                            <div className="text-field_half_selector">
+                                                <div className="text_field_half_select" onClick={() => toggleCity()}>
+                                                    <p className={citySelected === valueCity ? "onStart" : "choosed"}>{citySelected}</p>
+                                                    <img src="../img/arrow.svg" id="arrowIcon" className={citySelectorActive ? 'rotate' : null} alt="arrow"/>
+                                                </div>
+                                                <ul className={ citySelectorActive ? 'select_list' : 'select_list hide'}>
+                                                    {getElemByCountry(countrySelected).cities.map((city) =>
+                                                        <li className='text_field_half_options' onClick={() => {setCitySelected(city); toggleCity()}}>
+                                                            <p>{city}</p>
+                                                        </li>
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    :
+                                        <></>
+                                    }
+                        </div>
+                        <div className="row_center_6">
+                            <div className="text-field_half">
+                                <input className="text-field_half input" style={{color: selectedPrize === valuePrize ? "var(--white70)" : "white"}} type="text" name="prize" value={selectedPrize} placeholder="Укажите приз" onChange={e => {setSelectedPrize(e.target.value)}}/>
+                            </div>
+                            <div className="text-field_half">
+                                <input className="text-field_half input" style={{color: selectedFee === valueFee ? "var(--white70)" : "white"}} type="text" name="prize" value={selectedFee} placeholder="Укажите взнос" onChange={e => {setSelectedFee(e.target.value)}}/>
+                            </div>
+                        </div>
+                        <div className="row_center_6" style={{zIndex: 1}}>
+                                    <div className="text-field_half">
+                                        <div className="text-field_half_selector">
+                                        <div className="text_field_half_select" onClick={() => toggleFormat()}>
+                                            <p className={selectedFormat === "Выберите формат" ? "onStart" : "choosed"}>{selectedFormat}</p>
+                                            <img src="../img/arrow.svg" className={formatSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                        </div>
+                                        <ul className={ formatSelectorActive ? 'select_list' : 'select_list hide'}>
+                                            <li className="text_field_half_options" onClick={()=>{setSelectedFormat("1x1"); toggleFormat()}}>
+                                                <p>1x1</p>
+                                            </li>
+                                            <li className="text_field_half_options" onClick={()=>{setSelectedFormat("2x2"); toggleFormat()}}>
+                                                <p>2x2</p>
+                                            </li>
+                                            <li className="text_field_half_options" onClick={()=>{setSelectedFormat("5x5"); toggleFormat()}}>
+                                                <p>5x5</p>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                    <div className="text-field_half">
+                                        <div className="text-field_half_selector">
+                                        <div className="text_field_half_select" onClick={() => toggleType()}>
+                                            <p className={selectedType === "Выберите тип" ? "onStart" : "choosed"}>{selectedType}</p>
+                                            <img src="../img/arrow.svg" className={typeSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                        </div>
+                                        <ul className={ typeSelectorActive ? 'select_list' : 'select_list hide'}>
+                                            <li className="text_field_half_options" onClick={()=>{setSelectedType("Lan"); toggleType()}}>
+                                                <p>Lan</p>
+                                            </li>
+                                            <li className="text_field_half_options" onClick={()=>{setSelectedType("Online"); toggleType()}}>
+                                                <p>Online</p>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div className="row_center_6">
+                                    <div className="text-field_half">
+                                        <div className="text-field_half_selector">
+                                            <label for="file-input">
+                                                <div className="text_field_half_select">
+                                                    <p className={selectedPath === "Укажите путь до файла" ? "onStart" : "choosed"}>{selectedPath}</p>
+                                                    <img src="../img/Add.svg" alt="Add" style={{width: "15px"}}/>
+                                                </div>
+                                            </label>
+                                            <input id="file-input" type="file" style={{all: "unset", width: "0px", height: "0px"}}/>
+                                        </div>
+                                    </div>
+                                    <div className="text-field_half">
+                                        <div className="text-field_half_selector">
+                                            <label for="file-input">
+                                                <div className="text_field_half_select">
+                                                    <p className={selectedPath === "Укажите путь до файла" ? "onStart" : "choosed"}>{selectedPath}</p>
+                                                    <img src="../img/Add.svg" alt="Add" style={{width: "15px"}}/>
+                                                </div>
+                                            </label>
+                                            <input id="file-input" type="file" style={{all: "unset", width: "0px", height: "0px"}}/>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div className="text-field">
+                            <input className="text-field_input" type="text" style={{color: selectedName === valueName ? "var(--white70)" : "white"}} name="diskLink" placeholder="Укажите название" value={selectedName} onChange={e => {setSelectedName(e.target.value)}}/>
+                        </div>
+                    </div>
+                    <div className="col_center_gap_20">
+                        <div className="full_grey_button">
+                            <input type="submit" value="Подтвердить" onClick={() => registrationInfoEditorActive ? setRegistrationInfoEditorActive(false) : null}/>
+                        </div>
+                        <div className="red_button">
+                            <input type="submit" value="Удалить матч" onClick={() => {setRegistrationInfoEditorActive(false); setDeleteEventActive(true)}}/>
+                        </div>
+                    </div>
+                </div>
+            </Login>
+
+            <Login active={deleteEventActive} setActive={setDeleteEventActive}>
+              <div className="header_splash_window">
+                  <div className="logo_splash_window"></div>
+              </div>
+              <div className="info_text">
+                  <p>Вы уверены, что хотите удалить турнир {valueName}?</p>
+              </div>
+              <div className="small_buttons_wrapper">
+                <div className="small_dark_button">
+                    <input type="submit" value="Нет" onClick={() => deleteEventActive ? setDeleteEventActive(!deleteEventActive) : null}/>
+                </div>
+                <div className="small_grey_button">
+                    <input type="submit" value="Да" onClick={() => deleteEventActive ? setDeleteEventActive(!deleteEventActive) : null}/>
+                </div>
+              </div>
+            </Login>
+
+            <Login active={editOngoingActive} setActive={setEditOngoingActive}>
+                <div className="header_splash_window">
+                  <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                  <p>Укажите информацию о турнире</p>
+                </div>
+                <div className="col_center_gap30">
+                    <div className="inside">
+                        <div className="row_center_6">
+                            <div className="text-field_half">
+                                <input className="text-field_half input" style={{color: selectedName === valueName ? "var(--white70)" : "white"}} type="text" name="prize" value={selectedName} placeholder="Укажите название" onChange={e => {setSelectedName(e.target.value)}}/>
+                            </div>
+                            <div className="text-field_half">
+                                <input className="text-field_half input" style={{color: selectedPrize === valuePrize ? "var(--white70)" : "white"}} type="text" name="prize" value={selectedPrize} placeholder="Укажите приз" onChange={e => {setSelectedPrize(e.target.value)}}/>
+                            </div>
+                        </div>
+                        <div className="row_center_6">
+                            <div className="text-field_half">
+                                                    <div className="text-field_half_selector">
+                                                        <label for="file-input">
+                                                            <div className="text_field_half_select">
+                                                                <p className={selectedPath === "Укажите путь до файла" ? "onStart" : "choosed"}>{selectedPath}</p>
+                                                                <img src="../img/Add.svg" alt="Add" style={{width: "15px"}}/>
+                                                            </div>
+                                                        </label>
+                                                        <input id="file-input" type="file" style={{all: "unset", width: "0px", height: "0px"}}/>
+                                                    </div>
+                            </div>
+                            <div className="text-field_half">
+                                                <div className="text-field_half_selector">
+                                                    <label for="file-input">
+                                                        <div className="text_field_half_select">
+                                                            <p className={selectedPath === "Укажите путь до файла" ? "onStart" : "choosed"}>{selectedPath}</p>
+                                                            <img src="../img/Add.svg" alt="Add" style={{width: "15px"}}/>
+                                                        </div>
+                                                    </label>
+                                                    <input id="file-input" type="file" style={{all: "unset", width: "0px", height: "0px"}}/>
+                                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col_center_gap_20">
+                            <div className="full_grey_button">
+                                <input type="submit" value="Подтвердить" onClick={() => editOngoingActive ? setEditOngoingActive(false) : null}/>
+                            </div>
+                            <div className="red_button">
+                                <input type="submit" value="Удалить матч" onClick={() => {setEditOngoingActive(false); setDeleteEventActive(true)}}/>
+                            </div>
+                    </div>
+                </div>
+            </Login>
         </div>
     );
 }

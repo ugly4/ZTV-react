@@ -85,10 +85,10 @@ const Header = () => {
                     <div className="col_right_gap20">
                     <div className="col_center_gap10">
                         <div className="text-field">
-                        <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
+                            <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
                         </div>
                         <div className="text-field">
-                        <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
+                            <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
                         </div>
                     </div>
                     <div className="keeplogin">
@@ -116,18 +116,18 @@ const Header = () => {
                     <div className="col_center_gap10">
                         <div className="row_center_6">
                             <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Имя пользователя"/>
+                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Имя пользователя"/>
                             </div>
                             <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Фамилия пользователя"/>
+                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Фамилия пользователя"/>
                             </div>
                         </div>
                         <div className="row_center_6">
                             <div className="text-field_half">
-                            <input className="text-field_half input" type="password" name="login" id="login" placeholder="Пароль"/>
+                                <input className="text-field_half input" type="password" name="login" id="login" placeholder="Пароль"/>
                             </div>
                             <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Почта"/>
+                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Почта"/>
                             </div>
                         </div>
                         <div className="row_center_6">
@@ -138,7 +138,7 @@ const Header = () => {
                                 <div className="text-field_half_selector">
                                     <div className="text_field_half_select" onClick={() => toggleClass()}>
                                         <p className={value === "Выберите страну" ? "onStart" : "choosed"}>{value}</p>
-                                        <img src="img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
+                                        <img src="../img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
                                     </div>
                                     <ul className={ selectorActive ? 'select_list' : 'select_list hide'}>
                                         {countries.map((country) =>

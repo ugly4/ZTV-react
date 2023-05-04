@@ -206,3 +206,33 @@
     height: 14px;
     
 }
+
+.minus{
+    width: 14px;
+    border-radius: 10px;
+    border: 2px solid #4C4C4C;
+    cursor: pointer;
+}
+.minus:hover{
+    filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(143%) contrast(101%);
+}
+
+.add_stream{
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 5px;
+    cursor: pointer;
+}
+.add_stream p{
+    font-size: 16px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+    pointer-events: none;
+}
+.add_stream img:hover{
+    filter: invert(66%) sepia(95%) saturate(557%) hue-rotate(94deg) brightness(143%) contrast(101%);
+}
