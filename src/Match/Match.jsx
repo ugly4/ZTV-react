@@ -68,7 +68,8 @@ function Match(props){
         temp[id] = true;
 
         setTeamsActive(temp);
-
+        setIsStart(false);
+    }
     return(
         <div>
             {/* Хэдер матча со временем */}
@@ -139,5 +140,5 @@ function Match(props){
         </div>   
     )
 }
-}
+
 export default Match;
