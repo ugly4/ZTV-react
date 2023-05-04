@@ -7,8 +7,6 @@ import Description from "./Description/Description";
 import Scoreboard from "./Scoreboard/Scoreboard"
 import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
-import "./Match.css"
-
 
 function Match(props){
     const isAdmin = true;
@@ -71,8 +69,6 @@ function Match(props){
 
         setTeamsActive(temp);
 
-        setIsStart(false);
-    }
     return(
         <div>
             {/* Хэдер матча со временем */}
@@ -142,5 +138,6 @@ function Match(props){
             }
         </div>   
     )
+}
 }
 export default Match;
