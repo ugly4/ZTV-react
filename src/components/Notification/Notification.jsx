@@ -1,0 +1,45 @@
+import React from "react";
+import './Notification.css'
+import { useState, useEffect } from "react";
+
+function Notification({props}){
+    const toastList = props;
+    const [list, setList] = useState(toastList);
+    console.log("добавили", list)
+    useEffect(() => {
+        setList(toastList);
+    }, [toastList, list]);
+    const deleteToast = () => {
+        list.splice(0, 1);
+        toastList.splice(0, 1);
+        
+        
+        setList([...list]);
+        console.log("удалили", list)
+    }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if ( toastList.length || list.length)
+            deleteToast();
+            
+        }, 3000);
+        return () => {
+            clearInterval(interval);
+        }
+        
+    }, [toastList]);
+    return(
+        <div class="notification-container top-right">
+            
+            {
+            list.map((toast, i) =>     
+                <div class="notification-toast top-right" style={{ border: toast.border}}>
+                    <p>{toast.description}</p>
+                </div>
+                )
+            }
+        </div>
+    )
+}
+
+export default Notification;

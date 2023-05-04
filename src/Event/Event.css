@@ -97,3 +97,51 @@
 
     gap: 90px;
 }
+.join_tournament{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 10px;
+    gap: 10px;
+    color: var(--base-05);
+    width: 223px;
+    height: 19px;
+    cursor: pointer;
+    border: 1px solid var(--base-05);
+    margin: 0 auto;
+    margin-top: 30px;
+    transition: color 0.3s 0s linear;
+}
+.join_tournament p{
+    font-family: var(--text-medium-lcg);
+    font-size: 16px;
+    
+}
+.join_tournament:hover{
+    color: #008d50;
+}
+.leave_tournament{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 10px;
+    gap: 10px;
+    color: #FF1E1E;
+    width: 223px;
+    height: 19px;
+    cursor: pointer;
+    border: 1px solid #FF1E1E;
+    margin: 0 auto;
+    margin-top: 25px;
+    transition: color 0.3s 0s linear;
+}
+.leave_tournament p{
+    font-family: var(--text-medium-lcg);
+    font-size: 16px;
+    
+}
+.leave_tournament:hover{
+    color:#cb0f0f;
+}

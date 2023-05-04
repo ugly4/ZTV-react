@@ -8,6 +8,7 @@ import Scoreboard from "./Scoreboard/Scoreboard"
 import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
 
+
 function Match(props){
     const match = {
         MatchStatus: 1,

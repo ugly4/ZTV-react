@@ -6,6 +6,9 @@ import EventMatches from "../components/EventMaker/EventMatches";
 import EventResults from "../components/EventMaker/EventResults/EventResults";
 import "./Event.css";
 import '../components/Tabs/PlayerTabs/PlayerTabs.css';
+import { useState } from "react";
+import Login from "../Login/Login";
+import Notification from "../components/Notification/Notification";
 
 function Event(){
     const drawOngoing = () =>{
@@ -66,7 +69,7 @@ function Event(){
             </div>
         );
     }
-
+    
     const maps = ["Ancient", "Anubis", "Inferno", "Mirage", "Nuke", "Overpass", "Vertigo"]
     const registred = [
         {name: "Tamada", src: "img/players/Tamada.png", team: "Amfier", teamsrc: "img/teams_logo/Amfier.png", status: "await", type: "player"},
@@ -135,7 +138,41 @@ function Event(){
     ]
 
     const status = "ongoing" //registration, ongoing, ended
+    const isCap = true;
+    const errors = false;
+    const [activeJoinTourWindow, setJoinTourWindowActive] = useState(false);
+    const [activeLeaveTourWindow, setLeaveTourWindowActive] = useState(false);
+    const [activeTour, setActiveTour] = useState(false);
 
+    const [list, setList] = useState([]);
+    function showToast(type){
+        let toastProperties = null;
+        switch (type){
+            case "errorJoinTour":
+                toastProperties = {
+                    description: "Вы не можете принять участие в турнире: *причина*",
+                    border: "1px solid #FF1E1E"
+                }; break;
+            case "successJoinTour":
+                toastProperties = {
+                    description: "Вы успешно зарегистрированы на турнир",
+                    border: "1px solid var(--base-05)"
+                }; break;
+            case "successLeaveTour":
+                toastProperties = {
+                    description: "Вы отказались от участия в турнире",
+                    border: "1px solid var(--base-05)"   
+                }; break;
+            case "successEditTeam":
+                toastProperties = {
+                    description: "Вы успешно изменили состав",
+                    border: "1px solid var(--base-05)"
+                }; break;
+            default:
+                setList([]);
+        }
+        setList([...list, toastProperties]);
+    }
     return(
         <div>
             <div className="event_image_header">
@@ -177,9 +214,58 @@ function Event(){
                     <div className="event_location_wrapper"><FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Россия, Пугачёв" height='12px'/></div>
                 </div>
             </div>
+            {(isCap && !activeTour) ? 
+                <div class="join_tournament" onClick={() => setJoinTourWindowActive(true)}>
+                    <p>Принять участие в турнире</p>
+                </div>
+                :
+                <div style={{display: "flex", flexDirection: "row", margin: "0 auto", marginTop: "25px", gap: "10px", justifyContent: "center"}}>
+                    <div class="leave_tournament" style={{margin: "0"}} onClick={() => setLeaveTourWindowActive(true)}>
+                        <p>Отказаться от участия</p>
+                    </div>
+                    <div class="join_tournament" style={{margin: "0"}} onClick={() => setJoinTourWindowActive(true)}>
+                        <p>Изменить состав команды</p>
+                    </div>
+                </div>
+            }
             {status === "registration" ? <EventInfo maps={maps} part={registred} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="registration"/> : 
             status === "ongoing" ? drawOngoing() :
             drawEnded()}
+            
+            <Login active={activeJoinTourWindow} setActive={setJoinTourWindowActive}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Принять участие в турнире?</p>
+                </div>
+                <div className="small_buttons_wrapper">
+                    <div className="small_dark_button">
+                        <input type="submit" value="Нет" onClick={() => activeJoinTourWindow ? setJoinTourWindowActive(!activeJoinTourWindow) : null}/>
+                    </div>
+                    <div className="small_grey_button">
+                        <input type="submit" value="Да" onClick={() =>  (activeJoinTourWindow && !errors)  ? (setJoinTourWindowActive(!activeJoinTourWindow), setActiveTour(true),showToast("successJoinTour")) : (setJoinTourWindowActive(!activeJoinTourWindow), showToast("errorJoinTour"))}/>
+                    </div>
+                </div>
+            </Login>
+
+            <Login active={activeLeaveTourWindow} setActive={setLeaveTourWindowActive}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Вы уверены, что хотите отказаться от участия в турнире?</p>
+                </div>
+                <div className="small_buttons_wrapper">
+                    <div className="small_dark_button">
+                        <input type="submit" value="Нет" onClick={() => activeLeaveTourWindow ? setLeaveTourWindowActive(!activeLeaveTourWindow) : null}/>
+                    </div>
+                    <div className="small_grey_button">
+                        <input type="submit" value="Да" onClick={() =>  activeLeaveTourWindow  ? (setLeaveTourWindowActive(!activeLeaveTourWindow), setActiveTour(false), showToast("successLeaveTour")) : null}/>
+                    </div>
+                </div>
+            </Login>
+            <Notification props={list}></Notification>
         </div>
     );
 }
