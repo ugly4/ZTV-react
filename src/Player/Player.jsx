@@ -5,6 +5,7 @@ import Trophies from "../components/Trophies/Trophies";
 import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
+import DateSelector from "../components/MatchHelper/DateSelector";
 import "./Player.css"
 import "../../src/Team/Team.css"
 import '../components/Editor/Editor.css';
@@ -150,7 +151,7 @@ function Player(){
     const [nickEditorActive, setNickEditorActive] = useState(false); //состояния модального окна для редактирования ника игрока
     const [socialEditorActive, setSocialEditorActive] = useState(false); //состояния модального окна для редактирования соц сетей
     const [socialUnbindActive, setSocialUnbindActive] = useState(false); //состояния модального окна для отвязки соц сети
-    const [ageEditorActive, setAgeEditorActive] = useState(false); //состояния модального окна для редактирования возраста
+    
     const [leaveTeamWindowActive, setLeaveTeamWindowActive] = useState(false); //состояния модального окна для выхода из команды
     const [leaveTeamActive, setLeaveTeamActive] = useState(false); //состояния модального окна для выхода из команды
     const [makeTeamActive, setMakeTeamActive] = useState(false); //состояния модального окна для создания команды
@@ -195,6 +196,54 @@ function Player(){
         
     }
 
+    //----------Всё, что связано с селектором даты рождения--------------
+    const [ageEditorActive, setAgeEditorActive] = useState(false); //Состояния модального окна для редактирования возраста
+    const [dateSelectorActive, setDateSelectorActive] = useState(false); // Состояния селектора даты (открыт/закрыт календарь)
+    const [dateSelected, setDateSelected] = useState('Укажите дату рождения'); // Здесь хранится выбраная дата
+    const [valueStartDate, setValueStartDate] = useState('Укажите дату рождения'); // Это для даты выбранного матча
+    const [agePlayer, setAgePlayer] = useState('Не указано');
+    const toggleDate = () => { // Функция toggle для селектора даты
+        setDateSelectorActive(!dateSelectorActive);
+    };
+
+    
+    //-------------------------------------------------------------------
+
+    //----------Всё, что связано с селекторами страны и города-----------
+    const countries =[ // Данные стран и городов
+        {name: "Россия", flagPath: "img/flags/mini/Russia.svg", cities: ["Пугачёв", "Самара", "Саратов", "Сызрань", "Балаково", "Тольятти"]},
+        {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg", cities: ["Дуглас", "Рамси", "Пил", "Каслтаун", "Лакси", "Онкан"]},
+        {name: "Албания", flagPath: "img/flags/mini/Albania.svg", cities: ["Берат", "Буррели", "Влёра", "Гирокастра", "Грамши", "Дуррес"]},
+        {name: "Испания", flagPath: "img/flags/mini/Spain.svg", cities: ["Барселона", "Мадрид", "Валенсия", "Севилья", "Мурсия", "Пальма"]},
+        {name: "Белиз", flagPath: "img/flags/mini/Belize.svg", cities: ["Белиз Сити", "Сан-Игнасио", "Бельмопан", "Сан-Педро", "Коросаль", "Дангрига"]},
+        {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg", cities: ["Витина", "Вучитрн", "Глоговац", "Гнилане", "Дечани", "Джяковица"]}
+    ]
+    const [countrySelectorActive, setCountrySelectorActive] = useState(false); //Селектор страны
+    const [citySelectorActive, setCitySelectorActive] = useState(false); // Селектор города
+
+    const [citySelected, setCitySelected] = useState('Выберите город'); // Здесь хранится выбранный город
+    const [valueCity, setValueCity] = useState('Выберите город'); //Для селектора города
+
+    const [countrySelected, setCountrySelected] = useState('Выберите страну'); // Здесь хранится выбранная страна
+    const [valueCountry, setValueCountry] = useState('Выберите страну'); //Для селектора страны
+
+    const toggleCountry = () => { // Функция toggle для селектора страны
+        setCountrySelectorActive(!countrySelectorActive);
+    };
+
+    const toggleCity = () => { // Функция toggle для селектора города
+        setCitySelectorActive(!citySelectorActive);
+    };
+
+    const getElemByCountry = (country) => { // Функция, возвращающая элемент "страны" по её названию
+        for(let i = 0; i < countries.length; ++i){
+            if(countries[i].name === country){
+                return countries[i];
+            }
+        }
+    }
+    //--------------------------------------------------------------------
+
     return(
     <div>
         <div className="user_back">
@@ -222,7 +271,7 @@ function Player(){
                             {isCap ? <Editor size="12px" depth={1} onClick={() => setAgeEditorActive(true)}/>
                             : <></>}
                         </div>
-                        <p>Не указано</p>
+                        <p>{agePlayer}</p>
                     </div>
                     <div className="devider_subline"></div>
                 </div>
@@ -271,8 +320,14 @@ function Player(){
                 </div>
             </div>
         </div>
+
+        {/* div, разделяющий плашку игрока и трофеи */}
         <div className="devider_line"></div>
+
+        {/* Трофеи */}
         <Trophies items={trophies}/>
+
+        {/* Табы игрока (Статистика, матчи, турниры ... ) */}
         <PlayerTabs 
         stat={stats} 
         rosters={rosters}
@@ -284,6 +339,7 @@ function Player(){
         online_events={online_events}
         />
 
+        {/* Модальное окно "Редактирование ника" */}
         <Login active={nickEditorActive} setActive={setNickEditorActive}>
             <div className="header_splash_window">
                  <div className="logo_splash_window"></div>
@@ -301,6 +357,7 @@ function Player(){
             </div>
         </Login>
 
+        {/* Модальное окно "Редактирование социальных сетей" */}
         <Login active={socialEditorActive} setActive={setSocialEditorActive}>
             <div className="header_splash_window">
                  <div className="logo_splash_window"></div>
@@ -340,6 +397,7 @@ function Player(){
             </div>
         </Login>
 
+        {/* Модальное окно "Вы уверены, что хотите отвзяать соц. сеть?" */}
         <Login active={socialUnbindActive} setActive={setSocialUnbindActive}>
             <div className="header_splash_window">
                  <div className="logo_splash_window"></div>
@@ -357,16 +415,26 @@ function Player(){
             </div>
         </Login>
 
+        {/* Модальное окно "Редактирование возраста" */}
         <Login active={ageEditorActive} setActive={setAgeEditorActive}>
             <div className="header_splash_window">
                  <div className="logo_splash_window"></div>
             </div>
+            
             <div className="info_text">
                 <p>Укажите дату рождения</p>
             </div>
-            
+            <div class="col_center_gap30">
+                <div className="inside scroll" style={{height: dateSelectorActive ? "400px": null, overflow: !dateSelectorActive ? "hidden" : null}}>
+                    <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={"04.03.2023"}/>
+                </div>
+                <div className="full_grey_button" >
+                    <input type="submit" value="Подвердить" onClick={() => ageEditorActive ? (setAgeEditorActive(!ageEditorActive), setAgePlayer(dateSelected)) : null} />
+                </div>
+            </div>
         </Login>
 
+        {/* Модальное окно "Вы уверены, что хотите покинуть команду?" */}
         <Login active={leaveTeamWindowActive} setActive={setLeaveTeamWindowActive}>
             <div className="header_splash_window">
                  <div className="logo_splash_window"></div>
@@ -384,6 +452,7 @@ function Player(){
             </div>
         </Login>
 
+        {/* Модально окно "Создание команды" */}
         <Login active={makeTeamActive} setActive={setMakeTeamActive}>
             <div className="header_splash_window">
                 <div className="logo_splash_window"></div>
@@ -402,11 +471,40 @@ function Player(){
                     </div>
                     <div class="row_center_6">
                         <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Укажите страну" />
+                            <div className="text-field_half_selector">
+                                <div className="text_field_half_select" onClick={() => toggleCountry()}>
+                                    <p className={countrySelected === valueCountry ? "onStart" : "choosed"}>{countrySelected}</p>
+                                        <img src="../img/arrow.svg" id="arrowIcon" className={countrySelectorActive ? 'rotate' : null} alt="arrow"/>
+                                </div>
+                                <ul className={ countrySelectorActive ? 'select_list' : 'select_list hide'}>
+                                    {countries.map((country) =>
+                                        <li className='text_field_half_options' onClick={() => {setCountrySelected(country.name); toggleCountry()}}>
+                                            <img src={"../" + country.flagPath} alt={country.name}/>
+                                            <p>{country.name}</p>
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
                         </div>
-                        <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Укажите город" />
-                        </div>
+                        {countrySelected !== "Выберите страну" ?
+                            <div className="text-field_half">
+                                <div className="text-field_half_selector">
+                                    <div className="text_field_half_select" onClick={() => toggleCity()}>
+                                        <p className={citySelected === valueCity ? "onStart" : "choosed"}>{citySelected}</p>
+                                        <img src="../img/arrow.svg" id="arrowIcon" className={citySelectorActive ? 'rotate' : null} alt="arrow"/>
+                                    </div>
+                                    <ul className={ citySelectorActive ? 'select_list' : 'select_list hide'}>
+                                        {getElemByCountry(countrySelected).cities.map((city) =>
+                                            <li className='text_field_half_options' onClick={() => {setCitySelected(city); toggleCity()}}>
+                                                <p>{city}</p>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                            </div>
+                        :
+                            <></>
+                        }
                     </div>
                 </div>
                 <div className="small_buttons_wrapper">
@@ -418,8 +516,8 @@ function Player(){
                     </div>
                 </div>
             </div>
-            
         </Login>
+
     </div>
     );
 }

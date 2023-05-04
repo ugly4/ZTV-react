@@ -195,10 +195,10 @@ function Event(){
     const [countrySelectorActive, setCountrySelectorActive] = useState(false); 
     const [citySelectorActive, setCitySelectorActive] = useState(false); 
 
-    const [valuePrize, setValuePrize] = useState('Укажите приз'); //Для селектора страны
-    const [valueFee, setValueFee] = useState('Укажите взнос'); //Для селектора страны
-    const [selectedPrize, setSelectedPrize] = useState('Укажите приз'); //Для селектора страны
-    const [selectedFee, setSelectedFee] = useState('Укажите взнос'); //Для селектора страны
+    const [valuePrize, setValuePrize] = useState('Укажите приз'); //Для селектора приза
+    const [valueFee, setValueFee] = useState('Укажите взнос'); //Для селектора взноса
+    const [selectedPrize, setSelectedPrize] = useState('Укажите приз'); //Для селектора приза
+    const [selectedFee, setSelectedFee] = useState('Укажите взнос'); //Для селектора взноса
     
 
     const [selectedFormat, setSelectedFormat] = useState('Выберите формат'); // формат (bo1 и тп)
@@ -226,7 +226,7 @@ function Event(){
         {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg", cities: ["Витина", "Вучитрн", "Глоговац", "Гнилане", "Дечани", "Джяковица"]}
     ]
 
-    const genMinDate = () =>{
+    const getMinDate = () =>{
         const date = new Date();
         let day = date.getDate();
         day = day < 10 ? ("0" + day) : day;
@@ -503,8 +503,8 @@ function Event(){
                 </div>
                 <div className="col_center_gap30">
                     <div className="inside scroll">
-                        <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={genMinDate()}/>
-                        <DateSelector toggleDate={toggleEndDate} dateSelected={dateEndSelected} valueDate={valueEndDate} dateSelectorActive={dateEndSelectorActive} setDate={setDateEndSelected} minDate={genMinDate()}/>
+                        <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={getMinDate()}/>
+                        <DateSelector toggleDate={toggleEndDate} dateSelected={dateEndSelected} valueDate={valueEndDate} dateSelectorActive={dateEndSelectorActive} setDate={setDateEndSelected} minDate={getMinDate()}/>
                         <div className="row_center_6" style={{alignItems: "flex-start", width: "464px", zIndex: 2}}>
                                     <div className="text-field_half">
                                         <div className="text-field_half_selector">
