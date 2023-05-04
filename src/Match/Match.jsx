@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import "./Match.css"
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
 import Streams from "./Streams/Streams"
@@ -8,11 +8,11 @@ import Scoreboard from "./Scoreboard/Scoreboard"
 import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
 
+
 function Match(props){
     const isAdmin = true;
     const [isStart, setIsStart] = useState(true);
     const [teamsActive, setTeamsActive] = useState([false, false, false, false, false]); // состояния команд - выбрана ли команда(чтоб блокировать ее)
-
     const match = {
         MatchStatus: 1,
         NameFirst: "AbuDabi",
@@ -43,7 +43,6 @@ function Match(props){
         link: "https://www.twitch.tv/csgo_paragon",
         country: "Россия"
     } 
-    const [ipMatch, setActiveIpMatch] = useState(false);
     const teams = [
         {name: "ПУПА", logo: "img/teams_logo/pupa.svg"}, 
         {name: "Walhalla", logo: "img/teams_logo/Walhalla.png"}, 
@@ -68,8 +67,10 @@ function Match(props){
         temp[id] = true;
 
         setTeamsActive(temp);
+
         setIsStart(false);
     }
+    const [ipMatch, setActiveIpMatch] = useState(false);
     return(
         <div>
             {/* Хэдер матча со временем */}
@@ -79,7 +80,7 @@ function Match(props){
             <div class="match_info_upcoming">
                 <div class="container">
                     {/* Описание матча */}
-                    <Description {...match} isAdmin={isAdmin}/>
+                    <Description {...match} isAdmin={isAdmin}></Description>
                     {/* Карты */}
                     <div class="container">
                         <MatchMap props={match} map={match.maps[0]}></MatchMap>
@@ -140,5 +141,4 @@ function Match(props){
         </div>   
     )
 }
-
 export default Match;

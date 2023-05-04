@@ -5,7 +5,7 @@ function TeamRow({team}){
     
     return(
         <div class="statistic_team_row">
-            <div class="statistic_team_row_name">
+            <div className="statistic_team_row_name">
                 <img src={team.logo} style={{width: "23px", height: "23px", marginTop: "1px"}}></img>
                 <p>{team.name}</p>
             </div>

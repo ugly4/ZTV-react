@@ -1,8 +1,9 @@
 import React from "react";
-import "./Scoreboard.css"
+
 import TeamBlock from "./TeamBlock/TeamBlock";
 import HalfMatchSideCT from "./HalfMatchSideCT/HalfMatchSideCT";
 import HalfMatchSideT from "./HalfMatchSideT/HalfMatchSideT";
+import "./Scoreboard.css"
 
 function Scoreboard({props, map}){
     const firstTeam = {
