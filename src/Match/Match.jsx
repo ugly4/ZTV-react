@@ -45,7 +45,34 @@ function Match(props){
         link: "https://www.twitch.tv/csgo_paragon",
         country: "Россия"
     } 
+    const [ipMatch, setActiveIpMatch] = useState(false);
+    const teams = [
+        {name: "ПУПА", logo: "img/teams_logo/pupa.svg"}, 
+        {name: "Walhalla", logo: "img/teams_logo/Walhalla.png"}, 
+        {name: "G2", logo: "img/teams_logo/NoLogo.svg"}, 
+        {name: "AbuDabi", logo: "img/teams_logo/AbuDabi.svg"}, 
+        {name: "Amfier", logo: "img/teams_logo/Amfier.png"}
+    ];
+    const indexOf = (value) =>{
+        for(let i = 0; i < teams.length; ++i){
+          if(value === teams[i].name){
+            return i;
+          }
+        }
+    }
 
+    const setSelectedTeam = () =>{
+        let temp = [...teamsActive];
+        let id = indexOf(match.NameFirst);
+        temp[id] = true;
+
+        id = indexOf(match.NameSecond);
+        temp[id] = true;
+
+        setTeamsActive(temp);
+
+        setIsStart(false);
+    }
     return(
         <div>
             {/* Хэдер матча со временем */}
