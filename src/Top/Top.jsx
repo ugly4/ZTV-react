@@ -87,7 +87,7 @@ function Top(){
   const setTeam = (id, value) =>{ // с её помощью делаем нужную команду заблокированной 
     let temp = [...teamsActive];
     let val = indexOf(value);
-
+    console.log(val);
     temp[val] = !temp[val];
     temp[id] = !temp[id];
     setTeamsActive(temp);
@@ -121,7 +121,7 @@ function Top(){
               </div>
               <ul className={ selectorActive[i] ? 'select_list' : 'select_list hide'}>
                 {teams.map((team) =>
-                  <li className={teamsActive[indexOf(team.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setTeamValue(i, team.name); setTeam(indexOf(team.name), valueTeam[i]); toggleClass(i)}}>
+                  <li className={teamsActive[indexOf(team.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setTeamValue(i, team.name); console.log(indexOf(team.name), valueTeam[i]); setTeam(indexOf(team.name), valueTeam[i]); toggleClass(i)}}>
                     <div className="list_logo">
                       <img src={team.logo} alt={team.name}/>
                     </div>

@@ -155,9 +155,12 @@ function Team() {
           <div>
             <div class="team_rectangle">
               {players.map((player) => 
+                !isCapAdmin ?
                 <Link to="/player" style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
                     <Player {...player}/>
-                </Link>
+                </Link> :
+                <Player {...player}/>
+                
                 )}
             </div>
 

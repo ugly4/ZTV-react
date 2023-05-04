@@ -184,6 +184,78 @@ function Event(){
         }
         setList([...list, toastProperties]);
     }
+
+    const [playersActive, setPlayersActive] = useState([false, false, false, false, false]); // состояния игроков - выбран ли игрок(чтоб блокировать его)
+    const [selectorActive, setSelectorActive] = useState([false, false]); // состояния селектора
+    const [valuePlayer, setValuePlayer] = useState(['Выберите игрока', 'Выберите игрока']); //Для селектора команды
+    const toggleClass = (id) => { // функция toggle для селектора
+        let temp = [];
+        for(let i = 0; i < selectorActive.length; ++i){
+          temp.push(false);
+        }
+        if(id !== "all"){
+          temp[id] = !selectorActive[id];
+        }
+        setSelectorActive(temp);
+      };
+    
+      const setPlayer = (id, value) =>{ // с её помощью делаем нужную команду заблокированной 
+        let temp = [...playersActive];
+        let val = indexOf(value);
+    
+        temp[val] = !temp[val];
+        temp[id] = !temp[id];
+        setPlayersActive(temp);
+      }
+    
+      const setPLayerValue = (id, value) =>{ // ставим выбранную команду в выбранное поле
+        let tempPlayers = [...valuePlayer];
+        tempPlayers[id] = value;
+        setValuePlayer(tempPlayers);
+      }
+    
+      const indexOf = (value) =>{
+        for(let i = 0; i < players.length; ++i){
+          if(value === players[i].name){
+            return i;
+          }
+        }
+      }
+    const players = [ // для селектора
+        {name: "Tamada"}, 
+        {name: "ugly4"}, 
+        {name: "_SD_"}, 
+        {name: "risttle"}, 
+        {name: "Hitry_Kazah"}
+        ];
+        
+    const generateSelectors = () =>{ //селектор игрока
+        const size = players.length;
+        let content = []
+        for(let i = 0; i < 2; ++i){
+            
+          content.push(
+                
+              <div className="text-field_half" style={{zIndex: size - i}}>
+                <div className="text-field_half_selector">
+                  <div className="text_field_half_select" onClick={() => toggleClass(i)}>
+                    <p className={valuePlayer[i] === "Выберите игрока" ? "onStart" : "choosed"}>{valuePlayer[i]}</p>
+                    <img src="../img/arrow.svg" className={selectorActive[i] ? 'rotate' : null} alt="arrow"/>
+                  </div>
+                  <ul className={ selectorActive[i] ? 'select_list' : 'select_list hide'}>
+                    {players.map((player) =>
+                      <li className={playersActive[indexOf(player.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setPLayerValue(i, player.name); setPlayer(indexOf(player.name), valuePlayer[i]); toggleClass(i)}}>
+                        <p>{player.name}</p>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+          );
+        }
+        return content;
+    }
+
     return(
         <div>
             <div className="event_image_header">
@@ -281,20 +353,17 @@ function Event(){
             </Login>
 
             <Login active={activeEditTeamWindow} setActive={setActiveEditTeamWindow}>
-                <div className="header_splash_window">
+                <div className="header_splash_window" onClick={() => toggleClass("all")}>
                     <div className="logo_splash_window"></div>
                 </div>
-                <div className="info_text">
+                <div className="info_text" onClick={() => toggleClass("all")}>
                     <p>Выберите игроков для участия в турнире</p>
                 </div>
                 <div class="col_center_gap30">
                     <div class="row_center_6">
-                        <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Выберите игрока" />
-                        </div>
-                        <div className="text-field_half">
-                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Выберите игрока" />
-                        </div>
+                        
+                            {generateSelectors()}
+                        
                     </div>
                     <div className="full_grey_button" >
                         <input type="submit" value="Подтвердить" onClick={() => activeEditTeamWindow ? (setActiveEditTeamWindow(!activeEditTeamWindow), showToast("successEditTeam")) : null} />
