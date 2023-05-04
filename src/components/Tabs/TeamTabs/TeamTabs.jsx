@@ -80,7 +80,7 @@ function TeamTabs(props){
                 </div>
                 <div className="col_center_gap30">
                     <div className="description_field">
-                        <textarea type="text" ref={ref}>{valueDecription}</textarea>
+                        <textarea type="text" ref={ref} placeholder="Введите описание" style={{color: "white"}}>{valueDecription}</textarea>
                     </div>
                     <div className="full_grey_button">
                         <input type="submit" value="Сохранить" onClick={handleClick}/>

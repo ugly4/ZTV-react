@@ -67,7 +67,7 @@
     flex-direction: row;
     align-items: center;
     padding: 0px;
-    gap: 0px;
+    gap: 10px;
 }
 
 /*Плашка live*/
@@ -233,4 +233,33 @@
     align-items: center;
     padding: 0px;
     gap: 3px;
+}
+
+.match_list_team_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.match_list_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 15px;
+}
+
+.buttons_wrapper{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
 }

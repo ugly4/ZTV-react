@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Match.css"
+import React from "react";
+import { useState } from "react";
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
 import Streams from "./Streams/Streams"
@@ -7,9 +7,14 @@ import Description from "./Description/Description";
 import Scoreboard from "./Scoreboard/Scoreboard"
 import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
+import "./Match.css"
 
 
 function Match(props){
+    const isAdmin = true;
+    const [isStart, setIsStart] = useState(true);
+    const [teamsActive, setTeamsActive] = useState([false, false, false, false, false]); // состояния команд - выбрана ли команда(чтоб блокировать ее)
+
     const match = {
         MatchStatus: 1,
         NameFirst: "AbuDabi",
@@ -26,8 +31,11 @@ function Match(props){
             {mapName: "Overpass", scoreFirst: 10, scoreSecond: 16, firstRound:[5, 10], secondRound: [5, 6]},
             {mapName: "Anubis", scoreFirst: 5, scoreSecond: 10, firstRound:[5, 10], secondRound: [null, null]},
             {mapName: "Nuke", scoreFirst: null, scoreSecond: null, firstRound:[null,null], secondRound: [null, null]}
-        ]
-        
+        ],
+        event: "Zasada Super Duper Ultra mega Cup",
+        format: "Best of 3",
+        type: "Lan",
+        description: "* Тут какое то описание, уточнения или тп. "
     }
     const isCap = true;
     const stream = {
@@ -38,17 +46,16 @@ function Match(props){
         country: "Россия"
     } 
 
-
-    const [ipMatch, setActiveIpMatch] = useState(false);
     return(
         <div>
             {/* Хэдер матча со временем */}
-            <MatchHeader {...match}/>
+            {isStart ? setSelectedTeam() : null}
+            <MatchHeader {...match} isAdmin={isAdmin} teams={teams} teamsActive={teamsActive}/>
 
             <div class="match_info_upcoming">
                 <div class="container">
                     {/* Описание матча */}
-                    <Description {...match}></Description>
+                    <Description {...match} isAdmin={isAdmin}/>
                     {/* Карты */}
                     <div class="container">
                         <MatchMap props={match} map={match.maps[0]}></MatchMap>

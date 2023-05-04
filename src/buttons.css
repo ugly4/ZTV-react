@@ -16,6 +16,59 @@
 .full_grey_button input:hover{
     background-color: #3c3c3c;
 }
+
+.red_button{
+    padding: 0px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+.red_button input{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 40px;
+
+    font-family: var(--text-regular-lcg);
+    font-size: 14px;
+    color: var(--hp-low);
+
+    border: 1px solid var(--hp-low);
+    background-color: var(--splash-window);
+}
+.red_button input:hover{
+    background-color: #341E1E;
+}
+
+.green_button{
+    padding: 0px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+}
+.green_button input{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 40px;
+
+    font-family: var(--text-regular-lcg);
+    font-size: 14px;
+    color: var(--base-05);
+
+    border: 1px solid var(--base-05);
+    background-color: var(--splash-window);
+}
+.green_button input:hover{
+    background-color: #1B3429;
+}
+
 /*Кнопка с серым фоном, при наведении темнеет. Текст белый(логин, регистрация)*/
 .full_grey_button_gap15{
     padding-top: 15px;
@@ -96,7 +149,7 @@
 }
 .small_grey_button input{
     width: 60px;
-    height: 35px;
+    height: 40px;
     outline: none;
 
     font-size: 16px;
@@ -119,7 +172,7 @@
 }
 .small_dark_button input{
     width: 60px;
-    height: 35px;
+    height: 40px;
     outline: none;
 
     font-size: 16px;
@@ -132,5 +185,28 @@
     cursor: pointer;
 }
 .small_dark_button input:hover{
+    background-color: var(--plashka);
+}
+
+.dark_button{
+    padding: 0px;
+    margin: 0;
+    width: 200px;
+}
+.dark_button input{
+    width: 200px;
+    height: 40px;
+    outline: none;
+
+    font-size: 14px;
+    font-family: var(--text-regular-lcg);
+    color: white;
+
+    border: 1px solid var(--base-09);
+    background-color: var(--base-09);
+
+    cursor: pointer;
+}
+.dark_button input:hover{
     background-color: var(--plashka);
 }

@@ -11,6 +11,16 @@ import Login from "../Login/Login";
 import Notification from "../components/Notification/Notification";
 
 function Event(){
+    const tournament ={
+        date: "03.12 - 05.12.2023",
+        prize: "10.000.000",
+        fee: "1.000",
+        teams: "16",
+        regTeams: "0",
+        type: "Online",
+        format: "2x2"
+
+    }
     const drawOngoing = () =>{
         return(
             <div>
@@ -138,14 +148,15 @@ function Event(){
     ]
 
     const status = "ongoing" //registration, ongoing, ended
-    const isCap = true;
-    const errors = false;
-    const [activeJoinTourWindow, setJoinTourWindowActive] = useState(false);
-    const [activeLeaveTourWindow, setLeaveTourWindowActive] = useState(false);
-    const [activeTour, setActiveTour] = useState(false);
+    const isCap = true; //капитан ли смотрит
+    const errors = false; // есть ли причины не попасть на турик
+    const [activeJoinTourWindow, setJoinTourWindowActive] = useState(false); // окно уточнения для регистрации на турик
+    const [activeLeaveTourWindow, setLeaveTourWindowActive] = useState(false); // окно уточнения "покидания" турика
+    const [activeTour, setActiveTour] = useState(false); // переменная, отвечающая за то зарегана ли команда на турик
+    const [activeEditTeamWindow, setActiveEditTeamWindow] = useState(false); // окно изменения состава на турик
 
-    const [list, setList] = useState([]);
-    function showToast(type){
+    const [list, setList] = useState([]); //список уведомлений
+    function showToast(type){ //"вывести уведомление"
         let toastProperties = null;
         switch (type){
             case "errorJoinTour":
@@ -181,32 +192,32 @@ function Event(){
             <div className="event_header">
                 <div className="info_wrapper">
                     <span>Дата</span>
-                    <div className="event_date_wrapper"><p>03.12 - 05.12.2023</p></div>
+                    <div className="event_date_wrapper"><p>{tournament.date}</p></div>
                 </div>
 
                 <div className="info_wrapper">
                     <span>Приз</span>
-                    <div className="event_prize_wrapper"><p>10.000.000</p></div>
+                    <div className="event_prize_wrapper"><p>{tournament.prize}</p></div>
                 </div>
 
                 <div className="info_wrapper">
                     <span>Взнос</span>
-                    <div className="event_fee_wrapper"><p>1.000р</p></div>
+                    <div className="event_fee_wrapper"><p>{tournament.fee}р</p></div>
                 </div>
 
                 <div className="info_wrapper">
                     <span>Команды</span>
-                    <div className="event_team_wrapper"><p>0/16</p></div>
+                    <div className="event_team_wrapper"><p>{tournament.regTeams}/{tournament.teams}</p></div>
                 </div>
 
                 <div className="info_wrapper">
                     <span>Тип</span>
-                    <div className="event_type_wrapper"><p>Online</p></div>
+                    <div className="event_type_wrapper"><p>{tournament.type}</p></div>
                 </div>
                 
                 <div className="info_wrapper">
                     <span>Формат</span>
-                    <div className="event_format_wrapper"><p>5х5</p></div>
+                    <div className="event_format_wrapper"><p>{tournament.format}</p></div>
                 </div>
 
                 <div className="info_wrapper">
@@ -223,9 +234,12 @@ function Event(){
                     <div class="leave_tournament" style={{margin: "0"}} onClick={() => setLeaveTourWindowActive(true)}>
                         <p>Отказаться от участия</p>
                     </div>
-                    <div class="join_tournament" style={{margin: "0"}} onClick={() => setJoinTourWindowActive(true)}>
+                    {tournament.format == "2x2" ? 
+                    <div class="join_tournament" style={{margin: "0"}} onClick={() => setActiveEditTeamWindow(true)}>
                         <p>Изменить состав команды</p>
-                    </div>
+                    </div> :
+                    null}
+                    
                 </div>
             }
             {status === "registration" ? <EventInfo maps={maps} part={registred} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="registration"/> : 
@@ -265,6 +279,30 @@ function Event(){
                     </div>
                 </div>
             </Login>
+
+            <Login active={activeEditTeamWindow} setActive={setActiveEditTeamWindow}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Выберите игроков для участия в турнире</p>
+                </div>
+                <div class="col_center_gap30">
+                    <div class="row_center_6">
+                        <div className="text-field_half">
+                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Выберите игрока" />
+                        </div>
+                        <div className="text-field_half">
+                            <input className="text-field_half input" type="text" name="login" id="login" placeholder="Выберите игрока" />
+                        </div>
+                    </div>
+                    <div className="full_grey_button" >
+                        <input type="submit" value="Подтвердить" onClick={() => activeEditTeamWindow ? (setActiveEditTeamWindow(!activeEditTeamWindow), showToast("successEditTeam")) : null} />
+                    </div>
+                </div>
+                
+            </Login>
+
             <Notification props={list}></Notification>
         </div>
     );
