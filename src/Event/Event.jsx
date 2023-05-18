@@ -169,7 +169,7 @@ function Event(){
         ]}
     ]
 
-    const status = "registration" //registration, ongoing, ended
+    const status = "ended" //registration, ongoing, ended
     const isCap = true; //капитан ли смотрит
     const errors = false; // есть ли причины не попасть на турик
     const [activeJoinTourWindow, setJoinTourWindowActive] = useState(false); // окно уточнения для регистрации на турик

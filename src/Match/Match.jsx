@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Match.css"
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
 import Streams from "./Streams/Streams"
@@ -8,7 +9,7 @@ import ScrollLog from "./ScrollLog/ScrollLog"
 import Statistic from "./Statistic/Statistic"
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
-import "./Match.css"
+
 
 
 function Match(props){
@@ -36,7 +37,7 @@ function Match(props){
     ]
     
     const match = {
-        MatchStatus: 1,
+        MatchStatus: 2,
         NameFirst: "AbuDabi",
         LogoFirst: "/img/teams_logo/AbuDabi.svg",
         SideFirst: "ct",
@@ -46,7 +47,7 @@ function Match(props){
         LogoSecond: "/img/teams_logo/pupa.svg",
         SideSecond: "t",
         ScoreSecond: 2,
-        MatchDate: new Date(2023, 4, 5, 8, 0, 0),
+        MatchDate: new Date(2023, 4, 9, 8, 0, 0),
         maps: [
             {mapName: "Overpass", scoreFirst: 10, scoreSecond: 16, firstRound:[5, 10], secondRound: [5, 6]},
             {mapName: "Anubis", scoreFirst: 5, scoreSecond: 10, firstRound:[5, 10], secondRound: [null, null]},

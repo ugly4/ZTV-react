@@ -7,7 +7,13 @@ function MatchMap({props, map}){
     return(
         <div class={props.MatchStatus == 0 ? "map_upcoming" : "map"} style={(map.scoreFirst == null)&&(map.scoreSecond == null)&&(props.MatchStatus != 0) ? {opacity: "0.3"}: null} >
             {props.MatchStatus == 0 ? 
-              <Map map={"TBA"}/> 
+              <div style={{height: "30px", objectPosition: "center", position: "relative"}}>
+                <Map map={"TBA"}/> 
+                <div style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
+                  <p style={{margin: "0", fontFamily: "var(--text-regular-lcg)"}}>TBA</p>
+                </div>
+              </div>
+              
               : 
               <div style={{height: "30px", objectPosition: "center", position: "relative"}}>
                 <Map map={map.mapName}/>
