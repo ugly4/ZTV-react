@@ -113,3 +113,29 @@
 .Login-btn:hover .Login-btn-icon svg {
     fill: #00ff90;
 }
+
+.Authorized{
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 14px;
+    gap: 10px;
+
+    width: 96px;
+    height: 38px;
+
+    background: #141414;
+    border: 1px solid #242424;
+    border-radius: 100px;
+}
+.Authorized a{
+    font-size: 14px;
+    font-family: var(--text-font);
+    color: white;
+    text-decoration: none;
+}

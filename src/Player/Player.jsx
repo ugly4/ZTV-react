@@ -144,7 +144,7 @@ function Player(){
         {name: "Zasada Gamer League Major Cup", date: "07.04.2023 - 07.04.2024", logo: "img/event_logo/Zasada2.svg", link: "/event", place: "2-4ое"}
     ]
 
-    const isAdmin = false;
+    const isAdmin = true;
     const isCap = true;
     const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
 
