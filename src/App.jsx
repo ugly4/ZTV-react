@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="Plashka"></div>
+      <div className="Plashka"></div> {/* Часть, разделяющая Хэдер и Основную часть  */}
       <Main />
       <Footer />
     </div>

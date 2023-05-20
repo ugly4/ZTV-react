@@ -11,23 +11,17 @@ import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
 
 
-
+// Компонент - "Страница матча"
 function Match(props){
+
+    //Кто находится на странице/ смотрит
     const isAdmin = true;
-    const [isStart, setIsStart] = useState(true);
-    const [teamsActive, setTeamsActive] = useState([false, false, false, false, false]); // состояния команд - выбрана ли команда(чтоб блокировать ее)
-    
-    const [streamsEditorActive, setStreamsEditorActive] = useState(false); //состояния модального окна для редактирования текущих матчей
+    const isCap = true;
+    ///////////////////////////////////////
 
-    const [selectorActive, setSelectorActive] = useState(false); // состояния селектора
-    
-    const toggleClass = () => { // функция toggle для селектора
-        setSelectorActive(!selectorActive);
-    };
 
-    const [value, setValue] = useState('Выберите страну'); //Для селектора страны
-
-    const countries =[
+    // ------------- Селектор стран ------------
+    const countries =[ // База стран
         {name: "Россия", flagPath: "img/flags/mini/Russia.svg"},
         {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg"},
         {name: "Албания", flagPath: "img/flags/mini/Albania.svg"},
@@ -35,9 +29,33 @@ function Match(props){
         {name: "Белиз", flagPath: "img/flags/mini/Belize.svg"},
         {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg"}
     ]
+
+    const [value, setValue] = useState('Выберите страну'); //"Значение" для селектора страны
+
+    const [selectorActive, setSelectorActive] = useState(false); // Состояния селектора стран
+
+    const toggleClass = () => { // Функция toggle для селектора стран
+        setSelectorActive(!selectorActive);
+    };
+    //--------------------------------------------
+
+
+    // ___________ Раздел со стримами ____________
     
+    const stream = { //Пример стрима
+        name: "(название стрима)",
+        viewers: 8948,
+        flagPath: "img/flags/mini/Russia.svg",
+        link: "https://www.twitch.tv/csgo_paragon",
+        country: "Россия"
+    }
+    const [streamsEditorActive, setStreamsEditorActive] = useState(false); //Состояния модального окна для редактирования, добавления стримов
+    //_____________________________________________
+
+
+    // ---------- Данные о матче -------------------
     const match = {
-        MatchStatus: 2,
+        MatchStatus: 1, //Статус матча: 0 - Не начался, 1 - LIVE, 2 - Закончился
         NameFirst: "AbuDabi",
         LogoFirst: "/img/teams_logo/AbuDabi.svg",
         SideFirst: "ct",
@@ -58,14 +76,10 @@ function Match(props){
         type: "Lan",
         description: "* Тут какое то описание, уточнения или тп. "
     }
-    const isCap = true;
-    const stream = {
-        name: "(название стрима)",
-        viewers: 8948,
-        flagPath: "img/flags/mini/Russia.svg",
-        link: "https://www.twitch.tv/csgo_paragon",
-        country: "Россия"
-    } 
+    // _____________________________________
+
+
+    // Данные для редактирования команд в Хэдере матча 
     const teams = [
         {name: "ПУПА", logo: "img/teams_logo/pupa.svg"}, 
         {name: "Walhalla", logo: "img/teams_logo/Walhalla.png"}, 
@@ -73,15 +87,16 @@ function Match(props){
         {name: "AbuDabi", logo: "img/teams_logo/AbuDabi.svg"}, 
         {name: "Amfier", logo: "img/teams_logo/Amfier.png"}
     ];
-    const indexOf = (value) =>{
+    const [teamsActive, setTeamsActive] = useState([false, false, false, false, false]); // Состояния команд - выбрана ли команда(чтоб блокировать ее) в селекторе
+    
+    const indexOf = (value) =>{ // Функция нахождения индекса по названию команды
         for(let i = 0; i < teams.length; ++i){
           if(value === teams[i].name){
             return i;
           }
         }
     }
-
-    const setSelectedTeam = () =>{
+    const setSelectedTeam = () =>{ // Функция, определяющая какие команды заняты
         let temp = [...teamsActive];
         let id = indexOf(match.NameFirst);
         temp[id] = true;
@@ -93,7 +108,11 @@ function Match(props){
 
         setIsStart(false);
     }
-    const [ipMatch, setActiveIpMatch] = useState(false);
+    const [isStart, setIsStart] = useState(true);
+    //___________________________________________
+    
+    const [ipMatch, setActiveIpMatch] = useState(false); //Состояние видимости IP адреса
+
     return(
         <div>
             {/* Хэдер матча со временем */}
@@ -115,14 +134,15 @@ function Match(props){
                 <div class="container">
                 <div className="row_center_5px">
                         <p>{match.MatchStatus == 2 ? "Повтор" : "Просмотр"}</p>
-                        {isAdmin ?<Editor size="14px" depth={1} onClick={() => setStreamsEditorActive(true)}/> : <></>}
+                        {isAdmin &&match.MatchStatus != 2 ?<Editor size="14px" depth={1} onClick={() => setStreamsEditorActive(true)}/> : <></>}
                     </div>
                     <div class="match_info_upcoming_stream">
                         {match.MatchStatus == 0 ? <p>Трансляции отсутствуют</p> : null}
                         {match.MatchStatus == 1 ? <p>Zasada TV</p> : null}
                         {match.MatchStatus == 2 ? <p>Повторы отсутствуют</p> : null}
                     </div>
-                    { (isCap&& match.MatchStatus != 2) && 
+                    {/* Видимость плашки с IP адресом для подключения */}
+                    { (isCap && match.MatchStatus != 2) && 
                     <div class="ip_match">
                         {!ipMatch ? 
                         <p class="ip_hidden">IP скрыт</p> : 
@@ -138,6 +158,7 @@ function Match(props){
                         </div>
                     </div>
                     }
+                    {/* Видимость стримов */}
                     {match.MatchStatus == 1 && <Streams {...stream}/>}
                     
                 </div>
@@ -165,7 +186,7 @@ function Match(props){
                 </div>
             }
 
-
+            {/* Окно добавления, редактирования стримов */}
             <Login active={streamsEditorActive} setActive={setStreamsEditorActive}>
                 <div className="header_splash_window">
                     <div className="logo_splash_window"></div>
@@ -180,7 +201,7 @@ function Match(props){
                         </div>
                         <div className="row_center_gap3">
                             <div className="row_center_7">
-                            <div className="text-field_third">
+                                <div className="text-field_third">
                                     <div className="text-field_third_selector">
                                         <div className="text_field_third_select" onClick={() => toggleClass()}>
                                             <p className={value === "Выберите страну" ? "onStart" : "choosed"}>{value}</p>
@@ -197,10 +218,10 @@ function Match(props){
                                     </div>
                                 </div>
                                 <div className="text-field_third">
-                                    <input className="text-field_input" type="text" name="name" id="ip" placeholder="Название" />
+                                    <input className="text-field_input" type="text" name="ip_name" id="ip_name" placeholder="Название" />
                                 </div>
                                 <div className="text-field_third">
-                                    <input className="text-field_input" type="text" name="name" id="ip" placeholder="Ссылка" />
+                                    <input className="text-field_input" type="text" name="ip_link" id="ip_link" placeholder="Ссылка" />
                                 </div>
                             </div>
                             <div className="minus"></div>

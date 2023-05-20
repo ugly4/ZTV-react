@@ -4,16 +4,16 @@ import Login from '../Login/Login'
 import './Header.css';
 
 const Header = () => {
-    const [loginActive, setLoginActive, children1] = useState(false); //состояния модального окна "логин"
-    const [signupActive, setSignupActive, children2] = useState(false); // состояния модального окна "регистрации"
-    const [selectorActive, setSelectorActive] = useState(false); // состояния селектора
-    
+    const [loginActive, setLoginActive, children1] = useState(false); //Состояния модального окна "логин"
+    const [signupActive, setSignupActive, children2] = useState(false); // Состояния модального окна "регистрации"
+
+
+    const [selectorActive, setSelectorActive] = useState(false); // Состояния селектора стран
     const toggleClass = () => { // функция toggle для селектора
         setSelectorActive(!selectorActive);
     };
-
-    const [value, setValue] = useState('Выберите страну'); //Для селектора страны
-
+    const [value, setValue] = useState('Выберите страну'); //"Значение" в селекторе
+    // База Стран для селектора
     const countries =[
         {name: "Россия", flagPath: "img/flags/mini/Russia.svg"},
         {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg"},
@@ -30,7 +30,7 @@ const Header = () => {
                 <nav className='Navigation'>
                     <ul className='Navigation-list'>
                         <li className='Navigation-link'>
-                            <NavLink to='/tournaments' style={({ isActive }) => ({  // если активна, то текст белый
+                            <NavLink to='/tournaments' style={({ isActive }) => ({  // Если вкладка активна, то текст становится белым
                                 color: isActive ? 'var(--text-01)' : 'var(--text-02)'})}>
                             Турниры
                             </NavLink>
@@ -77,37 +77,39 @@ const Header = () => {
                     </button>
                 </div>
             </div>
+            {/*Окно логина*/}
             <Login active={loginActive} setActive={setLoginActive}>
-            <div className="header_splash_window">
+                <div className="header_splash_window">
                     <div className="logo_splash_window"></div>
                 </div>
                 <div className="col_center_gap30">
                     <div className="col_right_gap20">
-                    <div className="col_center_gap10">
-                        <div className="text-field">
-                            <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
+                        <div className="col_center_gap10">
+                            <div className="text-field">
+                                <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
+                            </div>
+                            <div className="text-field">
+                                <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
+                            </div>
                         </div>
-                        <div className="text-field">
-                            <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
+                        <div className="keeplogin">
+                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping"/>
+                            <label for="loginkeeping">Запомнить меня</label>
                         </div>
-                    </div>
-                    <div className="keeplogin">
-                        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping"/>
-                        <label for="loginkeeping">Запомнить меня</label>
-                    </div>
                     </div>
                     <div className ="col_center_gap_20">
-                    <div className="full_grey_button">
-                        <input type="submit" id="loginsubmit" value="Войти" />
-                    </div>
-                    <div className="transparent_grey_border_button text">
-                        <a className="close">
-                        <input type="submit" id="loginsubmit" value="Регистрация"  onClick={() => {setSignupActive(true); setLoginActive(false)}} />
-                        </a>
-                    </div>
+                        <div className="full_grey_button">
+                            <input type="submit" id="loginsubmit" value="Войти" />
+                        </div>
+                        <div className="transparent_grey_border_button text">
+                            <a className="close">
+                                <input type="submit" id="loginsubmit" value="Регистрация"  onClick={() => {setSignupActive(true); setLoginActive(false)}} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </Login>
+            {/* Окно регистрации */}
             <Login active={signupActive} setActive={setSignupActive} >
                 <div className="header_splash_window" onClick={() => selectorActive ? toggleClass() : null}>
                     <div className="logo_splash_window"></div>
@@ -116,23 +118,23 @@ const Header = () => {
                     <div className="col_center_gap10">
                         <div className="row_center_6">
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Имя пользователя"/>
+                                <input className="text-field_half input" type="text" name="fname" id="fname" placeholder="Имя пользователя"/>
                             </div>
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Фамилия пользователя"/>
-                            </div>
-                        </div>
-                        <div className="row_center_6">
-                            <div className="text-field_half">
-                                <input className="text-field_half input" type="password" name="login" id="login" placeholder="Пароль"/>
-                            </div>
-                            <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Почта"/>
+                                <input className="text-field_half input" type="text" name="lname" id="lname" placeholder="Фамилия пользователя"/>
                             </div>
                         </div>
                         <div className="row_center_6">
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="login" id="login" placeholder="Никнейм пользователя"/>
+                                <input className="text-field_half input" type="password" name="signup_password" id="signup_password" placeholder="Пароль"/>
+                            </div>
+                            <div className="text-field_half">
+                                <input className="text-field_half input" type="email" name="email" id="email" placeholder="Почта"/>
+                            </div>
+                        </div>
+                        <div className="row_center_6">
+                            <div className="text-field_half">
+                                <input className="text-field_half input" type="text" name="nickname" id="nickname" placeholder="Никнейм пользователя"/>
                             </div>
                             <div className="text-field_half">
                                 <div className="text-field_half_selector">
