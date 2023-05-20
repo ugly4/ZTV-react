@@ -1,6 +1,7 @@
 import {Link, NavLink} from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Login from '../Login/Login'
+import { request, setAuthToken } from '../components/MyAxios/MyAxios';
 import './Header.css';
 
 const Header = () => {
@@ -15,13 +16,56 @@ const Header = () => {
     const [value, setValue] = useState('Выберите страну'); //"Значение" в селекторе
     // База Стран для селектора
     const countries =[
-        {name: "Россия", flagPath: "img/flags/mini/Russia.svg"},
-        {name: "Остров Мэн", flagPath: "img/flags/mini/IsleOfMan.svg"},
-        {name: "Албания", flagPath: "img/flags/mini/Albania.svg"},
-        {name: "Испания", flagPath: "img/flags/mini/Spain.svg"},
-        {name: "Белиз", flagPath: "img/flags/mini/Belize.svg"},
-        {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg"}
+        {name: "Россия", flagPath: "../img/flags/mini/Russia.svg"},
+        {name: "Остров Мэн", flagPath: "../img/flags/mini/IsleOfMan.svg"},
+        {name: "Албания", flagPath: "../img/flags/mini/Albania.svg"},
+        {name: "Испания", flagPath: "../img/flags/mini/Spain.svg"},
+        {name: "Белиз", flagPath: "../img/flags/mini/Belize.svg"},
+        {name: "Косово", flagPath: "../img/flags/mini/Kosovo.svg"}
     ]
+
+    const [isAuthorized, setIsAuthorized] = useState(false); //Для проверки на авторизованность
+
+    const nameRef = useRef(null);
+    const surnameRef = useRef(null);
+    const passwordRef = useRef(null);
+    const emailRef = useRef(null);
+    const nickRef = useRef(null);
+
+    const nickLoginRef = useRef(null);
+    const passwordLoginRef = useRef(null);
+
+    const onLogin = () =>{
+        request("POST", "/auth/login", 
+        {
+            password: passwordLoginRef.current.value,
+            nick: nickLoginRef.current.value
+        }).then((resp) => {
+            setIsAuthorized(true);
+            setAuthToken(resp.data.token);
+        }).catch((error) => {
+            setIsAuthorized(false);
+        });
+        setLoginActive(!loginActive);
+    }
+
+    const onRegistration = () =>{
+        request("POST", "/auth/register", 
+        {
+            name: nameRef.current.value,
+            surname: surnameRef.current.value,
+            password: passwordRef.current.value,
+            email: emailRef.current.value,
+            nick: nickRef.current.value,
+            country: value
+        }).then((resp) => {
+            setIsAuthorized(true);
+            setAuthToken(resp.data.token);
+        }).catch((error) => {
+            setIsAuthorized(false);
+        });
+        setSignupActive(!signupActive);
+    }
 
     return(
         <header className='Header'>
@@ -56,25 +100,30 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className="Login">
-                    <button className="Login-btn" onClick={() => setLoginActive(true)}>
-                    
-                        <span className="Login-btn-name" >
-                            <a>Личный кабинет</a>
-                        </span>
-                        <div className="Login-btn-icon">
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M10.4674 4.49769C10.5238 4.27849 10.5779 4.21386 10.6862 4.08461C10.9595 3.75817 11.3053 3.48953 11.6801 3.30592C12.3045 3 13.1163 3 14.7399 3H16.2599C17.8835 3 18.6952 3 19.3197 3.30592C19.9176 3.59882 20.4011 4.08229 20.694 4.68018C20.9999 5.30464 20.9999 6.11642 20.9999 7.74V16.26C20.9999 17.8836 20.9999 18.6954 20.694 19.3198C20.4011 19.9177 19.9176 20.4012 19.3197 20.6941C18.6952 21 17.8835 21 16.2599 21H14.7399C13.1163 21 12.3045 21 11.6801 20.6941C11.3053 20.5105 10.9595 20.2418 10.6862 19.9154C10.5779 19.7861 10.5238 19.7215 10.4674 19.5023C10.4271 19.3459 10.4501 19.0195 10.512 18.8702C10.5986 18.6611 10.7155 18.556 10.9491 18.3457L17.174 12.7433C17.6154 12.346 17.6154 11.6539 17.174 11.2567L10.9491 5.65434C10.7155 5.44402 10.5986 5.33886 10.512 5.12976C10.4501 4.98051 10.4271 4.65414 10.4674 4.49769ZM14.5 12C14.5 11.5899 14.253 11.2374 13.8997 11.0831L10.6402 8.36687C9.98886 7.8241 9 8.28725 9 9.13509V11L3 11.0001C2.44771 11.0001 2 11.4478 2 12.0001C2 12.5523 2.44772 13.0001 3 13.0001L9 13V14.865C9 15.7128 9.98886 16.176 10.6402 15.6332L13.8997 12.917C14.253 12.7627 14.5 12.4102 14.5 12Z" />
-                            </svg>
-                        </div>
-                    </button>
+                    {isAuthorized ? 
+                            <div className='Authorized'>
+                                <a>Tamada</a>
+                            </div>
+                        :
+                            <button className="Login-btn" onClick={() => setLoginActive(true)}>
+                                <span className="Login-btn-name" >
+                                    <a>Личный кабинет</a>
+                                </span>
+                                <div className="Login-btn-icon">
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M10.4674 4.49769C10.5238 4.27849 10.5779 4.21386 10.6862 4.08461C10.9595 3.75817 11.3053 3.48953 11.6801 3.30592C12.3045 3 13.1163 3 14.7399 3H16.2599C17.8835 3 18.6952 3 19.3197 3.30592C19.9176 3.59882 20.4011 4.08229 20.694 4.68018C20.9999 5.30464 20.9999 6.11642 20.9999 7.74V16.26C20.9999 17.8836 20.9999 18.6954 20.694 19.3198C20.4011 19.9177 19.9176 20.4012 19.3197 20.6941C18.6952 21 17.8835 21 16.2599 21H14.7399C13.1163 21 12.3045 21 11.6801 20.6941C11.3053 20.5105 10.9595 20.2418 10.6862 19.9154C10.5779 19.7861 10.5238 19.7215 10.4674 19.5023C10.4271 19.3459 10.4501 19.0195 10.512 18.8702C10.5986 18.6611 10.7155 18.556 10.9491 18.3457L17.174 12.7433C17.6154 12.346 17.6154 11.6539 17.174 11.2567L10.9491 5.65434C10.7155 5.44402 10.5986 5.33886 10.512 5.12976C10.4501 4.98051 10.4271 4.65414 10.4674 4.49769ZM14.5 12C14.5 11.5899 14.253 11.2374 13.8997 11.0831L10.6402 8.36687C9.98886 7.8241 9 8.28725 9 9.13509V11L3 11.0001C2.44771 11.0001 2 11.4478 2 12.0001C2 12.5523 2.44772 13.0001 3 13.0001L9 13V14.865C9 15.7128 9.98886 16.176 10.6402 15.6332L13.8997 12.917C14.253 12.7627 14.5 12.4102 14.5 12Z" />
+                                    </svg>
+                                </div>
+                            </button>
+                    }
                 </div>
             </div>
             {/*Окно логина*/}
@@ -86,26 +135,27 @@ const Header = () => {
                     <div className="col_right_gap20">
                         <div className="col_center_gap10">
                             <div className="text-field">
-                                <input className="text-field_input" type="text" name="login" id="login" placeholder="Имя пользователя" />
+                                <input className="text-field_input" type="text" name="login" id="loginLogin" placeholder="Никнейм пользователя" ref={nickLoginRef}/>
                             </div>
                             <div className="text-field">
-                                <input className="text-field_input" type="password" name="password" id="password" placeholder="Пароль" />
+                                <input className="text-field_input" type="password" name="password" id="passwordLogin" placeholder="Пароль" ref={passwordLoginRef}/>
                             </div>
                         </div>
-                        <div className="keeplogin">
-                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping"/>
-                            <label for="loginkeeping">Запомнить меня</label>
-                        </div>
+                    </div>
+                    <div className="keeplogin">
+                        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping"/>
+                        <label for="loginkeeping">Запомнить меня</label>
+                    </div>
                     </div>
                     <div className ="col_center_gap_20">
-                        <div className="full_grey_button">
-                            <input type="submit" id="loginsubmit" value="Войти" />
-                        </div>
-                        <div className="transparent_grey_border_button text">
-                            <a className="close">
-                                <input type="submit" id="loginsubmit" value="Регистрация"  onClick={() => {setSignupActive(true); setLoginActive(false)}} />
-                            </a>
-                        </div>
+                    <div className="full_grey_button">
+                        <input type="submit" id="loginsubmit" value="Войти" onClick={onLogin}/>
+                    </div>
+                    <div className="transparent_grey_border_button text">
+                        <a className="close">
+                        <input type="submit" id="loginsubmit" value="Регистрация"  onClick={() => {setSignupActive(true); setLoginActive(false)}} />
+                        </a>
+                    </div>
                     </div>
                 </div>
             </Login>
@@ -118,23 +168,23 @@ const Header = () => {
                     <div className="col_center_gap10">
                         <div className="row_center_6">
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="fname" id="fname" placeholder="Имя пользователя"/>
+                                <input className="text-field_half input" type="text" name="name" id="name" placeholder="Имя пользователя" ref={nameRef}/>
                             </div>
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="lname" id="lname" placeholder="Фамилия пользователя"/>
-                            </div>
-                        </div>
-                        <div className="row_center_6">
-                            <div className="text-field_half">
-                                <input className="text-field_half input" type="password" name="signup_password" id="signup_password" placeholder="Пароль"/>
-                            </div>
-                            <div className="text-field_half">
-                                <input className="text-field_half input" type="email" name="email" id="email" placeholder="Почта"/>
+                                <input className="text-field_half input" type="text" name="surname" id="surname" placeholder="Фамилия пользователя" ref={surnameRef}/>
                             </div>
                         </div>
                         <div className="row_center_6">
                             <div className="text-field_half">
-                                <input className="text-field_half input" type="text" name="nickname" id="nickname" placeholder="Никнейм пользователя"/>
+                                <input className="text-field_half input" type="password" name="password" id="passwordRegistration" placeholder="Пароль" ref={passwordRef}/>
+                            </div>
+                            <div className="text-field_half">
+                                <input className="text-field_half input" type="email" name="email" id="email" placeholder="Почта" ref={emailRef}/>
+                            </div>
+                        </div>
+                        <div className="row_center_6">
+                            <div className="text-field_half">
+                                <input className="text-field_half input" type="text" name="nick" id="nickRegistration" placeholder="Никнейм пользователя" ref={nickRef}/>
                             </div>
                             <div className="text-field_half">
                                 <div className="text-field_half_selector">
@@ -155,7 +205,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="full_grey_button">
-                        <input type="submit" id="loginsubmit" value="Зарегистрироваться"/>
+                        <input type="submit" id="loginsubmit" value="Зарегистрироваться" onClick={onRegistration}/>
                     </div>
                 </div>
             </Login>
