@@ -478,7 +478,7 @@ function Player(){
                                 </div>
                                 <ul className={ countrySelectorActive ? 'select_list' : 'select_list hide'}>
                                     {countries.map((country) =>
-                                        <li className='text_field_half_options' onClick={() => {setCountrySelected(country.name); toggleCountry()}}>
+                                        <li className='text_field_half_options' onClick={() => {setCountrySelected(country.name); setCitySelected(valueCity); toggleCountry()}}>
                                             <img src={"../" + country.flagPath} alt={country.name}/>
                                             <p>{country.name}</p>
                                         </li>
