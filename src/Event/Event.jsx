@@ -449,7 +449,7 @@ function Event(){
                         <input type="submit" value="Нет" onClick={() => activeJoinTourWindow ? setJoinTourWindowActive(!activeJoinTourWindow) : null}/>
                     </div>
                     <div className="small_grey_button">
-                        <input type="submit" value="Да" onClick={() =>  (activeJoinTourWindow && !errors)  ? (setJoinTourWindowActive(!activeJoinTourWindow), setActiveTour(true),showToast("successJoinTour")) : (setJoinTourWindowActive(!activeJoinTourWindow), showToast("errorJoinTour"))}/>
+                        <input type="submit" value="Да" onClick={() =>  (activeJoinTourWindow && !errors)  ? (tournament.format == "2x2" ? setActiveEditTeamWindow(true) : null , setJoinTourWindowActive(!activeJoinTourWindow), setActiveTour(true),showToast("successJoinTour")) : (setJoinTourWindowActive(!activeJoinTourWindow), showToast("errorJoinTour"))}/>
                     </div>
                 </div>
             </Login>

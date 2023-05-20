@@ -157,7 +157,7 @@ const Header = () => {
                         </a>
                     </div>
                     </div>
-                </div>
+                
             </Login>
             {/* Окно регистрации */}
             <Login active={signupActive} setActive={setSignupActive} >
