@@ -11,10 +11,10 @@
     display: flex;
 
     height: 55px;
-    width: 75px;
+    width: 80px;
     justify-content: center;
     align-items: center;
-    
+    margin: 0 auto;
     padding-bottom: 25px;
     background-image: url('/public/img/web/LOGOTYPE.svg');
     background-size: cover;
