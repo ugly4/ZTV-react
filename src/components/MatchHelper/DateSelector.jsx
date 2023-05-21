@@ -8,6 +8,7 @@ function DateSelector(props) {
     const dateSelectorActive = props.dateSelectorActive;
     const setDate = props.setDate;
     const minDate = props.minDate;
+    const maxDate = props.maxDate;
     return(
         <div className="text-field_selector">
             <div className="text_field_select" onClick={() => toggleDate()}>
@@ -16,7 +17,7 @@ function DateSelector(props) {
             </div>
             <ul className={ dateSelectorActive ? 'select_date' : 'select_date hide'}>
                 <li className="date_options" key="datePicker">
-                    <DatePicker setDate={setDate} minDate={minDate}/>
+                    <DatePicker setDate={setDate} minDate={minDate} maxDate={maxDate}/>
                 </li>
             </ul>
         </div>

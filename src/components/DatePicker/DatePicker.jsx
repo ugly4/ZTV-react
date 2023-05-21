@@ -11,21 +11,26 @@ function DatePicker(props) {
     const [curMonth, setCurMonth] = useState(new Date().getMonth());
     const [curYear, setCurYear] = useState(new Date().getFullYear());
 
-    const getMinDate = () =>{
-        const date = props.minDate;
-        let day = parseInt(date.substring(0, 2));
-        let month = parseInt(date.substring(3, 5)) - 1;
-        let year = parseInt(date.substring(6, 10));
+    const getDate = (date) =>{
+        if (date == null)
+            return null
+        else{
+            let day = parseInt(date.substring(0, 2));
+            let month = parseInt(date.substring(3, 5)) - 1;
+            let year = parseInt(date.substring(6, 10));
+            
+            const parsed = new Date();
+            parsed.setFullYear(year);
+            parsed.setDate(day);
+            parsed.setMonth(month);
+    
+            return parsed;
+        }
         
-        const parsed = new Date();
-        parsed.setFullYear(year);
-        parsed.setDate(day);
-        parsed.setMonth(month);
-
-        return parsed;
     }
 
-    const minDate = getMinDate();
+    const minDate = props.minDate;
+    const maxDate = props.maxDate;
 
     const [selectedDate, setSelectedDate] = useState(null);
 
@@ -60,6 +65,10 @@ function DatePicker(props) {
             setCurYear(prev => prev + 1);
         }
     }
+    
+    const nextYear = () => {
+        setCurYear(prev => prev + 1);
+    }
 
     const prevMonth = () =>{
         if(curMonth > 0) {
@@ -70,18 +79,22 @@ function DatePicker(props) {
         }
     }
 
+    const prevYear = () =>{
+        setCurYear(prev => prev - 1);
+    }
+
     const selectionHandler = (event) => {
         if (event.target.id === "day"){
             setSelectedDate(new Date(curYear, curMonth, event.target.getAttribute("data-day")))
         }
     }
 
-    const getTimeFromState = (day) => {
-        return new Date(curYear, curMonth, day).getTime();
+    const getTimeFromState = (year, day) => {
+        return new Date(year, curMonth, day).getTime();
     }
 
-    const checkMinDate = (day) => {
-        return selectedDate?.getTime() === getTimeFromState(day) && minDate?.getTime() <= getTimeFromState(day + 1);
+    const checkMinMaxDate = (day) => {
+        return selectedDate?.getTime() === getTimeFromState(curYear, day) && minDate <= getTimeFromState(curYear, day + 1) && maxDate >= getTimeFromState(curYear, day + 1);
     }
 
     const setDate = () => {
@@ -100,13 +113,19 @@ function DatePicker(props) {
     return (
         <div className="picker_wrapper">
             <div className="picker_header">
-                <button onClick={prevMonth} disabled={minDate?.getTime() > getTimeFromState(1)}>
+                <button onClick={prevYear} disabled={minDate ? minDate > getTimeFromState(curYear - 1, 31) : null}>
+                    <img src="../img/leftArrow.svg" alt="prev year"/>
+                </button>
+                <button onClick={prevMonth} disabled={minDate ? minDate > getTimeFromState(curYear, 1) : null}>
                     <img src="../img/leftArrow.svg" alt="prev month"/>
                 </button>
                 
                 <p>{monthNames[curMonth]} {curYear}</p>
-                <button onClick={nextMonth}>
+                <button onClick={nextMonth} disabled={maxDate ? maxDate < getTimeFromState(curYear, 31) : null}>
                     <img src="../img/rightArrow.svg" alt="next month"/>
+                </button>
+                <button onClick={nextYear} disabled={maxDate ? maxDate < getTimeFromState(curYear + 1, 1) : null}>
+                    <img src="../img/rightArrow.svg" alt="next year"/>
                 </button>
             </div>
             <div className="picker_body">
@@ -117,8 +136,8 @@ function DatePicker(props) {
                 </div>
                 <div className="seven_col_grid" onClick={selectionHandler}>
                     {range(1, getNumberOfDaysInMonth(curYear, curMonth) + 1).map((day) =>
-                        <p id="day" data-day={day} className={checkMinDate(day) ? "date_selected" : ""}
-                        onClick={checkMinDate(day) ? setDate() : null}>
+                        <p id="day" data-day={day} className={checkMinMaxDate(day) ? "date_selected" : ""}
+                        onClick={checkMinMaxDate(day) ? setDate() : null}>
                             {day}
                         </p>
                     )}

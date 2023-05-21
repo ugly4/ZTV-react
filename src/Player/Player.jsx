@@ -206,6 +206,32 @@ function Player(){
         setDateSelectorActive(!dateSelectorActive);
     };
 
+    const getDate = (date) =>{
+        
+        let day = parseInt(date.substring(0, 2));
+        let month = parseInt(date.substring(3, 5)) - 1;
+        let year = parseInt(date.substring(6, 10));
+        
+        const parsed = new Date();
+        parsed.setFullYear(year);
+        parsed.setDate(day);
+        parsed.setMonth(month);
+    
+        return parsed;
+        
+    }
+
+    function diffDate(date){ // функция для нахождения полных лет игрока
+        
+        
+        var diff = Math.floor(new Date() - getDate(date));
+        var day_hours = 1000 * 60 * 60 * 24;
+    
+        var days = Math.floor(diff/day_hours);
+        var months = Math.floor(days/31);
+        var years = Math.floor(months/12);
+        return years;
+    }
     
     //-------------------------------------------------------------------
 
@@ -243,7 +269,7 @@ function Player(){
         }
     }
     //--------------------------------------------------------------------
-
+    
     return(
     <div>
         <div className="user_back">
@@ -426,10 +452,10 @@ function Player(){
             </div>
             <div class="col_center_gap30">
                 <div className="inside scroll" style={{height: dateSelectorActive ? "400px": null, overflow: !dateSelectorActive ? "hidden" : null}}>
-                    <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={"04.03.2023"}/>
+                    <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={getDate("05.01.1990")} maxDate={new Date()}/>
                 </div>
                 <div className="full_grey_button" >
-                    <input type="submit" value="Подвердить" onClick={() => ageEditorActive ? (setAgeEditorActive(!ageEditorActive), setAgePlayer(dateSelected)) : null} />
+                    <input type="submit" value="Подвердить" onClick={() => ageEditorActive ? (setAgeEditorActive(!ageEditorActive), setAgePlayer(diffDate(dateSelected) + " лет")) : null} />
                 </div>
             </div>
         </Login>
