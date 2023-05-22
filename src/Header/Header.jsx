@@ -1,7 +1,7 @@
 import {Link, NavLink} from 'react-router-dom';
 import { useRef, useState } from 'react';
 import Login from '../Login/Login'
-import { request, setAuthToken } from '../components/MyAxios/MyAxios';
+import { request, setAuthToken, getAuthToken } from '../components/MyAxios/MyAxios';
 import './Header.css';
 
 const Header = () => {
@@ -24,7 +24,7 @@ const Header = () => {
         {name: "Косово", flagPath: "../img/flags/mini/Kosovo.svg"}
     ]
 
-    const [isAuthorized, setIsAuthorized] = useState(false); //Для проверки на авторизованность
+    const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
 
     const nameRef = useRef(null);
     const surnameRef = useRef(null);
