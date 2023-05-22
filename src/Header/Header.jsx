@@ -52,8 +52,8 @@ const Header = () => {
     const onRegistration = () =>{
         request("POST", "/auth/register", 
         {
-            name: nameRef.current.value,
-            surname: surnameRef.current.value,
+            firstName: nameRef.current.value,
+            lastName: surnameRef.current.value,
             password: passwordRef.current.value,
             email: emailRef.current.value,
             nick: nickRef.current.value,
