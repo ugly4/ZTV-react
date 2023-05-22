@@ -11,23 +11,6 @@ function DatePicker(props) {
     const [curMonth, setCurMonth] = useState(new Date().getMonth());
     const [curYear, setCurYear] = useState(new Date().getFullYear());
 
-    const getDate = (date) =>{
-        if (date == null)
-            return null
-        else{
-            let day = parseInt(date.substring(0, 2));
-            let month = parseInt(date.substring(3, 5)) - 1;
-            let year = parseInt(date.substring(6, 10));
-            
-            const parsed = new Date();
-            parsed.setFullYear(year);
-            parsed.setDate(day);
-            parsed.setMonth(month);
-    
-            return parsed;
-        }
-        
-    }
 
     const minDate = props.minDate;
     const maxDate = props.maxDate;
@@ -66,7 +49,7 @@ function DatePicker(props) {
         }
     }
     
-    const nextYear = () => {
+    const nextYear = () => { 
         setCurYear(prev => prev + 1);
     }
 
