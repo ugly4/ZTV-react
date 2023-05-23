@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import Login from '../Login/Login'
 import { request, setAuthToken, getAuthToken, setStoredPlayerNick,  getStoredPlayerNick } from '../components/MyAxios/MyAxios';
 import './Header.css';
+import axios from 'axios';
 
 const Header = () => {
     const [loginActive, setLoginActive, children1] = useState(false); //Состояния модального окна "логин"
@@ -15,14 +16,17 @@ const Header = () => {
     };
     const [value, setValue] = useState('Выберите страну'); //"Значение" в селекторе
     // База Стран для селектора
-    const countries =[
-        {name: "Россия", flagPath: "../img/flags/mini/Russia.svg"},
-        {name: "Остров Мэн", flagPath: "../img/flags/mini/IsleOfMan.svg"},
-        {name: "Албания", flagPath: "../img/flags/mini/Albania.svg"},
-        {name: "Испания", flagPath: "../img/flags/mini/Spain.svg"},
-        {name: "Белиз", flagPath: "../img/flags/mini/Belize.svg"},
-        {name: "Косово", flagPath: "../img/flags/mini/Kosovo.svg"}
-    ]
+    const [countries, setCountries] = useState([]);
+    
+    // const countries =[
+    //     {name: "Россия", flagPath: "../img/flags/mini/Russia.svg"},
+    //     {name: "Остров Мэн", flagPath: "../img/flags/mini/IsleOfMan.svg"},
+    //     {name: "Албания", flagPath: "../img/flags/mini/Albania.svg"},
+    //     {name: "Испания", flagPath: "../img/flags/mini/Spain.svg"},
+    //     {name: "Белиз", flagPath: "../img/flags/mini/Belize.svg"},
+    //     {name: "Косово", flagPath: "../img/flags/mini/Kosovo.svg"}
+    // ]
+
 
     const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
     const [playerNick, setPlayerNick] = useState((getStoredPlayerNick() !== null && getStoredPlayerNick() !== "null" && getStoredPlayerNick() !== "undefined") ? getStoredPlayerNick() : "");
@@ -72,6 +76,14 @@ const Header = () => {
         setSignupActive(!signupActive);
     }
 
+    const initCountries = () =>{
+        if(countries.length === 0){
+            request("GET", "/country", {}).then((resp) => {
+                setCountries(resp.data);
+            });
+        }
+    }
+
     return(
         <header className='Header'>
             <div className='Header-content'>
@@ -108,11 +120,11 @@ const Header = () => {
                     {isAuthorized ? 
                             <Link to="/player" style={{textDecoration: "none"}}>
                                 <div className='Authorized'>
-                                    <a>{playerNick}</a>
+                                    <p>{playerNick}</p>
                                 </div>
                             </Link>
                         :
-                            <button className="Login-btn" onClick={() => setLoginActive(true)}>
+                            <button className="Login-btn" onClick={() => {setLoginActive(true); initCountries()}}>
                                 <span className="Login-btn-name" >
                                     <a>Личный кабинет</a>
                                 </span>
@@ -201,9 +213,9 @@ const Header = () => {
                                     </div>
                                     <ul className={ selectorActive ? 'select_list' : 'select_list hide'}>
                                         {countries.map((country) =>
-                                            <li className='text_field_half_options' onClick={setValue.bind(this, country.name)}>
-                                                <img src={country.flagPath} alt={country.name}/>
-                                                <p>{country.name}</p>
+                                            <li key={country.countryRU} className='text_field_half_options' onClick={setValue.bind(this, country.countryRU)}>
+                                                <img src={"../img/flags/mini/" + country.countryENG +".svg"} alt={country.countryRU}/>
+                                                <p>{country.countryRU}</p>
                                             </li>
                                         )}
                                     </ul>

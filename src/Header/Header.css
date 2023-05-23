@@ -132,8 +132,10 @@
     background: #141414;
     border: 1px solid #242424;
     border-radius: 100px;
+
+    text-decoration: none;
 }
-.Authorized a{
+.Authorized p{
     font-size: 14px;
     font-family: var(--text-font);
     color: white;

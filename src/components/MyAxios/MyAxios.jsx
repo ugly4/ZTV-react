@@ -26,6 +26,13 @@ export const request = (method, url, data) =>{
         headers = {"Authorization": `Bearer ${getAuthToken()}`};
     }
 
+    if (method === "GET"){
+        headers["Accept"] = "application/json";
+        headers["Content-Type"] = "application/json";
+    }
+
+    console.log(headers);
+
     return axios({
         method: method,
         headers: headers,
