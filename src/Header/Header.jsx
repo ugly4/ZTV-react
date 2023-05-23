@@ -1,7 +1,7 @@
 import {Link, NavLink} from 'react-router-dom';
 import { useRef, useState } from 'react';
 import Login from '../Login/Login'
-import { request, setAuthToken, getAuthToken } from '../components/MyAxios/MyAxios';
+import { request, setAuthToken, getAuthToken, setStoredPlayerNick,  getStoredPlayerNick } from '../components/MyAxios/MyAxios';
 import './Header.css';
 
 const Header = () => {
@@ -25,6 +25,7 @@ const Header = () => {
     ]
 
     const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
+    const [playerNick, setPlayerNick] = useState((getStoredPlayerNick() !== null && getStoredPlayerNick() !== "null" && getStoredPlayerNick() !== "undefined") ? getStoredPlayerNick() : "");
 
     const nameRef = useRef(null);
     const surnameRef = useRef(null);
@@ -43,6 +44,8 @@ const Header = () => {
         }).then((resp) => {
             setIsAuthorized(true);
             setAuthToken(resp.data.token);
+            setStoredPlayerNick(resp.data.nick);
+            setPlayerNick(resp.data.nick);
         }).catch((error) => {
             setIsAuthorized(false);
         });
@@ -61,6 +64,8 @@ const Header = () => {
         }).then((resp) => {
             setIsAuthorized(true);
             setAuthToken(resp.data.token);
+            setStoredPlayerNick(resp.data.nick);
+            setPlayerNick(resp.data.nick);
         }).catch((error) => {
             setIsAuthorized(false);
         });
@@ -101,9 +106,11 @@ const Header = () => {
                 </nav>
                 <div className="Login">
                     {isAuthorized ? 
-                            <div className='Authorized'>
-                                <a>Tamada</a>
-                            </div>
+                            <Link to="/player" style={{textDecoration: "none"}}>
+                                <div className='Authorized'>
+                                    <a>{playerNick}</a>
+                                </div>
+                            </Link>
                         :
                             <button className="Login-btn" onClick={() => setLoginActive(true)}>
                                 <span className="Login-btn-name" >

@@ -11,6 +11,14 @@ export const setAuthToken = (token) =>{
     window.localStorage.setItem("auth_token", token);
 };
 
+export const getStoredPlayerNick = () =>{
+    return window.localStorage.getItem("player_nick");
+};
+
+export const setStoredPlayerNick = (nick) =>{
+    window.localStorage.setItem("player_nick", nick);
+};
+
 export const request = (method, url, data) =>{
     let headers = {};
 
