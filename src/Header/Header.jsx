@@ -118,7 +118,7 @@ const Header = () => {
                 </nav>
                 <div className="Login">
                     {isAuthorized ? 
-                            <Link to="/player" style={{textDecoration: "none"}}>
+                            <Link to={"/player/" + playerNick} style={{textDecoration: "none"}}>
                                 <div className='Authorized'>
                                     <p>{playerNick}</p>
                                 </div>
