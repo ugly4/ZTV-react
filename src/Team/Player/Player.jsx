@@ -12,10 +12,10 @@ function Player(props){
             mouseOutCard ? 
                 <div>
                     <div className="players_team">
-                        <div className="crop_team"><img src={"../" + props.photo} alt={props.nick}/></div>
+                        <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
                     </div>
                     <div className="nick_team">
-                        <img src={"../" + props.flagPath} alt={props.country}/>
+                        <img src={"../../" + props.flagPath} alt={props.country}/>
                         <p>{props.nick}</p>
                     </div>
                 </div>
@@ -23,14 +23,14 @@ function Player(props){
                 <div className="img_hover_wrapper_in_team" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onClick={() => setkickActive(true)}>
                     <div style={{opacity: "0.4"}}>
                         <div className="players_team">
-                            <div className="crop_team"><img src={"../" + props.photo} alt={props.nick}/></div>
+                            <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
                         </div>
                         <div className="nick_team">
-                            <img src={"../" + props.flagPath} alt={props.country}/>
+                            <img src={"../../" + props.flagPath} alt={props.country}/>
                             <p>{props.nick}</p>
                         </div>
                     </div>
-                    <img className="kick_hover" src="../img/KickHovered.svg" alt="Удаление игрока"/>
+                    <img className="kick_hover" src="../../img/KickHovered.svg" alt="Удаление игрока"/>
                     
                     
                 </div>
@@ -47,10 +47,10 @@ function Player(props){
             {isCap ? toggleOnMouseOver() :
             <div>
                 <div className="players_team">
-                    <div className="crop_team"><img src={"../" + props.photo} alt={props.nick}/></div>
+                    <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
                 </div>
                 <div className="nick_team">
-                    <img src={"../" + props.flagPath} alt={props.country}/>
+                    <img src={"../../" + props.flagPath} alt={props.country}/>
                     <p>{props.nick}</p>
                 </div>
             </div>

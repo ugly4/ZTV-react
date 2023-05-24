@@ -43,10 +43,10 @@ function PlayerTabs(props){
                 </li>
             </ul>
             <Routes>
-                <Route index element={<Navigate replace to="/player/stats" />}/>
+                <Route index element={<Navigate replace to={"/player/"+ props.nick +"/stats"} />}/>
                 <Route path="stats" element={<Stats stats={props.stat}/>}/>
-                <Route path="matches" element={<Matches matches_upcoming={props.matches_upcoming} matches_ended={props.matches_ended} type="player"/>}/>
-                <Route path="events" element={<Events ongoing={props.ongoing_events} ended={props.ended_events} type="player"/>}/>
+                <Route path="matches" element={<Matches matches_upcoming={props.matches_upcoming} matches_ended={props.matches_ended} type="player" param={props.nick}/>}/>
+                <Route path="events" element={<Events ongoing={props.ongoing_events} ended={props.ended_events} type="player" param={props.nick}/>}/>
                 <Route path="achievements" element={<Achievments lan={props.lan_events} online={props.online_events}/>}/>
                 <Route path="teams" element={<Rosters rosters={props.rosters}/>}/>
             </Routes>

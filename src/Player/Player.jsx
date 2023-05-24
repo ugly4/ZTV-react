@@ -1,11 +1,14 @@
 import React from "react";
 import { useRef, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FlagName from "../components/FlagName/FlagName";
 import Trophies from "../components/Trophies/Trophies";
 import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
 import DateSelector from "../components/MatchHelper/DateSelector";
+import { fillSpaces } from "../components/Helper/Helper";
 import "./Player.css"
 import "../../src/Team/Team.css"
 import '../components/Editor/Editor.css';
@@ -14,6 +17,8 @@ function Player(){
     //Короче, про отображение лого, фотки, ника и, соответственно, alt в фотках - 
     //всё это как-то из БД должно тянуться, может через пропсы
     
+    const params = useParams();
+
     const social = {
         items : [
             {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white", link: "https://vk.com/tarnada", displayed: "Кирилл Симовин"}, 
@@ -146,7 +151,7 @@ function Player(){
 
     const isAdmin = true;
     const isCap = true;
-    const nick = isAdmin ? "Tamada (Админ)" : "Tamada";
+    const nick = isAdmin ? (params.id + " (Админ)") : params.id;
 
     const [nickEditorActive, setNickEditorActive] = useState(false); //состояния модального окна для редактирования ника игрока
     const [socialEditorActive, setSocialEditorActive] = useState(false); //состояния модального окна для редактирования соц сетей
@@ -177,15 +182,15 @@ function Player(){
         return(
             mouseOutCard ? 
                 <div>
-                    <div className="player_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                    <div className="player_team_logo"><img src="../../img/teams_logo/Amfier.png" alt="Amfier"/></div>
                     <div className="player">
-                        <div className="crop_player"><img src="../img/players/Tamada.png" alt="Tamada"/></div>
+                        <div className="crop_player"><img src="../../img/players/Tamada.png" alt="Tamada"/></div>
                     </div>
                 </div>
             : 
                 <div className="img_hover_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}}>
                     <label for="file-input">
-                        <img src="../img/PlayerHovered.svg" alt="Выбор фотографии игрока"/>
+                        <img src="../../img/PlayerHovered.svg" alt="Выбор фотографии игрока"/>
                     </label>
                     <input id="file-input" type="file"/>
                 </div>
@@ -286,15 +291,15 @@ function Player(){
             <div className="player_info">
                 <div className="player_nick">
                     <p>{valueNick}</p>
-                    {isAdmin ? <Editor size="18px" depth={1} onClick={() => setNickEditorActive(true)}/>
+                    {isAdmin ? <Editor size="18px" depth={2} onClick={() => setNickEditorActive(true)}/>
                     : <></>}
                 </div>
-                <FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин" height='11px'/>
+                <FlagName flagPath="../img/flags/mini/Russia.svg" country="Россия" name="Кирилл Симовин" height='11px'/>
                 <div className="devider_info">
                     <div className="devider_info_line">
-                        <div class="row_center_5px">
+                        <div className="row_center_5px">
                             <span>Возраст</span>
-                            {isCap ? <Editor size="12px" depth={1} onClick={() => setAgeEditorActive(true)}/>
+                            {isCap ? <Editor size="12px" depth={2} onClick={() => setAgeEditorActive(true)}/>
                             : <></>}
                         </div>
                         <p>{agePlayer}</p>
@@ -303,25 +308,27 @@ function Player(){
                 </div>
                 <div className="devider_info">
                     <div className="devider_info_line">
-                        <div class="row_center_5px">
+                        <div className="row_center_5px">
                             <span>Текущая команда</span>
                             {isCap && !leaveTeamActive ?  
                             <div className="editor" style={{width: "16px", height: "16px"}} onClick={() => setLeaveTeamWindowActive(true)}>
-                                <img src="../img/Cross.svg" alt="Editor"/>
+                                <img src="../../img/Cross.svg" alt="Editor"/>
                             </div>
                             :
                             <div className="editor" style={{width: "17px", height: "17px"}} onClick={() => setMakeTeamActive(true)}>
-                                <img src="../img/MakeTeam.svg" alt="Editor"/>
+                                <img src="../../img/MakeTeam.svg" alt="Editor"/>
                             </div> 
                             }
 
                         </div>
                         
                         {leaveTeamActive ? <p>Отсутствует</p> :
-                        <div className="devider_team">
-                            <div className="devider_team_logo"><img src="../img/teams_logo/Amfier.png" alt="Amfier"/></div>
-                            <p>ПУПА</p>
-                        </div>
+                        <Link to={"/team/" + fillSpaces("ПУПА")} style={{textDecoration: "none"}}>
+                            <div className="devider_team">
+                                <div className="devider_team_logo"><img src="../../img/teams_logo/Amfier.png" alt="Amfier"/></div>
+                                <p>ПУПА</p>
+                            </div>
+                        </Link>
                         }
                     </div>
                     <div className="devider_subline"></div>
@@ -332,14 +339,14 @@ function Player(){
                             <span>Социальные сети</span>
                             {/* ТУТ НАДО БУДЕТ ПОМЕНЯТЬ УСЛОВИЕ НА OnClick. Если игрок - на карандаш срабатывает его окно, если админ - его
                             Также условие на то, игрок или админ смотрит страницу!!!!!!*/}
-                            {isAdmin || isCap ? <Editor size="12px" depth={1} onClick={() => setSocialEditorActive(true)}/>
+                            {isAdmin ? <Editor size="12px" depth={2} onClick={() => setSocialEditorActive(true)}/>
                             : <></>}
                             
                         </div>
                         <div className="social_media">
                             {social.items.map((item) => 
-                            item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img className={item.color === "white" ? 'active_elem' : 'active_colored'} src={"../" + item.src} alt={item.alt}/></a> : 
-                            <img className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={"../" + item.src} alt={item.alt}/>
+                            item.active === true ? <a href={item.link} target="_blank" rel="noopener noreferrer"><img className={item.color === "white" ? 'active_elem' : 'active_colored'} src={"../../" + item.src} alt={item.alt}/></a> : 
+                            <img className={item.color === "white" ? 'inactive_elem' : 'inactive_colored'} src={"../../" + item.src} alt={item.alt}/>
                             )}
                         </div>
                     </div>
@@ -363,6 +370,7 @@ function Player(){
         ended_events={ended_events}
         lan_events={lan_events}
         online_events={online_events}
+        nick={params.id}
         />
 
         {/* Модальное окно "Редактирование ника" */}
@@ -450,7 +458,7 @@ function Player(){
             <div className="info_text">
                 <p>Укажите дату рождения</p>
             </div>
-            <div class="col_center_gap30">
+            <div className="col_center_gap30">
                 <div className="inside scroll" style={{height: dateSelectorActive ? "400px": null, overflow: !dateSelectorActive ? "hidden" : null}}>
                     <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={getDate("05.01.1990")} maxDate={new Date()}/>
                 </div>
@@ -486,16 +494,16 @@ function Player(){
             <div className="info_text">
                 <p>Укажите информацию о команде</p>
             </div> 
-            <div class="col_center_gap30">
+            <div className="col_center_gap30">
                  
-                <div class="col_center_gap10">
+                <div className="col_center_gap10">
                     <div className="text-field">
                         <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Название. Максимум 15 символов" />
                     </div>
                     <div className="text-field">
                         <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Тег. Максимум 8 символов" />
                     </div>
-                    <div class="row_center_6">
+                    <div className="row_center_6">
                         <div className="text-field_half">
                             <div className="text-field_half_selector">
                                 <div className="text_field_half_select" onClick={() => toggleCountry()}>

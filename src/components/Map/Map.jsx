@@ -10,7 +10,7 @@ function Map(props){
     }
 
     return(
-            <img src= {"../img/map_preview/" + (isFound(props.map) ? props.map : "TBA") + ".png"} alt={props.map}/>     
+            <img src= {"../../img/map_preview/" + (isFound(props.map) ? props.map : "TBA") + ".png"} alt={props.map}/>     
     );
 }
 

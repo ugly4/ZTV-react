@@ -5,6 +5,7 @@ import NonFirstTeam from "./Teams/NonFirstTeam/NonFirstTeam";
 import FirstTeam from "./Teams/FirstTeam/FirstTeam";
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
+import { fillSpaces } from "../components/Helper/Helper";
 import "./Top.css"
 import "../../src/auto-layout.css"
 
@@ -157,13 +158,13 @@ function Top(){
             
             <FirstTeam {...firstTeam}/>
             
-            <Link to="/team" style={{textDecoration: "none"}}>
               <div className="col_center_gap10">
                 {nonFirstTeams.map((team)=>
-                  <NonFirstTeam {...team}/>
+                  <Link to={"/team/" + fillSpaces(team.name)} style={{textDecoration: "none"}}>
+                    <NonFirstTeam {...team}/>
+                  </Link>
                 )}
               </div>
-            </Link>
           </div>
       </div>
       <Login active={editorActive} setActive={setEditorActive}>

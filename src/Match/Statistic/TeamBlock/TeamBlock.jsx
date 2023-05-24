@@ -5,7 +5,7 @@ import TeamRow from "./TeamRow/TeamRow";
 
 function TeamBlock({team, players, map}){
     return(
-        <div class="statistic_team_block">
+        <div className="statistic_team_block">
             <TeamRow team={team}/>
             {players.players.map((item) => 
                 <PlayerRow props={item} team={team}/>

@@ -4,12 +4,12 @@ import './TeamRow.css'
 function TeamRow({team}){
     
     return(
-        <div class="statistic_team_row">
+        <div className="statistic_team_row">
             <div className="statistic_team_row_name">
                 <img src={team.logo} style={{width: "23px", height: "23px", marginTop: "1px"}}></img>
                 <p>{team.name}</p>
             </div>
-            <div class="statistic_team_row_stats">
+            <div className="statistic_team_row_stats">
                 <p>У-С</p>
                 <p>+/-</p>
                 <p>СУР</p>

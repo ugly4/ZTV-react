@@ -10,13 +10,13 @@ function Structure(props) {
             <div className="head_header"><p>Текущий состав</p></div>
             <div className="players_list">
                 {props.roster.map((player) => 
-                    <Link to="/player" style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
+                    <Link to={"/player/" + player.nick} style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
                         <div className="player_top">
                             <div className="players_background_roster">
-                                <div className="crop_roster"><img src={"../" + player.photo} alt={player.nick}/></div>
+                                <div className="crop_roster"><img src={"../../" + player.photo} alt={player.nick}/></div>
                             </div>
                             <div className="nick_roster">
-                                <img src={"../" + player.flagPath} alt={player.country}/>
+                                <img src={"../../" + player.flagPath} alt={player.country}/>
                                 <p>{player.nick}</p>
                             </div>
                         </div>
@@ -28,13 +28,13 @@ function Structure(props) {
             <div className="ex_players_list">
                 <div className="ex_players">
                     {props.ex_players.map((ex) =>
-                        <Link to="/player" style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
+                        <Link to={"/player/" + ex.nick} style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
                             <div className="player_top">
                                 <div className="players_background_roster">
-                                    <div className="crop_roster"><img src={"../" + ex.photo} alt={ex.nick}/></div>
+                                    <div className="crop_roster"><img src={"../../" + ex.photo} alt={ex.nick}/></div>
                                 </div>
                                 <div className="nick_roster">
-                                    <img src={"../" + ex.flagPath} alt={ex.country}/>
+                                    <img src={"../../" + ex.flagPath} alt={ex.country}/>
                                     <p>{ex.nick}</p>
                                 </div>
                             </div>

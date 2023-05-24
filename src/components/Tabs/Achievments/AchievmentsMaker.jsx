@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { fillSpaces } from "../../Helper/Helper";
 import "./Achievments.css";
 import "../Events/Events.css";
 
@@ -10,24 +12,24 @@ function AchievmentsMaker(props){
         
         if(place.startsWith("1")){
             return(
-                <div class="achievement" style={{background: "#EDB404"}}>
-                    <img src="../img/Trophy.svg" style={{filter: first}} alt="gold"/>
+                <div className="achievement" style={{background: "#EDB404"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: first}} alt="gold"/>
                     <p style={{color: "#503B00"}}>{place}</p>
                 </div>
             );
         }
         else if(place.startsWith("2")){
             return(
-                <div class="achievement" style={{background: "#C0C0C0"}}>
-                    <img src="../img/Trophy.svg" style={{filter: second}} alt="silver"/>
+                <div className="achievement" style={{background: "#C0C0C0"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: second}} alt="silver"/>
                     <p style={{color: "#525252"}}>{place}</p>
                 </div>
             );
         }
         else if(place.startsWith("3")){
             return(
-                <div class="achievement" style={{background: "#CD7F32"}}>
-                    <img src="../img/Trophy.svg" style={{filter: third}} alt="bronze"/>
+                <div className="achievement" style={{background: "#CD7F32"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: third}} alt="bronze"/>
                     <p style={{color: "#502A05"}}>{place}</p>
                 </div>
             );
@@ -35,20 +37,22 @@ function AchievmentsMaker(props){
     }
 
     return(
-        <div class="tournament_rect">
-            <div class="place_event_wrapper">
-                {placeType(props.event.place)}
-                <div class="ev_info">
-                    <div class="event_logo"><img src={"../" + props.event.logo}/></div>
-                    <div class="tournament_info">
-                    <p>{props.event.name}</p>
-                    <div class="tournament_sub_info">
-                        <p>{props.event.date}</p>
-                    </div>
+        <Link to={"/event/" + fillSpaces(props.event.name)} target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
+            <div className="tournament_rect">
+                <div className="place_event_wrapper">
+                    {placeType(props.event.place)}
+                    <div className="ev_info">
+                        <div className="event_logo"><img src={"../../" + props.event.logo}/></div>
+                        <div className="tournament_info">
+                        <p>{props.event.name}</p>
+                        <div className="tournament_sub_info">
+                            <p>{props.event.date}</p>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

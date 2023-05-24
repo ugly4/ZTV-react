@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { matchUrlMaker } from "../Helper/Helper";
 import "../Tabs/Match/Match.css";
 import "./ResultMaker.css";
 
@@ -25,36 +27,38 @@ function ResultMaker(props) {
         <div className="col_center_gap10">
             <div className="results_date"><p>{"Результаты за " + props.day.date}</p></div>
             {props.day.matches.map((match) =>
-                <div className="match_rect_full">
-                    <div className="match">
+                <Link to={"/match/" + matchUrlMaker(match.leftTeam, match.rightTeam, match.event, props.day.date)} style={{textDecoration: "none"}}>
+                    <div className="match_rect_full">
+                        <div className="match">
 
-                        <div className="match_team" style={{opacity: match.leftScore < match.rightScore ? 0.3 : 1}}>
-                            <div className="left_team_tag"><p>{match.leftTeam}</p></div>
-                            <img src={"../" + match.leftTeamSrc} alt={match.leftTeam}/>
+                            <div className="match_team" style={{opacity: match.leftScore < match.rightScore ? 0.3 : 1}}>
+                                <div className="left_team_tag"><p>{match.leftTeam}</p></div>
+                                <img src={"../" + match.leftTeamSrc} alt={match.leftTeam}/>
+                            </div>
+
+                            <div className="row_center_gap3">
+                                <div className="left_team_score"><p style={{opacity: match.leftScore < match.rightScore ? 0.3 : 1, color: match.rightScore < match.leftScore ? "green" : "white"}}>{match.leftScore}</p></div>
+                                <p>:</p>
+                                <div className="right_team_score"><p style={{opacity: match.rightScore < match.leftScore ? 0.3 : 1, color: match.leftScore < match.rightScore ? "green" : "white"}}>{match.rightScore}</p></div>
+                            </div>
+
+                            <div className="match_team" style={{opacity: match.rightScore < match.leftScore ? 0.3 : 1}}>
+                                <img src={"../" + match.rightTeamSrc} alt={match.rightTeam}/>
+                                <div className="right_team_tag"><p id="right_match_team">{match.rightTeam}</p></div>
+                            </div>
                         </div>
-
                         <div className="row_center_gap3">
-                            <div className="left_team_score"><p style={{opacity: match.leftScore < match.rightScore ? 0.3 : 1, color: match.rightScore < match.leftScore ? "green" : "white"}}>{match.leftScore}</p></div>
-                            <p>:</p>
-                            <div className="right_team_score"><p style={{opacity: match.rightScore < match.leftScore ? 0.3 : 1, color: match.leftScore < match.rightScore ? "green" : "white"}}>{match.rightScore}</p></div>
+                            <div className="tournament_logo"><img src={"../" + match.eventSrc} alt={match.series}/></div>
+                            <div className="tournament_name"><p>{match.event}</p></div>
                         </div>
-
-                        <div className="match_team" style={{opacity: match.rightScore < match.leftScore ? 0.3 : 1}}>
-                            <img src={"../" + match.rightTeamSrc} alt={match.rightTeam}/>
-                            <div className="right_team_tag"><p id="right_match_team">{match.rightTeam}</p></div>
+                        <div className="top_tier">
+                            <div className="row_center_gap3">
+                                {setTier(match.tier, match.tierSrc)}
+                            </div>
+                            <p>{match.map}</p>
                         </div>
                     </div>
-                    <div className="row_center_gap3">
-                        <div className="tournament_logo"><img src={"../" + match.eventSrc} alt={match.series}/></div>
-                        <div className="tournament_name"><p>{match.event}</p></div>
-                    </div>
-                    <div className="top_tier">
-                        <div className="row_center_gap3">
-                            {setTier(match.tier, match.tierSrc)}
-                        </div>
-                        <p>{match.map}</p>
-                    </div>
-                </div>
+                </Link>
             )}
         </div>
     );

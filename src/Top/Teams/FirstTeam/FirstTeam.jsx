@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Player from "./Player/Player"
+import { fillSpaces } from "../../../components/Helper/Helper";
 import "./FirstTeam.css"
 import "../../../components/ResultMaker/ResultMaker.css"
 
@@ -11,7 +12,7 @@ function FirstTeam(props){
 
     return(
         <div>
-          <div className="rectangle_50px_top">
+          <div className="rectangle_50px_top" style={{cursor: "default", pointerEvents: "none"}}>
             <div className="row_center_6">
               <div className="rectangle_50px_top_text"><p>#{props.topPosition}</p></div>
               <div className="row_center_gap3">
@@ -26,12 +27,12 @@ function FirstTeam(props){
           <div className="top1_team_rectangle">
             <div className="row_left_gap20">
                 {props.players.map((item) => 
-                  <Link to="/player" style={{textDecoration: "none"}} >
+                  <Link to={"/player/" + item.nick} style={{textDecoration: "none"}} >
                     <Player {...item} />
                   </Link>
                 )}
             </div>
-            <Link to="/team">Профиль команды</Link> 
+            <Link to={"/team/" + fillSpaces(props.name)}>Профиль команды</Link> 
           </div>
         </div>
     )

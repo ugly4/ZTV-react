@@ -19,7 +19,7 @@ function Results() {
 
     return(
         <div>
-            <div class="results_header"><p>Результаты</p></div>
+            <div className="results_header"><p>Результаты</p></div>
             <div className="results">
                 {results.map((day) =>
                     <ResultMaker day={day}/>

@@ -4,7 +4,7 @@ import RoundIcon from "../RoundIcon/RoundIcon";
 
 function HalfMatchSideT(){
     return(
-        <div class="round_history_line_sideT">
+        <div className="round_history_line_sideT">
         {/*1 раунд */}  <RoundIcon props={"BombExploded"}/>
                         <RoundIcon props={"SkullT"}/>
                         <RoundIcon />

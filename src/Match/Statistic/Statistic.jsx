@@ -68,17 +68,17 @@ function Statistic({props,map}){
       setToggleState(index);
     };
     return(
-        <div class="statistic">
-            <div class="statistic_maps">
-                <div class="tab_map">
+        <div className="statistic">
+            <div className="statistic_maps">
+                <div className="tab_map">
                     <button className={toggleState === 1 ? "active_tab" : "tab"}
                     onClick={() => toggleTab(1)}>Все карты</button>
                 </div>
-                <div class="tab_map">
+                <div className="tab_map">
                     <button className={toggleState === 2 ? "active_tab" : "tab"}
                     onClick={() => toggleTab(2)}>Overpass</button>
                 </div>
-                <div class="tab_map">
+                <div className="tab_map">
                     <button className={toggleState === 3 ? "active_tab" : "tab"}
                     onClick={() => toggleTab(3)}>Anubis</button>
                 </div>

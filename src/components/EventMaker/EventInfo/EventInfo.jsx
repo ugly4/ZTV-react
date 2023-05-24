@@ -97,13 +97,13 @@ function EventInfo(props) {
                 <div className="text-field_half_selector">
                   <div className="text_field_half_select" onClick={() => toggleClass(i)}>
                     <p className={valueTeam[i] === "Выберите команду" ? "onStart" : "choosed"}>{valueTeam[i]}</p>
-                    <img src="../img/arrow.svg" className={selectorActive[i] ? 'rotate' : null} alt="arrow"/>
+                    <img src="../../img/arrow.svg" className={selectorActive[i] ? 'rotate' : null} alt="arrow"/>
                   </div>
                   <ul className={ selectorActive[i] ? 'select_list' : 'select_list hide'}>
                     {teams.map((team) =>
                       <li className={teamsActive[indexOf(team.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setTeamValue(i, team.name); setTeam(indexOf(team.name), valueTeam[i]); toggleClass(i)}}>
                         <div className="list_logo">
-                          <img src={"../" + team.src} alt={team.name}/>
+                          <img src={"../../" + team.src} alt={team.name}/>
                         </div>
                         <p>{team.name}</p>
                       </li>
@@ -168,7 +168,7 @@ function EventInfo(props) {
                 <div className="container_name">
                     <div className="row_center_5px">
                         <div className="event_col"><p>Призовые места</p></div>
-                        {props.isAdmin ? <Editor size="12px" depth={1} onClick={() => props.status === "registration" ? setPrizePlaceSetterActive(true) : setPrizePlaceEditorActive(true)}/> : <></>}
+                        {props.isAdmin ? <Editor size="12px" depth={2} onClick={() => props.status === "registration" ? setPrizePlaceSetterActive(true) : setPrizePlaceEditorActive(true)}/> : <></>}
                     </div>
                     <div className="participants_wrapper">
                         <PrizePlace prize={props.prizePlace}/>
@@ -181,7 +181,7 @@ function EventInfo(props) {
                             <div className="event_col">
                                 <p>Пул карт</p>
                             </div>
-                            {props.isAdmin ? props.status === "registration" ? <Editor size="12px" depth={1} onClick={() => setMapsSetterActive(true)}/> : <></> : <></>}
+                            {props.isAdmin ? props.status === "registration" ? <Editor size="12px" depth={2} onClick={() => setMapsSetterActive(true)}/> : <></> : <></>}
                         </div>
                         <div className="maps">
                             {props.maps.map((map_name) =>
@@ -199,7 +199,7 @@ function EventInfo(props) {
                                 <div className="event_col">
                                     <p>Формат игр</p>
                                 </div>
-                                {props.isAdmin ? props.status === "registration" ? <Editor size="12px" depth={1} onClick={() => SetDescriptionSetterActive(true)}/> : <></> : <></>}
+                                {props.isAdmin ? props.status === "registration" ? <Editor size="12px" depth={2} onClick={() => SetDescriptionSetterActive(true)}/> : <></> : <></>}
                             </div>
                             <div className="event_info">
                                 <p>Ну тут описание турнира, всё такое, карты всякие и тд, и тп.
@@ -210,7 +210,7 @@ function EventInfo(props) {
                         <div className="container_name">
                             <div className="row_center_5px">
                                 <div className="event_col"><p>Архив с фотографиями</p></div>
-                                {props.isAdmin ? <Editor size="12px" depth={1} onClick={() => setDiskLinkEditorActive(true)}/> : <></>}
+                                {props.isAdmin ? <Editor size="12px" depth={2} onClick={() => setDiskLinkEditorActive(true)}/> : <></>}
                             </div>
                             <div className="event_info">
                                 <a href={valueDiskLink} target="_blank" rel="noopener noreferrer">{urlFix(valueDiskLink)}</a>

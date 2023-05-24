@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Editor from "../../components/Editor/Editor";
 import SetMatchInfo from "../../components/MatchHelper/SetMatchInfo";
 import Login from "../../Login/Login";
+import { fillSpaces } from "../../components/Helper/Helper";
 import "./MatchHeader.css"
 
 function MatchHeader(props){
@@ -151,23 +152,24 @@ function MatchHeader(props){
         console.log(teamsActive);
     }
 
+
     return(
         <div>
-        <div class="header_match">
+        <div className="header_match">
             
-            <div class="container_time_match">
-                <div class="container_time_match_time">
+            <div className="container_time_match">
+                <div className="container_time_match_time">
                     <a>
                         {getMatchTime()}
                     </a>
                 </div>
-                <div class="container_time_match_date">
+                <div className="container_time_match_date">
                     <a>{props.MatchDate.getDate()} {monthWord(props.MatchDate.getMonth())} {props.MatchDate.getFullYear()}</a>
                 </div>
-                <div class="container_time_match_cup">
-                    <Link to="/event">{props.event}</Link>
+                <div className="container_time_match_cup">
+                    <Link to={"/event/" + fillSpaces(props.event)}>{props.event}</Link>
                 </div>
-                <div class="container_time_match_live">
+                <div className="container_time_match_live">
                     <div className="row_center_5px">
                         {props.MatchStatus == 0 ? <a>{counter < 3600 ? 0 : parseInt(counter/3600)} час. {counter < 60 ? 0 : parseInt(counter/60%60)} мин. {parseInt(counter%60)} сек.</a> : null}
                         {props.MatchStatus == 1 ? <a>LIVE</a> : null}
@@ -177,22 +179,19 @@ function MatchHeader(props){
                     
                 </div>
             </div>
-            <div class="flag_1st">
-                <Link to="/team"> 
-                    <img src={props.LogoFirst} class="logo_1st" />
-                </Link>
-                <div class="name_team_1st">
-                    <Link to="/team"> {props.NameFirst} </Link>  
+            <div className="flag_team" style={{background: "linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(25, 25, 25, 1)), url(\"../img/flags/dragon.svg\")", left: "0"}}>
+                <img src={props.LogoFirst} className="match_logo_team" />
+                <div className="name_score_wrapper">
+                    <p>{props.NameFirst}</p>  
+                    {(props.MatchStatus == 1) || (props.MatchStatus == 2) ? <a id="points" style={props.ScoreSecond < props.ScoreFirst ?{color: "green"}:{color: "red"}}>{props.ScoreFirst}</a> : null}
                 </div>
-                {(props.MatchStatus == 1) || (props.MatchStatus == 2) ? <a id="points_1st" style={props.ScoreSecond < props.ScoreFirst ?{color: "green"}:{color: "red"}}>{props.ScoreFirst}</a> : null}
-                
             </div>
-            <div class="flag_2st">
-                <img src={props.LogoSecond} class="logo_2st" />
-                <div class="name_team_2st">
-                  <a href="">{props.NameSecond}</a>
+            <div className="flag_team" style={{background: "linear-gradient(to left, rgba(0, 0, 0, 0.4), rgba(25, 25, 25, 1)), url(\"../img/flags/RU.svg\")", right: "0"}}>
+                <img src={props.LogoSecond} className="match_logo_team" />
+                <div className="name_score_wrapper">
+                    <p>{props.NameSecond}</p>
+                    {(props.MatchStatus == 1) || (props.MatchStatus == 2) ? <a id="points" style={props.ScoreSecond < props.ScoreFirst ?{color: "red"}:{color: "green"}}>{props.ScoreSecond}</a> : null}
                 </div>
-                {(props.MatchStatus == 1) || (props.MatchStatus == 2) ? <a id="points_2st" style={props.ScoreSecond < props.ScoreFirst ?{color: "red"}:{color: "green"}}>{props.ScoreSecond}</a> : null}
             </div>
         
         </div>

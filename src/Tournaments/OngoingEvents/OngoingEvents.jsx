@@ -261,7 +261,7 @@ function OngoingEvents(props) {
                 </div>
             </div>
             <div className="events_spacer">
-                <div class="events_upcoming">
+                <div className="events_upcoming">
                     <OngoingEventsMaker events={props.ongoing}/>
                 </div>
             </div>

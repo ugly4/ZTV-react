@@ -10,7 +10,7 @@ function EndedEvents(props) {
         <div className="events_past">
             {props.ended.map((month) =>
                 <div className="events_date_wrapper">
-                    <div class="events_date"><p>{month.date}</p></div>
+                    <div className="events_date"><p>{month.date}</p></div>
                     <EndedEventsMaker events={month.events}/>
                 </div>
             )}

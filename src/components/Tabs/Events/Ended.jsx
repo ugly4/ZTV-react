@@ -1,5 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { fillSpaces } from "../../Helper/Helper";
 import "./Events.css";
 
 function Ended(props) {
@@ -10,24 +11,24 @@ function Ended(props) {
         
         if(place.startsWith("1")){
             return(
-                <div class="achievement" style={{background: "#EDB404"}}>
-                    <img src="../img/Trophy.svg" style={{filter: first}} alt="gold"/>
+                <div className="achievement" style={{background: "#EDB404"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: first}} alt="gold"/>
                     <p style={{color: "#503B00"}}>{place}</p>
                 </div>
             );
         }
         else if(place.startsWith("2")){
             return(
-                <div class="achievement" style={{background: "#C0C0C0"}}>
-                    <img src="../img/Trophy.svg" style={{filter: second}} alt="silver"/>
+                <div className="achievement" style={{background: "#C0C0C0"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: second}} alt="silver"/>
                     <p style={{color: "#525252"}}>{place}</p>
                 </div>
             );
         }
         else if(place.startsWith("3")){
             return(
-                <div class="achievement" style={{background: "#CD7F32"}}>
-                    <img src="../img/Trophy.svg" style={{filter: third}} alt="bronze"/>
+                <div className="achievement" style={{background: "#CD7F32"}}>
+                    <img src="../../img/Trophy.svg" style={{filter: third}} alt="bronze"/>
                     <p style={{color: "#502A05"}}>{place}</p>
                 </div>
             );
@@ -35,14 +36,14 @@ function Ended(props) {
     }
 
     return(      
-        <NavLink to="/event" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
-            <div class="tournament_rect">
-                <div class="ended_event_wrapper">
-                    <div class="tournament_full">
-                        <div class="event_logo"><img src={"../" + props.event.logo}/></div>
-                        <div class="tournament_info">
+        <Link to={"/event/" + fillSpaces(props.event.name)} target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
+            <div className="tournament_rect">
+                <div className="ended_event_wrapper">
+                    <div className="tournament_full">
+                        <div className="event_logo"><img src={"../../" + props.event.logo}/></div>
+                        <div className="tournament_info">
                         <p>{props.event.name}</p>
-                        <div class="tournament_sub_info">
+                        <div className="tournament_sub_info">
                             <p>{props.event.date}</p>
                         </div>
                         </div>
@@ -50,7 +51,7 @@ function Ended(props) {
                     {placeType(props.event.place)}
                 </div>
             </div>
-      </NavLink>
+      </Link>
     );
 }
 

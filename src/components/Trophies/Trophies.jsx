@@ -1,12 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { fillSpaces } from "../Helper/Helper";
 import "./Trophies.css"
 
 function Trophies(props){
     return (
-        <div class="trophies_container">
+        <div className="trophies_container">
             <div id="trophies">
-            {props.items.trophies.map((item) => 
-                <img key={item.id} src={"../" + item.src} alt={item.alt}/>
+                {props.items.trophies.map((item) => 
+                    <Link to={"/event/" + fillSpaces(item.alt)} style={{textDecoration: "none"}}>
+                        <img key={item.alt} src={"../../" + item.src} alt={item.alt}/>
+                    </Link>
                 )}
             </div>
         </div>

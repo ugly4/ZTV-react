@@ -13,7 +13,7 @@ function Log({type, children}){
         }          
     }
     return(
-        <div class="log" style={{border: colorBorder(type), 
+        <div className="log" style={{border: colorBorder(type), 
                                 opacity: (type == "login")||(type == "logout") ? "0.5" : "1",
                                 marginBottom: type == "roundBegin" ? "25px" : null}}> 
             {children}

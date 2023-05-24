@@ -6,7 +6,7 @@ import PlayerRow from "./PlayerRow/PlayerRow";
 function TeamBlock({team,map}){
     
     return(
-        <div class="team_block" >
+        <div className="team_block" >
             <TeamRow team={team}/>
             {team.players.map((item) => 
                 <PlayerRow props={item} team={team}/>

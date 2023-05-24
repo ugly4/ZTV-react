@@ -22,15 +22,15 @@ const Main = () => (
             <Route exact path="/" element={<Matches/>} />
             <Route path="/results" element={<Results/>} />
             <Route path="/top" element={<Top/>} />
-            <Route path="/player/*" element={<Player/>} />
-            <Route path="/team/*" element={<Team/>} />
+            <Route path="/player/:id/*" element={<Player/>} />
+            <Route path="/team/:id/*" element={<Team/>} />
             <Route path="/player" element={<Player/>} />
-            <Route path="/event/*" element={<Event/>} />
-            <Route path="/team_results" element={<TeamResults/>} />
-            <Route path="/match" element={<Match/>} />
-            <Route path="/team_events" element={<TeamEvents/>} />
-            <Route path="/player_results" element={<PlayerResults/>} />
-            <Route path="/player_events" element={<PlayerEvents/>} />
+            <Route path="/event/:id/*" element={<Event/>} />
+            <Route path="/team_results/:id" element={<TeamResults/>} />
+            <Route path="/match/:id" element={<Match/>} />
+            <Route path="/team_events/:id" element={<TeamEvents/>} />
+            <Route path="/player_results/:id" element={<PlayerResults/>} />
+            <Route path="/player_events/:id" element={<PlayerEvents/>} />
         </Routes>
       </main>
 );

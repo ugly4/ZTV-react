@@ -31,8 +31,8 @@ function InfoContainer(props){
       <div className="team_logo">
         <label for="file-input">
           <ImageToggleOnMouseOver
-            primaryImg={props.logo}
-            secondaryImg={"../img/PhotoHover.svg"}
+            primaryImg={"../../" + props.logo}
+            secondaryImg={"../../img/PhotoHover.svg"}
             alt={props.name} 
           />
         </label>
@@ -40,25 +40,25 @@ function InfoContainer(props){
       </div>
       :
       <div className="team_logo">
-        <img src={props.logo} alt={props.name}/>
+        <img src={"../../" + props.logo} alt={props.name}/>
       </div>
     );
     
   }
 
     return(
-        <div class="info_container">
-              <div class="team_info">
+        <div className="info_container">
+              <div className="team_info">
                 {showLogo()}
-                <div class="info_teamname">
-                  <div class="flag_location">
-                    <img src={"../" + props.flagPath} alt={props.country}/>
+                <div className="info_teamname">
+                  <div className="flag_location">
+                    <img src={"../../" + props.flagPath} alt={props.country}/>
                     <p>{props.country}, {props.city}</p>
                   </div>
                   <p>{props.name}</p>
                 </div>
               </div>
-              <div class="top_position">
+              <div className="top_position">
                 <p>Место в рейтинге</p>
                 <p>#{props.topPosition}</p>
               </div>

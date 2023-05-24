@@ -32,7 +32,7 @@ function TeamTabs(props){
                         color: isActive ? 'var(--text-01)' : 'var(--text-02)'})}>
                         <div className="description_col">
                             Описание
-                            {isCapAdmin ? <Editor size="15px" depth={1} onClick={() => setEditorActive(true)}/> 
+                            {isCapAdmin ? <Editor size="15px" depth={2} onClick={() => setEditorActive(true)}/> 
                             : <></>}
                         </div>
                     </NavLink>
@@ -63,10 +63,10 @@ function TeamTabs(props){
                 </li>
             </ul>
             <Routes>
-                <Route index element={<Navigate replace to="/team/description" />}/>
+                <Route index element={<Navigate replace to={"/team/" + props.team + "/description"} />}/>
                 <Route path="description" element={<Description desc={valueDecription}/>}/>
-                <Route path="matches" element={<Matches matches_upcoming={props.matches_upcoming} matches_ended={props.matches_ended} type="team"/>}/>
-                <Route path="events" element={<Events ongoing={props.ongoing_events} ended={props.ended_events} type="team"/>}/>
+                <Route path="matches" element={<Matches matches_upcoming={props.matches_upcoming} matches_ended={props.matches_ended} type="team" param={props.team}/>}/>
+                <Route path="events" element={<Events ongoing={props.ongoing_events} ended={props.ended_events} type="team" param={props.team}/>}/>
                 <Route path="achievements" element={<Achievments lan={props.lan_events} online={props.online_events}/>}/>
                 <Route path="structure" element={<Structure roster={props.players} ex_players={props.ex_players}/>}/>
             </Routes>

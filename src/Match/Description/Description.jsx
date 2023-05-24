@@ -56,19 +56,11 @@ function Description(props){
                 temp[id] = true;
             }
         } else if(bo === 3){
-            console.log("ВОШЕЛ");
-            console.log(tempPick[id]);
             if(tempPick[id].name.includes("банит") && tempPick[id].count >= 2){
-                console.log("Тут баню");
-                console.log(tempPick[id]);
                 temp[id] = true;
             } else if(tempPick[id].name.includes("пикает") && tempPick[id].count >= 1){
-                console.log("Тут Пикаю");
-                console.log(tempPick[id]);
                 temp[id] = true;
             } else if(tempPick[id].name.includes("Десайдер") && tempPick[id].count >= 1){
-                console.log("Тут Десайдер");
-                console.log(tempPick[id]);
                 temp[id] = true;
             }
         } else if(bo === 5){
@@ -144,7 +136,7 @@ function Description(props){
                         <div className="text-field_half_selector">
                             <div className="text_field_half_select" onClick={() => toggleMap(i)}>
                                 <p className={(valueMap[i] === "Выберите карту " + (i + 1)) ? "onStart" : "choosed"}>{valueMap[i]}</p>
-                                <img src="img/arrow.svg" className={selectorMapActive[i] ? 'rotate' : null} alt="arrow"/>
+                                <img src="../img/arrow.svg" className={selectorMapActive[i] ? 'rotate' : null} alt="arrow"/>
                             </div>
                             <ul className={ selectorMapActive[i] ? 'select_list' : 'select_list hide'}>
                                 {eventMapPool.map((map) =>
@@ -159,7 +151,7 @@ function Description(props){
                         <div className="text-field_half_selector">
                             <div className="text_field_half_select" onClick={() => togglePick(i)}>
                                 <p className={valuePick[i] === "Выберите пик" ? "onStart" : "choosed"}>{valuePick[i]}</p>
-                                <img src="img/arrow.svg" className={selectorPickActive[i] ? 'rotate' : null} alt="arrow"/>
+                                <img src="../img/arrow.svg" className={selectorPickActive[i] ? 'rotate' : null} alt="arrow"/>
                             </div>
                             <ul className={ selectorPickActive[i] ? 'select_list' : 'select_list hide'}>
                                 {pickState.map((pick) =>
@@ -195,11 +187,11 @@ function Description(props){
             <p>Карты</p>
             {props.isAdmin ?<Editor size="14px" depth={1} onClick={() => setInfoEditorActive(true)}/> : <></>}
         </div>
-        <div class="match_info_upcoming_maps_desc">
+        <div className="match_info_upcoming_maps_desc">
             <p>{props.format} ({props.type})<br/><br/>{props.description}</p>
         </div>
         {props.MatchStatus == 0 ? null : 
-            <div class="maps_news">
+            <div className="maps_news">
                 <p>1. Команда ПУПА убирает Mirage</p>
                 <p>2. Команда AbuDabi убирает Vertigo</p>
                 <p>3. Команда AbuDabi выбирает Overpass</p>
@@ -223,7 +215,7 @@ function Description(props){
                             <div className="text-field_half_selector">
                                 <div className="text_field_half_select" onClick={() => toggleFormat()}>
                                     <p className={selectedFormat === ("bo" + props.format[8]) ? "onStart" : "choosed"}>{selectedFormat}</p>
-                                    <img src="img/arrow.svg" className={formatSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                    <img src="../img/arrow.svg" className={formatSelectorActive ? 'rotate' : null} alt="arrow"/>
                                 </div>
                                 <ul className={ formatSelectorActive ? 'select_list' : 'select_list hide'}>
                                     <li className="text_field_half_options" onClick={()=>{setSelectedFormat("bo1"); toggleFormat()}}>
@@ -248,7 +240,7 @@ function Description(props){
                             <div className="text-field_half_selector">
                                 <div className="text_field_half_select" onClick={() => toggleType()}>
                                     <p className={selectedType === props.type ? "onStart" : "choosed"}>{selectedType}</p>
-                                    <img src="img/arrow.svg" className={typeSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                    <img src="../img/arrow.svg" className={typeSelectorActive ? 'rotate' : null} alt="arrow"/>
                                 </div>
                                 <ul className={ typeSelectorActive ? 'select_list' : 'select_list hide'}>
                                     <li className="text_field_half_options" onClick={()=>{setSelectedType("Lan"); toggleType()}}>

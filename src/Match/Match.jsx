@@ -119,36 +119,36 @@ function Match(props){
             {isStart ? setSelectedTeam() : null}
             <MatchHeader {...match} isAdmin={isAdmin} teams={teams} teamsActive={teamsActive}/>
 
-            <div class="match_info_upcoming">
-                <div class="container">
+            <div className="match_info_upcoming">
+                <div className="container">
                     {/* Описание матча */}
                     <Description {...match} isAdmin={isAdmin}></Description>
                     {/* Карты */}
-                    <div class="container">
+                    <div className="container">
                         <MatchMap props={match} map={match.maps[0]}></MatchMap>
                         <MatchMap props={match} map={match.maps[1]}></MatchMap>
                         <MatchMap props={match} map={match.maps[2]}></MatchMap>
                     </div>
                 </div>
                 {/* В зависмости от того, какой тип матча, выводятся стримы */}
-                <div class="container">
+                <div className="container">
                 <div className="row_center_5px">
                         <p>{match.MatchStatus == 2 ? "Повтор" : "Просмотр"}</p>
                         {isAdmin &&match.MatchStatus != 2 ?<Editor size="14px" depth={1} onClick={() => setStreamsEditorActive(true)}/> : <></>}
                     </div>
-                    <div class="match_info_upcoming_stream">
+                    <div className="match_info_upcoming_stream">
                         {match.MatchStatus == 0 ? <p>Трансляции отсутствуют</p> : null}
                         {match.MatchStatus == 1 ? <p>Zasada TV</p> : null}
                         {match.MatchStatus == 2 ? <p>Повторы отсутствуют</p> : null}
                     </div>
                     {/* Видимость плашки с IP адресом для подключения */}
                     { (isCap && match.MatchStatus != 2) && 
-                    <div class="ip_match">
+                    <div className="ip_match">
                         {!ipMatch ? 
-                        <p class="ip_hidden">IP скрыт</p> : 
-                        <p class="ip_open" style={{color: "white", fontFamily: "var(--text-medium-lcg)"}}>321313131</p> 
+                        <p className="ip_hidden">IP скрыт</p> : 
+                        <p className="ip_open" style={{color: "white", fontFamily: "var(--text-medium-lcg)"}}>321313131</p> 
                         }
-                        <div class="ip_block_images">
+                        <div className="ip_block_images">
                             <img src="../img/Eye.svg" style={{cursor: "pointer"}} onClick={() => ipMatch ? setActiveIpMatch(!ipMatch) : setActiveIpMatch(true)}></img>
                             <img src="../img/Copy.svg" style={{cursor: "pointer"}} onClick={() =>[navigator.clipboard.writeText("321313131")]}></img>
                             <a href="">
@@ -166,21 +166,21 @@ function Match(props){
 
             {/* В зависимости от статуса матча выводятся scoreboard, scrollLog, statistic */}
             {match.MatchStatus == 1 && 
-                <div class="scoreboard_block">
+                <div className="scoreboard_block">
                     <p>Таблица</p>
                     <Scoreboard props={match} map={match.maps[0]}></Scoreboard>
                 </div>
             }
 
             {match.MatchStatus == 1 && 
-                <div class="scroll_logs_block">
+                <div className="scroll_logs_block">
                     <p>Игровые события</p>
                     <ScrollLog props={match} map={match.maps[0]}></ScrollLog>
                 </div>
             }
                 
             {match.MatchStatus == 2 && 
-                <div class="match_statistic_block">
+                <div className="match_statistic_block">
                     <p>Статистика матча</p>
                     <Statistic props={match} map={match.maps[0]}></Statistic>
                 </div>
@@ -205,12 +205,12 @@ function Match(props){
                                     <div className="text-field_third_selector">
                                         <div className="text_field_third_select" onClick={() => toggleClass()}>
                                             <p className={value === "Выберите страну" ? "onStart" : "choosed"}>{value}</p>
-                                            <img src="img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
+                                            <img src="../img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
                                         </div>
                                         <ul className={ selectorActive ? 'select_list_third' : 'select_list_third hide'}>
                                             {countries.map((country) =>
                                                 <li className='text_field_third_options' onClick={setValue.bind(this, country.name)}>
-                                                    <img src={country.flagPath} alt={country.name}/>
+                                                    <img src={"../" + country.flagPath} alt={country.name}/>
                                                     <p>{country.name}</p>
                                                 </li>
                                             )}
@@ -229,7 +229,7 @@ function Match(props){
                     </div>
                     <div className="add_stream">
                         <p>Добавить трансляцию</p>
-                        <img src="img/Add.svg" alt="Плюс" />
+                        <img src="../img/Add.svg" alt="Плюс" />
                     </div>
                 </div>
             </Login>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import TeamTabs from "../components/Tabs/TeamTabs/TeamTabs";
 import Trophies from "../components/Trophies/Trophies";
 import { Link } from "react-router-dom";
@@ -9,7 +10,9 @@ import Login from "../Login/Login";
 import { useState } from "react";
 
 function Team() {
-    
+
+  const params = useParams();
+
     const trophies = {
       trophies : [
             {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
@@ -40,7 +43,7 @@ function Team() {
     }
 
     const team = {
-        logo: "../img/teams_logo/NoLogo.svg",
+        logo: "img/teams_logo/NoLogo.svg",
         flagPath: "img/flags/mini/Russia.svg",
         country: "Россия",
         city: "Пугачёв",
@@ -153,10 +156,10 @@ function Team() {
     return(
         <div >
           <div>
-            <div class="team_rectangle">
+            <div className="team_rectangle">
               {players.map((player) => 
                 !isCapAdmin ?
-                <Link to="/player" style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
+                <Link to={"/player/" + player.nick} style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
                     <Player {...player}/>
                 </Link> :
                 <Player {...player}/>
@@ -164,11 +167,11 @@ function Team() {
                 )}
             </div>
 
-            <div class="devider_line"></div>
+            <div className="devider_line"></div>
 
             <InfoContainer {...team} isCapAdmin={isCapAdmin}/>
 
-            <div class="devider_line"></div>
+            <div className="devider_line"></div>
 
             <Trophies items={trophies}/>
 
@@ -185,10 +188,11 @@ function Team() {
         lan_events={lan_events}
         online_events={online_events}
         ex_players={ex_players}
+        team={params.id}
         />
 
         {isCapAdmin && 
-        <div class="leave_team" onClick={() => setLeaveWindowActive(true)}>
+        <div className="leave_team" onClick={() => setLeaveWindowActive(true)}>
           <p>Покинуть команду</p>
         </div>}
         

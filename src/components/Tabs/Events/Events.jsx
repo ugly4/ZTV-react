@@ -12,7 +12,7 @@ function Events(props) {
     };
 
     const buttonText = props.type === "team" ? "Все турниры команды" : "Все турниры игрока";
-    const link = props.type === "team" ? "/team_events" : "/player_events";
+    const link = props.type === "team" ? ("/team_events/" + props.param) : ("/player_events/" + props.param);
 
     return(
         <div className="tabcontent_tournaments">
@@ -39,7 +39,7 @@ function Events(props) {
                 <Ended event={ev}/>
               )}
             </div>
-            <div class="full_grey_button_gap15">
+            <div className="full_grey_button_gap15">
               <NavLink to={link} target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
                   <input type="submit" id="loginsubmit" value={buttonText}/>
               </NavLink>

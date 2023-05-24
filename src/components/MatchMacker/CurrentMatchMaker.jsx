@@ -3,6 +3,7 @@ import "../../Matches/Matches.css";
 import "../Tabs/Match/Match.css"
 import "../ResultMaker/ResultMaker.css"
 import { Link } from "react-router-dom";
+import { matchUrlMaker } from "../Helper/Helper";
 
 function CurrentMatchMaker(props){
     const setTier = (tier, tierSrc) =>{
@@ -10,12 +11,12 @@ function CurrentMatchMaker(props){
         for(let i = 0; i < 5; ++i){
             if (i < tier){
                 content.push(
-                    <img src={tierSrc} alt="star"/>
+                    <img src={"../" + tierSrc} alt="star"/>
                 );
             }
             else{
                 content.push(
-                    <img src={tierSrc} style={{opacity: 0.3}} alt="faded_star"/>
+                    <img src={"../" + tierSrc} style={{opacity: 0.3}} alt="faded_star"/>
                 );
             }
         }
@@ -31,14 +32,14 @@ function CurrentMatchMaker(props){
     const rightSubOpacity = rightSubColor === "var(--white40)" ? 1 : 0.9;
 
     return(
-        <Link to="/match" style={{textDecoration: "none"}}>
+        <Link to={"/match/" + matchUrlMaker(props.leftTeam, props.rightTeam, props.event, props.date)} style={{textDecoration: "none"}}>
             <div className="match_frame">
             <div className="status_match_wrapper">
                 <div className="live"><p>LIVE</p></div>
                 <div className="matches_frame">
                     <div className="row_center_gap3">
                         <div className="left_team_tag"><p>{props.leftTeam}</p></div>
-                        <img src={props.leftTeamSrc} alt={props.leftTeam}/>
+                        <img src={"../" + props.leftTeamSrc} alt={props.leftTeam}/>
                     </div>
                     <div className="match_score">
                         <div className="upper_score">
@@ -52,14 +53,14 @@ function CurrentMatchMaker(props){
                         </div>
                     </div>
                     <div className="row_center_gap3">
-                        <img src={props.rightTeamSrc} alt={props.rightTeam}/>
+                        <img src={"../" + props.rightTeamSrc} alt={props.rightTeam}/>
                         <div className="right_team_tag"><p>{props.rightTeam}</p></div>
                     </div>
                 </div>
             </div>
             <div className="row_center_gap3">
                 <div className="tournament_logo">
-                    <img src={props.eventSrc} alt={props.series}/>
+                    <img src={"../" + props.eventSrc} alt={props.series}/>
                 </div>
                 <div className="event">
                     <p>{props.event}</p>

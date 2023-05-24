@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import ResultMaker from "../components/ResultMaker/ResultMaker";
 import "../Results/Results.css";
 
@@ -17,9 +18,11 @@ function PlayerResults() {
         ]}
     ]
 
+    const params = useParams();
+
     return(
         <div>
-            <div class="results_header"><p>Результаты игрока</p></div>
+            <div className="results_header"><p>{"Результаты игрока " + params.id}</p></div>
             <div className="results">
                 {results.map((day) =>
                     <ResultMaker day={day}/>

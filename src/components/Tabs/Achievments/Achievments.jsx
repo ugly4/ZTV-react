@@ -23,24 +23,24 @@ function Achievments(props) {
             </div>
             </div>
             <div className={toggleState === 1 ? "content active_content" : "content"}>
-                <div class="achievements_col">
+                <div className="achievements_col">
                   <p>Место</p>
                   <p>Турнир</p>
                 </div>
                 <div className="tournaments_wrapper">
                     {props.lan.map((ev) =>
-                    <AchievmentsMaker event={ev}/>
+                        <AchievmentsMaker event={ev}/>
                     )}
                 </div>
             </div>
             <div className={toggleState === 2 ? "content active_content" : "content"}>
-                <div class="achievements_col">
+                <div className="achievements_col">
                   <p>Место</p>
                   <p>Турнир</p>
                 </div>
                 <div className="tournaments_wrapper">
                     {props.online.map((ev) =>
-                    <AchievmentsMaker event={ev}/>
+                        <AchievmentsMaker event={ev}/>
                     )}
                 </div>
             </div>

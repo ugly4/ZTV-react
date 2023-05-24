@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {Routes, Route, NavLink, Navigate} from 'react-router-dom'
+import {Routes, Route, NavLink, Navigate, useParams} from 'react-router-dom'
 import FlagName from "../components/FlagName/FlagName";
 import EventInfo from "../components/EventMaker/EventInfo/EventInfo";
 import EventMatches from "../components/EventMaker/EventMatches";
@@ -14,6 +14,8 @@ import '../components/Tabs/PlayerTabs/PlayerTabs.css';
 
 function Event(){
     const isAdmin = true;
+
+    const params = useParams();
 
     const [registrationInfoEditorActive, setRegistrationInfoEditorActive] = useState(false);
 
@@ -54,7 +56,7 @@ function Event(){
                     </li>
                 </ul>
                 <Routes>
-                    <Route index element={<Navigate replace to="/event/info" />}/>
+                    <Route index element={<Navigate replace to={"/event/"+ params.id +"/info"} />}/>
                     <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended" isAdmin={isAdmin}/>}/>
                     <Route path="matches" element={<EventMatches current_matches={current_matches} ongoing_matches={ongoing_matches}/>}/>
                     <Route path="results" element={<EventResults results={results}/>}/>
@@ -81,7 +83,7 @@ function Event(){
                     </li>
                 </ul>
                 <Routes>
-                    <Route index element={<Navigate replace to="/event/info" />}/>
+                    <Route index element={<Navigate replace to={"/event/"+ params.id +"/info"} />}/>
                     <Route path="info" element={<EventInfo maps={maps} part={participants} total={total} prizePlace={prizePlace} part_header={part_header} photoLink={photoLink} status="ended" isAdmin={isAdmin}/>}/>
                     <Route path="results" element={<EventResults results={results}/>}/>
                 </Routes>
@@ -375,13 +377,13 @@ function Event(){
     return(
         <div>
             <div className="event_image_header">
-                <div className="crop_header"><img src="../img/event_logo/IEMHeader.png" alt="IEM"/></div>
+                <div className="crop_header"><img src="../../img/event_logo/IEMHeader.png" alt="IEM"/></div>
             </div>
             <div className="event_header">
                 <div className="info_wrapper">
                     <div className="row_center_5px">
                         <span>Дата</span>
-                        {isAdmin ? status === "registration" ? <Editor size="12px" depth={1} onClick={() => setRegistrationInfoEditorActive(true)}/> : <></> : <></>}
+                        {isAdmin ? status === "registration" ? <Editor size="12px" depth={2} onClick={() => setRegistrationInfoEditorActive(true)}/> : <></> : <></>}
                     </div>
                     <div className="event_date_wrapper"><p>{tournament.date}</p></div>
                 </div>
@@ -413,20 +415,20 @@ function Event(){
 
                 <div className="info_wrapper">
                     <span>Локация</span>
-                    <div className="event_location_wrapper"><FlagName flagPath="img/flags/mini/Russia.svg" country="Россия" name="Россия, Пугачёв" height='12px'/></div>
+                    <div className="event_location_wrapper"><FlagName flagPath="../img/flags/mini/Russia.svg" country="Россия" name="Россия, Пугачёв" height='12px'/></div>
                 </div>
             </div>
             {(isCap && !activeTour) ? 
-                <div class="join_tournament" onClick={() => setJoinTourWindowActive(true)}>
+                <div className="join_tournament" onClick={() => setJoinTourWindowActive(true)}>
                     <p>Принять участие в турнире</p>
                 </div>
                 :
                 <div style={{display: "flex", flexDirection: "row", margin: "0 auto", marginTop: "25px", gap: "10px", justifyContent: "center"}}>
-                    <div class="leave_tournament" style={{margin: "0"}} onClick={() => setLeaveTourWindowActive(true)}>
+                    <div className="leave_tournament" style={{margin: "0"}} onClick={() => setLeaveTourWindowActive(true)}>
                         <p>Отказаться от участия</p>
                     </div>
                     {tournament.format == "2x2" ? 
-                    <div class="join_tournament" style={{margin: "0"}} onClick={() => setActiveEditTeamWindow(true)}>
+                    <div className="join_tournament" style={{margin: "0"}} onClick={() => setActiveEditTeamWindow(true)}>
                         <p>Изменить состав команды</p>
                     </div> :
                     null}
@@ -478,8 +480,8 @@ function Event(){
                 <div className="info_text" onClick={() => toggleClass("all")}>
                     <p>Выберите игроков для участия в турнире</p>
                 </div>
-                <div class="col_center_gap30">
-                    <div class="row_center_6">
+                <div className="col_center_gap30">
+                    <div className="row_center_6">
                         
                             {generateSelectors()}
                         

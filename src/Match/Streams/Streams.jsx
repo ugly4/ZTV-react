@@ -4,13 +4,13 @@ import "./Streams.css"
 
 function Streams(props){
     return (
-    <div class="stream">
+    <div className="stream">
         <FlagName flagPath={props.flagPath} country={props.country} name={props.name} height="15px"/>
-        {/* <div class="inline_block">
-            <img src={props.flagPath} class="stream_country" />
+        {/* <div className="inline_block">
+            <img src={props.flagPath} className="stream_country" />
             <p>{props.name}</p>
         </div> */}
-        <div class="stream_viewers">
+        <div className="stream_viewers">
             <p>{props.viewers}</p>
             <a href={props.link}></a>
         </div>

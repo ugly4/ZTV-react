@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import FlagName from "../../FlagName/FlagName";
+import { fillSpaces } from "../../Helper/Helper";
 import './OngoingEventsMaker.css'
 
 function OngoingEventsMaker(props) {
@@ -21,10 +22,11 @@ function OngoingEventsMaker(props) {
         return event + " (" + type +")"
     }
 
+
     return(
         <div className="events_block">
             {props.events.map((event)=>
-            <NavLink to="/event" target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
+            <NavLink to={"/event/" + fillSpaces(event.event)} target="_blank" rel="noopener noreferrer" style={{textDecoration: "none"}}>
                 <div>
                     <div className="event_img_header">
                         <div className="crop_event"><img src={"../" + event.headerSrc} alt={event.series}/></div>

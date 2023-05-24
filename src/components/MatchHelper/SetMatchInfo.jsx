@@ -52,7 +52,7 @@ function SetMatchInfo(props) {
                             <div className="text-field_half_selector">
                                 <div className="text_field_half_select" onClick={() => toggleTime()}>
                                     <p className={timeSelected === valueTime ? "onStart" : "choosed"}>{timeSelected}</p>
-                                    <img src="img/arrow.svg" id="arrowIcon" className={timeSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                    <img src="../img/arrow.svg" id="arrowIcon" className={timeSelectorActive ? 'rotate' : null} alt="arrow"/>
                                 </div>
                                 <ul className={ timeSelectorActive ? 'time_list' : 'time_list hide'}>
                                     <TimePicker setTime={setTimeSelected} minTime={valueTime}/>
@@ -62,14 +62,14 @@ function SetMatchInfo(props) {
                         <div className="text-field_half">
                             <div className="text-field_half_selector">
                                 <div className="text_field_half_select" onClick={() => toggleEvent()}>
-                                <p className={eventSelected === valueEvent ? "onStart" : "choosed"}>{eventSelected}</p>
-                                <img src="img/arrow.svg" id="arrowIcon" className={eventSelectorActive ? 'rotate' : null} alt="arrow"/>
+                                    <p className={eventSelected === valueEvent ? "onStart" : "choosed"}>{eventSelected}</p>
+                                    <img src="../img/arrow.svg" id="arrowIcon" className={eventSelectorActive ? 'rotate' : null} alt="arrow"/>
                                 </div>
                                 <ul className={ eventSelectorActive ? 'select_list' : 'select_list hide'}>
                                 {allEvents.map((ev) =>
                                     <li className='text_field_half_options' onClick={() => {setEventSelected(ev.event); toggleEvent()}}>
                                     <div className="list_logo">
-                                        <img src={ev.eventSrc} alt={ev.series}/>
+                                        <img src={"../" + ev.eventSrc} alt={ev.series}/>
                                     </div>
                                     <p>{ev.event}</p>
                                     </li>
@@ -83,13 +83,13 @@ function SetMatchInfo(props) {
                         <div className="text-field_half_selector">
                             <div className="text_field_half_select" onClick={() => toggleLeftTeam()}>
                             <p className={selectedLeftTeam === valueLeftTeam ? "onStart" : "choosed"}>{selectedLeftTeam}</p>
-                            <img src="img/arrow.svg" className={leftTeamSelectorActive ? 'rotate' : null} alt="arrow"/>
+                            <img src="../img/arrow.svg" className={leftTeamSelectorActive ? 'rotate' : null} alt="arrow"/>
                             </div>
                             <ul className={ leftTeamSelectorActive ? 'select_list' : 'select_list hide'}>
                             {teams.map((team) =>
                                 <li className={teamsActive[indexOf(team.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setSelectedLeftTeam(team.name); setTeam(indexOf(team.name), selectedLeftTeam); toggleLeftTeam()}}>
                                 <div className="list_logo">
-                                    <img src={team.logo} alt={team.name}/>
+                                    <img src={"../" + team.logo} alt={team.name}/>
                                 </div>
                                 <p>{team.name}</p>
                                 </li>
@@ -101,13 +101,13 @@ function SetMatchInfo(props) {
                         <div className="text-field_half_selector">
                             <div className="text_field_half_select" onClick={() => toggleRightTeam()}>
                             <p className={selectedRightTeam === valueRightTeam ? "onStart" : "choosed"}>{selectedRightTeam}</p>
-                            <img src="img/arrow.svg" className={rightTeamSelectorActive ? 'rotate' : null} alt="arrow"/>
+                            <img src="../img/arrow.svg" className={rightTeamSelectorActive ? 'rotate' : null} alt="arrow"/>
                             </div>
                             <ul className={ rightTeamSelectorActive ? 'select_list' : 'select_list hide'}>
                             {teams.map((team) =>
                                 <li className={teamsActive[indexOf(team.name)] ? "text_field_half_options non_selectable" : "text_field_half_options"} onClick={()=>{setSelectedRightTeam(team.name); setTeam(indexOf(team.name), selectedRightTeam); toggleRightTeam()}}>
                                 <div className="list_logo">
-                                    <img src={team.logo} alt={team.name}/>
+                                    <img src={"../" + team.logo} alt={team.name}/>
                                 </div>
                                 <p>{team.name}</p>
                                 </li>

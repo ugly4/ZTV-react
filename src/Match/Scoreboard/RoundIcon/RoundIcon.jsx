@@ -7,7 +7,7 @@ function RoundIcon({props}){
         return "/img/scoreboard/" + props + ".svg";
     }
     return(
-        <div class="roundIcon" style={{opacity: props != null || props != undefined ? "1" : "0"}}>
+        <div className="roundIcon" style={{opacity: props != null || props != undefined ? "1" : "0"}}>
             <img src={props != null ? resRound(props) : null}></img>
         </div>
     )

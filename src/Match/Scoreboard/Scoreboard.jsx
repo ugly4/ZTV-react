@@ -31,17 +31,17 @@ function Scoreboard({props, map}){
         ]
     }
     return(
-        <div class="scoreboard" style={{backgroundImage: "url(img/maps/scoreboard/"+ map.mapName +".png)"}}>
-            <div class="scoreboard_score_block">
-                <div class="scoreboard_score">
-                    <div class="t_score">{props.SideFirst == "t" ? map.scoreFirst : map.scoreSecond}</div>
+        <div className="scoreboard" style={{backgroundImage: "url(../img/maps/scoreboard/"+ map.mapName +".png)"}}>
+            <div className="scoreboard_score_block">
+                <div className="scoreboard_score">
+                    <div className="t_score">{props.SideFirst == "t" ? map.scoreFirst : map.scoreSecond}</div>
                     <p>:</p>
-                    <div class="ct_score">{props.SideFirst == "t" ? map.scoreSecond : map.scoreFirst}</div>
+                    <div className="ct_score">{props.SideFirst == "t" ? map.scoreSecond : map.scoreFirst}</div>
                     
                 </div>
             </div> 
 
-            <div class="round">
+            <div className="round">
                 Round: 26 - {map.mapName}
             </div>
             <div style={{display: "flex",
@@ -57,12 +57,12 @@ function Scoreboard({props, map}){
                         }}>
                 <TeamBlock team={firstTeam} map={map}/>
                 
-                <div class="rounds_history">
-                        <div class="rounds_first_half">
+                <div className="rounds_history">
+                        <div className="rounds_first_half">
                             <HalfMatchSideCT />
                             <HalfMatchSideT />
                         </div>
-                        <div class="rounds_second_half">
+                        <div className="rounds_second_half">
                             <HalfMatchSideCT />
                             <HalfMatchSideT />
                         </div>

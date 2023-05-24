@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { fillSpaces } from "../Helper/Helper";
 import "./Participant.css"
 
 function Participant(props) {
@@ -12,7 +14,7 @@ function Participant(props) {
                 <div className="tba_participant">
                     <div className="tba_wrapper">
                         <div className="participant_team">
-                            <img src="../img/teams_logo/TBAParticipant.svg" alt="Неизвестно"/>
+                            <img src="../../img/teams_logo/TBAParticipant.svg" alt="Неизвестно"/>
                         </div>
                         <p>Неизвестно</p> 
                     </div>
@@ -28,25 +30,29 @@ function Participant(props) {
         let name = participant.name;
         if(participant.type === "team"){
             return(
-                <div className="participant_wrapper">
-                    <div className="participant_team">
-                        <img src={"../" + src} alt={name}/>
-                    </div>      
-                    <p>{name}</p>  
-                </div>
+                <Link to={"/team/" + fillSpaces(name)} style={{textDecoration: "none"}}>
+                    <div className="participant_wrapper">
+                        <div className="participant_team">
+                            <img src={"../../" + src} alt={name}/>
+                        </div>      
+                        <p>{name}</p>  
+                    </div>
+                </Link>
             );
         }
         else{
             return(
-                <div className="participant_wrapper">
-                    {participant.team === "" ? <></> : 
-                    <div className="participant_player_logo"><img src={"../" + participant.teamsrc} alt={participant.team}/></div>
-                    }
-                    <div className="participant_player">
-                        <div className="crop_participant_player"><img src={"../" + src} alt={name} /></div>
+                <Link to={"/player/" + name} style={{textDecoration: "none"}}>
+                    <div className="participant_wrapper">
+                        {participant.team === "" ? <></> : 
+                        <div className="participant_player_logo"><img src={"../../" + participant.teamsrc} alt={participant.team}/></div>
+                        }
+                        <div className="participant_player">
+                            <div className="crop_participant_player"><img src={"../../" + src} alt={name} /></div>
+                        </div>
+                        <p>{name}</p>
                     </div>
-                    <p>{name}</p>
-                </div>
+                </Link>
             );
         }
     }
