@@ -24,7 +24,7 @@ const Main = () => (
             <Route path="/top" element={<Top/>} />
             <Route path="/player/:id/*" element={<Player/>} />
             <Route path="/team/:id/*" element={<Team/>} />
-            <Route path="/player" element={<Player/>} />
+            {/* <Route path="/player" element={<Player/>} /> */}
             <Route path="/event/:id/*" element={<Event/>} />
             <Route path="/team_results/:id" element={<TeamResults/>} />
             <Route path="/match/:id" element={<Match/>} />
