@@ -3,7 +3,7 @@ import "./Description.css"
 
 function Description(props){
     return(
-        <div class="tabcontent_info" >
+        <div className="tabcontent_info" >
               <p>{props.desc}</p>
         </div>
     );

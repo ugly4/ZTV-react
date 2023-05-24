@@ -29,11 +29,11 @@ function Notification({props}){
         
     }, [toastList]);
     return(
-        <div class="notification-container top-right">
+        <div className="notification-container top-right">
             
             {
             list.map((toast, i) =>     
-                <div class="notification-toast top-right" style={{ border: toast.border}}>
+                <div className="notification-toast top-right" style={{ border: toast.border}}>
                     <p>{toast.description}</p>
                 </div>
                 )
