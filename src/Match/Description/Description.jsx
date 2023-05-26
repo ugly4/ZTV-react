@@ -16,6 +16,8 @@ function Description(props){
     const [selectedType, setSelectedType] = useState(props.type); // тип (Лан/Онлайн)
     const [typeSelectorActive, setTypeSelectorActive] = useState(false);
 
+    const [valueDescription, setDescription] = useState(props.description); // описание
+
     const [mapsActive, setMapsActive] = useState([false, false, false, false, false, false, false]); // состояния команд - выбрана ли команда(чтоб блокировать ее)
     const [pickActive, setPickActive] = useState([false, false, false, false, false]);
 
@@ -188,7 +190,7 @@ function Description(props){
             {props.isAdmin ?<Editor size="14px" depth={1} onClick={() => setInfoEditorActive(true)}/> : <></>}
         </div>
         <div className="match_info_upcoming_maps_desc">
-            <p>{props.format} ({props.type})<br/><br/>{props.description}</p>
+            <p>{props.format} ({props.type})<br/><br/>{valueDescription}</p>
         </div>
         {props.MatchStatus == 0 ? null : 
             <div className="maps_news">
@@ -254,12 +256,12 @@ function Description(props){
                         </div>
                     </div>
                     <div className="description_field">
-                        <textarea type="text" placeholder="Введите описание" style={{width: "434px", color: "white", fontSize: "16px", height: "65px"}}>{props.description}</textarea>
+                        <textarea type="text" placeholder="Введите описание" style={{width: "434px", color: "white", fontSize: "16px", height: "65px"}} onChange={(ev) => setDescription(ev.target.value)}>{valueDescription}</textarea>
                     </div>
                     {selectorGenerator()}
                 </div>
                 <div className="full_grey_button">
-                    <input type="submit" value="Подтвердить" onClick={() => infoEditorActive ? setInfoEditorActive(false) : null}/>
+                    <input type="submit" value="Подтвердить" onClick={() => { setInfoEditorActive(false)} }/>
                 </div>
             </div>
         </Login>

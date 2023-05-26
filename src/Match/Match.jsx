@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Match.css"
 import MatchHeader from "./MatchHeader/MatchHeader";
 import MatchMap from "./MatchMap/MatchMap"
@@ -30,26 +30,34 @@ function Match(props){
         {name: "Косово", flagPath: "img/flags/mini/Kosovo.svg"}
     ]
 
-    const [value, setValue] = useState('Выберите страну'); //"Значение" для селектора страны
+    const [valueCountry, setValueCountry] = useState('Выберите страну'); //"Значение" для селектора страны
 
-    const [selectorActive, setSelectorActive] = useState(false); // Состояния селектора стран
+    const [selectorCountryActive, setSelectorCountryActive] = useState(false); // Состояния селектора стран
 
     const toggleClass = () => { // Функция toggle для селектора стран
-        setSelectorActive(!selectorActive);
+        setSelectorCountryActive(!selectorCountryActive);
     };
     //--------------------------------------------
 
 
     // ___________ Раздел со стримами ____________
-    
-    const stream = { //Пример стрима
-        name: "(название стрима)",
-        viewers: 8948,
-        flagPath: "img/flags/mini/Russia.svg",
-        link: "https://www.twitch.tv/csgo_paragon",
-        country: "Россия"
-    }
+    let [streams, setStreams] = useState([]); // стримы
     const [streamsEditorActive, setStreamsEditorActive] = useState(false); //Состояния модального окна для редактирования, добавления стримов
+    const nameStreamRef = useRef(null);
+    const linkStreamRef = useRef(null);
+    function addStream(countryBuf, nameBuf, linkBuf){ //функция, добавляющая трансляцию в список
+        let streamBuf = {
+            name: nameBuf,
+            viewers: 999,
+            flagPath: countries.find(x => x.name === countryBuf).flagPath,
+            link: linkBuf,
+            country: countryBuf
+        }
+        setStreams([...streams, streamBuf]);
+    }
+    function removeStream(strname){
+        setStreams(streams.filter(stream => !(stream.name.includes(strname))));
+    };
     //_____________________________________________
 
 
@@ -159,7 +167,10 @@ function Match(props){
                     </div>
                     }
                     {/* Видимость стримов */}
-                    {match.MatchStatus == 1 && <Streams {...stream}/>}
+                    {match.MatchStatus == 1 && 
+                        streams.map((stream) =>
+                        <Streams flagPath={stream.flagPath} name={stream.name} country={stream.country} viewers={stream.viewers} link={stream.link}/>)
+                    }
                     
                 </div>
             </div>
@@ -195,21 +206,44 @@ function Match(props){
                     <p>Редактирование трансляций</p>
                 </div>
                 <div className="col_right_gap20">
-                    <div className="inside scroll" style={{paddingLeft: "8px", alignItems: "flex-start"}}>
+                    <div className="inside scroll" style={{paddingLeft: "8px", alignItems: "flex-start", height: selectorCountryActive ? "400px": null, overflow: !selectorCountryActive ? "hidden" : null}}>
                         <div className="text-field">
                             <input className="text-field_input" type="text" name="ip" id="ip" placeholder="Введите IP сервера" />
                         </div>
+                        {streams.map((stream) =>
+                                <div className="row_center_gap3">
+                                    <div className="row_center_7">
+                                        <div className="text-field_third">
+                                            <div className="text-field_third_selector">
+                                                
+                                                <div className="text_field_third_select" >
+                                                    <p className={ "choosed"}>{stream.country}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="text-field_third">
+                                            <input className="text-field_input" type="text" name="ip_name" id="ip_name" placeholder="Название" value={stream.name}/>
+                                        </div>
+                                        <div className="text-field_third">
+                                            <input className="text-field_input" type="text" name="ip_link" id="ip_link" placeholder="Ссылка" value={stream.link}/>
+                                        </div>
+                                    </div>
+                                    <div className="minus" onClick={() => removeStream(stream.name)}></div>
+                                </div>
+                        )}
                         <div className="row_center_gap3">
+                            
                             <div className="row_center_7">
                                 <div className="text-field_third">
                                     <div className="text-field_third_selector">
                                         <div className="text_field_third_select" onClick={() => toggleClass()}>
-                                            <p className={value === "Выберите страну" ? "onStart" : "choosed"}>{value}</p>
-                                            <img src="../img/arrow.svg" id="arrowIcon" className={selectorActive ? 'rotate' : null} alt="arrow"/>
+                                            <p className={valueCountry === "Выберите страну" ? "onStart" : "choosed"}>{valueCountry}</p>
+                                            <img src="../img/arrow.svg" id="arrowIcon" className={selectorCountryActive ? 'rotate' : null} alt="arrow"/>
                                         </div>
-                                        <ul className={ selectorActive ? 'select_list_third' : 'select_list_third hide'}>
+                                        <ul className={ selectorCountryActive ? 'select_list_third' : 'select_list_third hide'}>
                                             {countries.map((country) =>
-                                                <li className='text_field_third_options' onClick={setValue.bind(this, country.name)}>
+                                                <li className='text_field_third_options' onClick={setValueCountry.bind(this, country.name)}>
                                                     <img src={"../" + country.flagPath} alt={country.name}/>
                                                     <p>{country.name}</p>
                                                 </li>
@@ -217,19 +251,20 @@ function Match(props){
                                         </ul>
                                     </div>
                                 </div>
+                                
                                 <div className="text-field_third">
-                                    <input className="text-field_input" type="text" name="ip_name" id="ip_name" placeholder="Название" />
+                                    <input className="text-field_input" type="text" name="ip_name" id="ip_name" placeholder="Название" ref={nameStreamRef}/>
                                 </div>
                                 <div className="text-field_third">
-                                    <input className="text-field_input" type="text" name="ip_link" id="ip_link" placeholder="Ссылка" />
+                                    <input className="text-field_input" type="text" name="ip_link" id="ip_link" placeholder="Ссылка" ref={linkStreamRef}/>
                                 </div>
                             </div>
-                            <div className="minus"></div>
+                            {/* <div className="minus"></div> */}
                         </div>
                     </div>
                     <div className="add_stream">
                         <p>Добавить трансляцию</p>
-                        <img src="../img/Add.svg" alt="Плюс" />
+                        <img src="../img/Add.svg" alt="Плюс" onClick={ () => {setStreamsEditorActive(!streamsEditorActive); addStream(valueCountry, nameStreamRef.current.value, linkStreamRef.current.value)}}/>
                     </div>
                 </div>
             </Login>
