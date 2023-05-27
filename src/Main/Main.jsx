@@ -6,6 +6,7 @@ import Top from '../Top/Top'
 import Player from '../Player/Player'
 import Event from '../Event/Event'
 import Team from '../Team/Team'
+import NotFoundPage from '../components/NotFoundPage/NotFoundPage'
 
 import TeamResults from '../Team/TeamResults'
 import Match from '../Match/Match'
@@ -31,6 +32,7 @@ const Main = () => (
             <Route path="/team_events/:id" element={<TeamEvents/>} />
             <Route path="/player_results/:id" element={<PlayerResults/>} />
             <Route path="/player_events/:id" element={<PlayerEvents/>} />
+            <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </main>
 );

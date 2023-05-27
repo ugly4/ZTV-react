@@ -9,6 +9,9 @@ function Notification({props}){
     useEffect(() => {
         setList(toastList);
     }, [toastList, list]);
+    useEffect(() => {
+        if (toastList.length > 5) deleteToast();
+    }, [toastList, list]);
     const deleteToast = () => {
         list.splice(0, 1);
         toastList.splice(0, 1);

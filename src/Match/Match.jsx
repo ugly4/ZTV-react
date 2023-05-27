@@ -39,6 +39,10 @@ function Match(props){
     };
     //--------------------------------------------
 
+    // __________ IP матча (админ) _____________
+    let [ipValue, setIpValue] = useState("");
+    const [ipMatch, setActiveIpMatch] = useState(false); //Состояние видимости IP адреса
+    /////////////////////////////////////////////
 
     // ___________ Раздел со стримами ____________
     let [streams, setStreams] = useState([]); // стримы
@@ -119,7 +123,7 @@ function Match(props){
     const [isStart, setIsStart] = useState(true);
     //___________________________________________
     
-    const [ipMatch, setActiveIpMatch] = useState(false); //Состояние видимости IP адреса
+    
 
     return(
         <div>
@@ -154,7 +158,7 @@ function Match(props){
                     <div className="ip_match">
                         {!ipMatch ? 
                         <p className="ip_hidden">IP скрыт</p> : 
-                        <p className="ip_open" style={{color: "white", fontFamily: "var(--text-medium-lcg)"}}>321313131</p> 
+                        <p className="ip_open" style={{color: "white", fontFamily: "var(--text-medium-lcg)"}}>{ipValue}</p> 
                         }
                         <div className="ip_block_images">
                             <img src="../img/Eye.svg" style={{cursor: "pointer"}} onClick={() => ipMatch ? setActiveIpMatch(!ipMatch) : setActiveIpMatch(true)}></img>
@@ -208,7 +212,7 @@ function Match(props){
                 <div className="col_right_gap20">
                     <div className="inside scroll" style={{paddingLeft: "8px", alignItems: "flex-start", height: selectorCountryActive ? "400px": null, overflow: !selectorCountryActive ? "hidden" : null}}>
                         <div className="text-field">
-                            <input className="text-field_input" type="text" name="ip" id="ip" placeholder="Введите IP сервера" />
+                            <input className="text-field_input" type="text" name="ip" id="ip" placeholder="Введите IP сервера" value={ipValue} onChange={(ev) => setIpValue(ev.target.value)}/>
                         </div>
                         {streams.map((stream) =>
                                 <div className="row_center_gap3">

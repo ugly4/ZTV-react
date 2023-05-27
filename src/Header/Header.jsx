@@ -1,6 +1,7 @@
 import {Link, NavLink} from 'react-router-dom';
 import { useRef, useState } from 'react';
 import Login from '../Login/Login'
+import Notification from '../components/Notification/Notification';
 import { request, setAuthToken, getAuthToken, setStoredPlayerNick,  getStoredPlayerNick } from '../components/MyAxios/MyAxios';
 import './Header.css';
 import axios from 'axios';
@@ -27,6 +28,16 @@ const Header = () => {
     //     {name: "Косово", flagPath: "../img/flags/mini/Kosovo.svg"}
     // ]
 
+    //_____ Фрагменты, отвечающие за отображение ошибок_________
+    const [errorList, setErrorList] = useState([]); //список появляющихся ошибок
+    function showError(desc){ //"вывести ошибку"
+        let toastProperties = {
+            description: desc,
+            border: "1px solid #FF1E1E"
+        };
+        setErrorList([...errorList, toastProperties]);
+    }
+    ///////////////////////////////////////////////////////////
 
     const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
     const [playerNick, setPlayerNick] = useState((getStoredPlayerNick() !== null && getStoredPlayerNick() !== "null" && getStoredPlayerNick() !== "undefined") ? getStoredPlayerNick() : "");
@@ -176,8 +187,9 @@ const Header = () => {
                         </a>
                     </div>
                     </div>
-                
+                    
             </Login>
+            <Notification props={errorList}></Notification>
             {/* Окно регистрации */}
             <Login active={signupActive} setActive={setSignupActive} >
                 <div className="header_splash_window" onClick={() => selectorActive ? toggleClass() : null}>
