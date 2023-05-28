@@ -37,7 +37,6 @@ const Header = () => {
         };
         setErrorList([...errorList, toastProperties]);
     }
-    ///////////////////////////////////////////////////////////
 
     //_____Вывод уведомлений______
     function notificationEmpty(){ //"вывести ошибку"
@@ -53,8 +52,7 @@ const Header = () => {
     
     ////////////////////////////
 
-    //const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
-    const [isAuthorized, setIsAuthorized] = useState(true);
+    const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
     const [playerNick, setPlayerNick] = useState((getStoredPlayerNick() !== null && getStoredPlayerNick() !== "null" && getStoredPlayerNick() !== "undefined") ? getStoredPlayerNick() : "");
 
     const nameRef = useRef(null);

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Login from "../../Login/Login";
 
 function Player(props){
+    const player = props.player;
     const [mouseOutCard, setMouseOutCard] = useState(true); //Для ховера игрока
     const [mouseOnCard, setMouseOnCard] = useState(false); //Для ховера игрока
     const isCap = true;
@@ -12,22 +13,22 @@ function Player(props){
             mouseOutCard ? 
                 <div>
                     <div className="players_team">
-                        <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
+                        <div className="crop_team"><img src={"../../" + player.photo} alt={player.nick}/></div>
                     </div>
                     <div className="nick_team">
-                        <img src={"../../" + props.flagPath} alt={props.country}/>
-                        <p>{props.nick}</p>
+                        <img src={"../../" + player.flagPath} alt={player.country}/>
+                        <p>{player.nick}</p>
                     </div>
                 </div>
             : 
                 <div className="img_hover_wrapper_in_team" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onClick={() => setkickActive(true)}>
                     <div style={{opacity: "0.4"}}>
                         <div className="players_team">
-                            <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
+                            <div className="crop_team"><img src={"../../" + player.photo} alt={player.nick}/></div>
                         </div>
                         <div className="nick_team">
-                            <img src={"../../" + props.flagPath} alt={props.country}/>
-                            <p>{props.nick}</p>
+                            <img src={"../../" + player.flagPath} alt={player.country}/>
+                            <p>{player.nick}</p>
                         </div>
                     </div>
                     <img className="kick_hover" src="../../img/KickHovered.svg" alt="Удаление игрока"/>
@@ -41,17 +42,21 @@ function Player(props){
     const handleClick = () => {
       setkickActive(!kickActive);
     };
+    function removePlayer(rmvPlayer){
+        props.updatePlayers(props.players.filter(player => !(player.nick.includes(rmvPlayer.nick))));
+        props.updateExPlayers([...props.ex_players, rmvPlayer]);
+    }
 
     return(
         <div className="team_player_card_wrapper" onMouseOut={() => {setMouseOutCard(true); setMouseOnCard(false)}} onMouseOver={() => {setMouseOutCard(false); setMouseOnCard(true)}}>
             {isCap ? toggleOnMouseOver() :
             <div>
                 <div className="players_team">
-                    <div className="crop_team"><img src={"../../" + props.photo} alt={props.nick}/></div>
+                    <div className="crop_team"><img src={"../../" + player.photo} alt={player.nick}/></div>
                 </div>
                 <div className="nick_team">
-                    <img src={"../../" + props.flagPath} alt={props.country}/>
-                    <p>{props.nick}</p>
+                    <img src={"../../" + player.flagPath} alt={player.country}/>
+                    <p>{player.nick}</p>
                 </div>
             </div>
             }
@@ -68,7 +73,7 @@ function Player(props){
                     <input type="submit" value="Нет" onClick={() => kickActive ? setkickActive(!kickActive) : null}/>
                 </div>
                 <div className="small_grey_button">
-                    <input type="submit" value="Да" onClick={() => kickActive ? setkickActive(!kickActive) : null}/>
+                    <input type="submit" value="Да" onClick={() => {removePlayer(player); setkickActive(false)}}/>
                 </div>
             </div>
           

@@ -51,6 +51,7 @@ function Team() {
         topPosition: 1
     }
 
+    //________________________________________________________
     const players = [
       {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
       {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
@@ -58,7 +59,8 @@ function Team() {
       {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
       {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
     ]
-
+    let [teamPlayers, updateTeamPlayers] = useState(players);
+    //--------------------------------------------------------
     const ex_players = [
       {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
       {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
@@ -76,6 +78,7 @@ function Team() {
       {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
       {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
     ]
+    let [ex_teamPlayers,updateEx_teamPlayers] = useState(ex_players);
 
     const matches_upcoming = [
       {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
@@ -157,12 +160,18 @@ function Team() {
         <div >
           <div>
             <div className="team_rectangle">
-              {players.map((player) => 
+              {teamPlayers.map((player) => 
                 !isCapAdmin ?
                 <Link to={"/player/" + player.nick} style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
                     <Player {...player}/>
                 </Link> :
-                <Player {...player}/>
+                <Player 
+                player={player}
+                players={teamPlayers}
+                updatePlayers={updateTeamPlayers}
+                ex_players={ex_teamPlayers}
+                updateExPlayers={updateEx_teamPlayers}
+                />
                 
                 )}
             </div>
@@ -180,14 +189,14 @@ function Team() {
         <TeamTabs
         isCapAdmin={isCapAdmin}
         description={description}
-        players={players} 
+        players={teamPlayers} 
         matches_upcoming={matches_upcoming} 
         matches_ended={matches_ended}
         ongoing_events={ongoing_events}
         ended_events={ended_events}
         lan_events={lan_events}
         online_events={online_events}
-        ex_players={ex_players}
+        ex_players={ex_teamPlayers}
         team={params.id}
         />
 
