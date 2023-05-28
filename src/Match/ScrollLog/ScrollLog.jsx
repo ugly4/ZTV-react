@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ScrollLog.css"
 import Log from "./Log/Log";
 
@@ -46,9 +46,31 @@ function ScrollLog({props, map}){
     function thingsImg(thing){
         return "/img/scrollLog/accessories/"+thing+".svg";        
     }
+
+    //__ Динамическое отображение логов ______
+
+    let [logs, updateLogs] = useState([]);
+    function addLog(log){
+        
+        updateLogs([...logs, parseLog(log)]);
+    }
+    function parseLog(log){
+        if (log.type == "login") 
+        return (
+            <Log type={log.type}>
+                <div className="event_text" style={{color: colorNick(log.player)}}>{log.player}</div><p>зашёл на сервер</p>  
+            </Log>
+        );
+    }
+    //////////////////////////////////////////
     return( 
         <div className="scroll_logs" style={{backgroundImage: "url(../img/maps/scoreboard/"+ map.mapName +".png)"}}>
             <div className="logs_container">
+                {logs.map((log) => 
+                    <Log type={log.type}>
+                        {}
+                    </Log>
+                )}
                 <Log type={"login"}>
                     <div className="event_text" style={{color: colorNick(tamada)}}>{tamada.nick}</div><p>зашёл на сервер</p>
                 </Log>

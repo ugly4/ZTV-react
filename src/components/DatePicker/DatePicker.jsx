@@ -98,6 +98,7 @@ function DatePicker(props) {
             <div className="picker_header">
                 <button onClick={prevYear} disabled={minDate ? minDate > getTimeFromState(curYear - 1, 31) : null}>
                     <img src="../img/leftArrow.svg" alt="prev year"/>
+                    <img src="../img/leftArrow.svg" alt="prev year"/>
                 </button>
                 <button onClick={prevMonth} disabled={minDate ? minDate > getTimeFromState(curYear, 1) : null}>
                     <img src="../img/leftArrow.svg" alt="prev month"/>
@@ -108,6 +109,7 @@ function DatePicker(props) {
                     <img src="../img/rightArrow.svg" alt="next month"/>
                 </button>
                 <button onClick={nextYear} disabled={maxDate ? maxDate < getTimeFromState(curYear + 1, 1) : null}>
+                    <img src="../img/rightArrow.svg" alt="next year"/>
                     <img src="../img/rightArrow.svg" alt="next year"/>
                 </button>
             </div>

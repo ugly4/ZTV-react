@@ -141,3 +141,30 @@
     color: white;
     text-decoration: none;
 }
+
+.Profile{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.exit_icon svg{
+    fill: rgb(74,77,74);
+    color: rgb(74,77,74);
+    transition: fill 0.3s 0s ease-in-out;
+}
+.exit_icon:hover svg {
+    fill: #00ff90;
+    cursor: pointer;
+}
+.notification_icon svg{
+    fill: rgb(74,77,74);
+    color: rgb(74,77,74);
+    transition: fill 0.3s 0s ease-in-out;
+}
+.notification_icon:hover svg {
+    fill: white;
+    cursor: pointer;
+    
+}
