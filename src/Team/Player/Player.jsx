@@ -42,9 +42,18 @@ function Player(props){
     const handleClick = () => {
       setkickActive(!kickActive);
     };
-    function removePlayer(rmvPlayer){
-        props.updatePlayers(props.players.filter(player => !(player.nick.includes(rmvPlayer.nick))));
-        props.updateExPlayers([...props.ex_players, rmvPlayer]);
+
+    function removePlayer(rmvPlayer){ //функция кика игрока
+        props.updatePlayers(props.players.filter(player => !(player.nick.includes(rmvPlayer.nick)))); //удаляем игрока из массива команды
+        // let updatedList = props.players.map(player => 
+        //     {
+        //       if (player.nick == rmvPlayer.nick){
+        //         return {...player, nick:"", photo:"", flagPath: "", country: ""}; //gets everything that was already in item, and updates "done"
+        //       }
+        //       return player; // else return unmodified item 
+        //     });
+        // props.updatePlayers(updatedList);
+        props.updateExPlayers([...props.ex_players, rmvPlayer]); //добавляем игрока в "бывшие"
     }
 
     return(

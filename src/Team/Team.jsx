@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import TeamTabs from "../components/Tabs/TeamTabs/TeamTabs";
 import Trophies from "../components/Trophies/Trophies";
@@ -8,6 +8,7 @@ import "./Team.css"
 import InfoContainer from "./InfoContainer/InfoContainer";
 import Login from "../Login/Login";
 import { useState } from "react";
+import EmptyPlayer from "./EmptyPlayer/EmptyPlayer";
 
 function Team() {
 
@@ -42,6 +43,7 @@ function Team() {
         ]
     }
 
+    //Данные команды
     const team = {
         logo: "img/teams_logo/NoLogo.svg",
         flagPath: "img/flags/mini/Russia.svg",
@@ -51,7 +53,8 @@ function Team() {
         topPosition: 1
     }
 
-    //________________________________________________________
+    //________ Вывод команды _______________________
+    // База данных игроков команды
     const players = [
       {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
       {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
@@ -59,8 +62,20 @@ function Team() {
       {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
       {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
     ]
-    let [teamPlayers, updateTeamPlayers] = useState(players);
+    let [teamPlayers, updateTeamPlayers] = useState(players); //Пихаем игроков в state, чтобы обновлялись
+    //----------- Вывод пустых игроков -------------------------
+
+    let [emptyPlayers, updateEmptyPlayers] = useState([]); // Обновляемый список "пустых" игроков
+
+    useEffect(() => { //всегда отслеживаем количество "пустых игроков"
+      let newList = [];
+      for (let i = teamPlayers.length; i < 5; ++i)
+        newList.push(1);
+      updateEmptyPlayers(newList);
+    });
+    
     //--------------------------------------------------------
+    // База данных бывших игроков
     const ex_players = [
       {nick: "Tamada", photo: "img/players/Tamada.png", flagPath: "img/flags/mini/Spain.svg", country: "Испания"},
       {nick: "_SD_", photo: "img/players/_SD_.png", flagPath: "img/flags/mini/IsleOfMan.svg", country: "Остров Мэн"},
@@ -78,7 +93,8 @@ function Team() {
       {nick: "rusttle", photo: "img/players/rusttle.png", flagPath: "img/flags/mini/Belize.svg", country: "Белиз"},
       {nick: "ugly4", photo: "img/players/ugly4.png", flagPath: "img/flags/mini/Russia.svg", country: "Россия"}
     ]
-    let [ex_teamPlayers,updateEx_teamPlayers] = useState(ex_players);
+    let [ex_teamPlayers,updateEx_teamPlayers] = useState(ex_players);//Пихаем бывших игроков в state, чтобы обновлялись
+  ///////////////////////////////////////////////////////
 
     const matches_upcoming = [
       {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
@@ -148,6 +164,7 @@ function Team() {
 
     const type = "admin";
     const isCapAdmin = type === "admin" ? true : type === "captain" ? true : false;
+    const isCap = true;
     const [leaveWindowActive, setLeaveWindowActive] = useState(false);
     const handleClick = () => {
       setLeaveWindowActive(!leaveWindowActive);
@@ -160,6 +177,7 @@ function Team() {
         <div >
           <div>
             <div className="team_rectangle">
+              {/* Выводим игроков */}
               {teamPlayers.map((player) => 
                 !isCapAdmin ?
                 <Link to={"/player/" + player.nick} style={{textDecoration: "none"}} target="_blank" rel="noopener noreferrer" >
@@ -172,8 +190,11 @@ function Team() {
                 ex_players={ex_teamPlayers}
                 updateExPlayers={updateEx_teamPlayers}
                 />
-                
-                )}
+              )}
+              {/* Выводим "пустых" игроков */}
+              {emptyPlayers.map(() =>
+                <EmptyPlayer/>
+              )}
             </div>
 
             <div className="devider_line"></div>
