@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import FlagName from "../components/FlagName/FlagName";
 import Trophies from "../components/Trophies/Trophies";
@@ -8,6 +8,7 @@ import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
 import DateSelector from "../components/MatchHelper/DateSelector";
+import Team from "../Team/Team";
 import { fillSpaces } from "../components/Helper/Helper";
 import "./Player.css"
 import "../../src/Team/Team.css"
@@ -18,7 +19,6 @@ function Player(){
     //всё это как-то из БД должно тянуться, может через пропсы
     
     const params = useParams();
-
     const social = {
         items : [
             {id: 1, src: "img/social/VK.svg", alt: "VK", active: true, color: "white", link: "https://vk.com/tarnada", displayed: "Кирилл Симовин"}, 
@@ -275,6 +275,9 @@ function Player(){
     }
     //--------------------------------------------------------------------
     
+    const teamName = useRef("");
+    const teamTag = useRef("");
+
     return(
     <div>
         <div className="user_back">
@@ -498,10 +501,10 @@ function Player(){
                  
                 <div className="col_center_gap10">
                     <div className="text-field">
-                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Название. Максимум 15 символов" />
+                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Название. Максимум 15 символов" ref={teamName}/>
                     </div>
                     <div className="text-field">
-                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Тег. Максимум 8 символов" />
+                        <input className="text-field_input" style={{width: "430px"}} type="text" name="login" id="login" placeholder="Тег. Максимум 8 символов" ref={teamTag} />
                     </div>
                     <div className="row_center_6">
                         <div className="text-field_half">
@@ -546,7 +549,16 @@ function Player(){
                         <input type="submit" value="Отмена" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
                     </div>
                     <div className="small_grey_button"  style={{width: "122px", height: "48px"}}>
-                        <input type="submit" value="Создать" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
+                        
+                        <Link to={"/team/" + teamName.current.value + "/description"} 
+                                state={{
+                                    name: teamName.current.value,
+                                    city: citySelected,
+                                    country: countrySelected
+                                    }}>
+                            <input type="submit" value="Создать" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
+                        </Link>
+                        
                     </div>
                 </div>
             </div>

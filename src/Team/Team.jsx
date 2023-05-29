@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import TeamTabs from "../components/Tabs/TeamTabs/TeamTabs";
 import Trophies from "../components/Trophies/Trophies";
 import { Link } from "react-router-dom";
@@ -10,10 +10,12 @@ import Login from "../Login/Login";
 import { useState } from "react";
 import EmptyPlayer from "./EmptyPlayer/EmptyPlayer";
 
-function Team() {
+function Team(props) {
 
   const params = useParams();
-
+  let location = useLocation();
+  console.log("params Team", params);
+  console.log("location", location);
     const trophies = {
       trophies : [
             {id: 1, src: "img/trophies/cup1.svg", alt: "cup1"},
@@ -42,14 +44,15 @@ function Team() {
             {id: 24, src: "img/trophies/cup3.svg", alt: "cup3"}
         ]
     }
-
+    let data = location.state;
+    console.log(data);
     //Данные команды
     const team = {
         logo: "img/teams_logo/NoLogo.svg",
         flagPath: "img/flags/mini/Russia.svg",
         country: "Россия",
-        city: "Пугачёв",
-        name: "Amfier",
+        city: "Самара",
+        name: "AbuDabi",
         topPosition: 1
     }
 
@@ -73,7 +76,8 @@ function Team() {
         newList.push(1);
       updateEmptyPlayers(newList);
     });
-    
+    ///// Состояние моадльного окна приглашения игрока
+    const [windowAddPlayerActive, setWindowAddPlayerActive] = useState(false);
     //--------------------------------------------------------
     // База данных бывших игроков
     const ex_players = [
@@ -193,7 +197,7 @@ function Team() {
               )}
               {/* Выводим "пустых" игроков */}
               {emptyPlayers.map(() =>
-                <EmptyPlayer/>
+                <EmptyPlayer setWindowAddPlayerActive={setWindowAddPlayerActive}/>
               )}
             </div>
 
@@ -220,12 +224,12 @@ function Team() {
         ex_players={ex_teamPlayers}
         team={params.id}
         />
-
+        {/* Видимость кнопки "покинуть команду" */}
         {isCapAdmin && 
         <div className="leave_team" onClick={() => setLeaveWindowActive(true)}>
           <p>Покинуть команду</p>
         </div>}
-        
+        {/* Окно покинуть команду */}
         <Login active={leaveWindowActive} setActive={setLeaveWindowActive}>
           <div className="header_splash_window">
             <div className="logo_splash_window"></div>
@@ -243,6 +247,23 @@ function Team() {
             </div>
           
         </Login>
+
+        <Login active={windowAddPlayerActive} setActive={setWindowAddPlayerActive}>
+                <div className="header_splash_window">
+                    <div className="logo_splash_window"></div>
+                </div>
+                <div className="info_text">
+                    <p>Укажите никнейм игрока, которого хотите пригласить в команду</p>
+                </div>
+                <div className="col_center_gap30">
+                    <div className="description_field">
+                        <textarea type="text" placeholder="Введите ник" style={{color: "white", height: "15px"}}></textarea>
+                    </div>
+                    <div className="full_grey_button">
+                        <input type="submit" value="Пригласить" onClick={() => setWindowAddPlayerActive(false)}/>
+                    </div>
+                </div>
+            </Login>
     </div>
     )
     
