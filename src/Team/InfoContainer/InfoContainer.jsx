@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import "./InfoContainer.css"
 import Login from "../../Login/Login";
 import Editor from "../../components/Editor/Editor";
+import Notification from "../../components/Notification/Notification";
 
 function InfoContainer(props){
 
@@ -50,6 +51,36 @@ const getElemByCountry = (country) => { // Функция, возвращающ�
   }
 }
 //--------------------------------------------------------------------
+
+//-------------------------------------------------------------------
+    //_____ Фрагменты, отвечающие за отображение ошибок_________
+    const [errorList, setErrorList] = useState([]); //список появляющихся ошибок
+    function showError(desc){ //"вывести ошибку"
+        let toastProperties = {
+            description: desc,
+            border: "1px solid #FF1E1E"
+        };
+        setErrorList([...errorList, toastProperties]);
+    }
+
+    //Провекра "изменения локации"
+    function checkLocation(){
+      if (countrySelected == "Укажите страну")
+        setEditorActive(!editorActive);
+      else {
+        if (citySelected == "Укажите город")
+          showError("Вы не указали город");
+        else {
+          setTeamCity(citySelected); 
+          setTeamCountry(countrySelected); 
+          setTeamFlagPath(findFlag(countrySelected));
+          setEditorActive(!editorActive);
+        }
+      }
+      
+    }
+/////////////////////////////////////////////////////////////////////
+
 const [editorActive, setEditorActive] = useState(false);
 
   const ImageToggleOnMouseOver = ({primaryImg, secondaryImg, alt}) => {
@@ -115,6 +146,7 @@ const [editorActive, setEditorActive] = useState(false);
               </div>
             </div>
 
+            <Notification props={errorList}></Notification>
             <Login active={editorActive} setActive={setEditorActive}>
             <div className="header_splash_window">
                 <div className="logo_splash_window"></div>
@@ -165,7 +197,7 @@ const [editorActive, setEditorActive] = useState(false);
                     </div>
                 </div>
                 <div className="full_grey_button">
-                    <input type="submit" value="Сохранить" onClick={() => {setTeamCity(citySelected); setTeamCountry(countrySelected); setTeamFlagPath(findFlag(countrySelected)); setEditorActive(false)}}/>
+                    <input type="submit" value="Сохранить" onClick={() => checkLocation()}/>
                 </div>
               </div>
             </Login>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import TeamTabs from "../components/Tabs/TeamTabs/TeamTabs";
 import Trophies from "../components/Trophies/Trophies";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Player from "./Player/Player"
 import "./Team.css"
 import InfoContainer from "./InfoContainer/InfoContainer";
+import Notification from "../components/Notification/Notification";
 import Login from "../Login/Login";
 import { useState } from "react";
 import EmptyPlayer from "./EmptyPlayer/EmptyPlayer";
@@ -99,6 +100,26 @@ function Team(props) {
     ]
     let [ex_teamPlayers,updateEx_teamPlayers] = useState(ex_players);//Пихаем бывших игроков в state, чтобы обновлялись
   ///////////////////////////////////////////////////////
+
+  //_____ Фрагменты, отвечающие за отображение ошибок_________
+  const [errorList, setErrorList] = useState([]); //список появляющихся ошибок
+  function showError(desc){ //"вывести ошибку"
+      let toastProperties = {
+          description: desc,
+          border: "1px solid #FF1E1E"
+      };
+      setErrorList([...errorList, toastProperties]);
+  }
+  //--- Проверка -------
+  const nickAddedPlayerRef = useRef(null);
+  function checkAddPlayer(){
+    if (nickAddedPlayerRef.current.value == "") showError("Вы не ввели ник")
+    else {
+      showError(nickAddedPlayerRef.current.value);
+      setWindowAddPlayerActive(false);
+    }
+  }
+  ///////////////////////////////////////////////////////////
 
     const matches_upcoming = [
       {event: "Zasada Gamer League 2023", type: "upcoming", place: "", matches: [
@@ -229,6 +250,7 @@ function Team(props) {
         <div className="leave_team" onClick={() => setLeaveWindowActive(true)}>
           <p>Покинуть команду</p>
         </div>}
+        <Notification props={errorList}></Notification>
         {/* Окно покинуть команду */}
         <Login active={leaveWindowActive} setActive={setLeaveWindowActive}>
           <div className="header_splash_window">
@@ -247,7 +269,7 @@ function Team(props) {
             </div>
           
         </Login>
-
+        {/* Модальное окно "Пригласить игрока" */}
         <Login active={windowAddPlayerActive} setActive={setWindowAddPlayerActive}>
                 <div className="header_splash_window">
                     <div className="logo_splash_window"></div>
@@ -257,10 +279,10 @@ function Team(props) {
                 </div>
                 <div className="col_center_gap30">
                     <div className="description_field">
-                        <textarea type="text" placeholder="Введите ник" style={{color: "white", height: "15px"}}></textarea>
+                        <textarea type="text" placeholder="Введите ник" style={{color: "white", height: "15px"}} ref={nickAddedPlayerRef}></textarea>
                     </div>
                     <div className="full_grey_button">
-                        <input type="submit" value="Пригласить" onClick={() => setWindowAddPlayerActive(false)}/>
+                        <input type="submit" value="Пригласить" onClick={() => checkAddPlayer()}/>
                     </div>
                 </div>
             </Login>

@@ -52,6 +52,9 @@ const Header = () => {
     
     ////////////////////////////
 
+
+    //_____Авторизация/Регистрация ____________-
+
     const [isAuthorized, setIsAuthorized] = useState(getAuthToken() !== null && getAuthToken() !== "null" && getAuthToken() !== "undefined"); //Для проверки на авторизованность
     const [playerNick, setPlayerNick] = useState((getStoredPlayerNick() !== null && getStoredPlayerNick() !== "null" && getStoredPlayerNick() !== "undefined") ? getStoredPlayerNick() : "");
 
@@ -99,6 +102,80 @@ const Header = () => {
         });
         setSignupActive(!signupActive);
     }
+    //---- Проверка ошибок в логине и пароле ------
+
+    //Проверка почты
+    function ValidateEmail(mail) 
+    {
+        if (mail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
+        {
+            return (true)
+        }
+            return (false)
+    }
+
+    //Проверка на некорректные значения в модальном окне авторизациии (Логин)
+    function checkLogin(){
+        if (nickLoginRef.current.value == "" 
+            || nickLoginRef.current.value == null 
+            || nickLoginRef.current.value == undefined)
+                showError("Пустой логин. Введите никнейм пользователя");
+        else {
+            if (passwordRef.current.value == "" 
+            || passwordRef.current.value == null 
+            || passwordRef.current.value == undefined)
+                showError("Введите пароль");
+            else {
+                if (/* Проверка есть ли в бд такой чел*/ false)
+                    showError("Вы ввели неверный логин или пароль");
+                else onLogin();
+            }
+        }
+        
+    }
+    //Проверка на некорректные значения в модальном окне авторизациии (Регистрация)
+    function checkRegistration(){
+        if (nickRef.current.value.length > 15)
+            showError("Слишком большой ник (больше 15 символов)");
+        else if (nickRef.current.value == "" 
+                || nickRef.current.value == null 
+                || nickRef.current.value == undefined)
+                    showError("Введите никнейм пользователя");
+        else if (! /^[\u0400-\u04FFA-Za-z0-9@-_]+$/.test(nickRef.current.value) )
+                    showError("Ник содержит недопустимые символы\n(Из специальных символов разрешены лишь @ - _)");
+        else if (nameRef.current.value == "" 
+                || nameRef.current.value == null 
+                || nameRef.current.value == undefined)
+                    showError("Введите имя пользователя");
+        else if (! /^[\u0400-\u04FF]+$/.test(nameRef.current.value) )
+            showError("Неверно указано имя пользователя. Оно должно содержать только русские буквы");
+        else if (nameRef.current.value.includes(" "))
+                showError("В имени пользователя присутствуют пробелы");
+        else if (surnameRef.current.value == "" 
+                || surnameRef.current.value == null 
+                || surnameRef.current.value == undefined)
+                    showError("Введите фамилию пользователя");
+        else if (nameRef.current.value.includes(" "))
+                    showError("В фамилии пользователя присутствуют пробелы");
+        else if (! /^[\u0400-\u04FF]+$/.test(surnameRef.current.value) )
+                    showError("Неверно указана фамилия пользователя. Она должно содержать только русские буквы");
+        else if (passwordRef.current.value == "" 
+                || passwordRef.current.value == null 
+                || passwordRef.current.value == undefined)
+                    showError("Введите пароль");
+        else if (value == "Выберите страну" 
+                || value == null 
+                || value == undefined)
+                    showError("Вы не выбрали страну");
+        else if (emailRef.current.value == "" 
+                || emailRef.current.value == null 
+                || emailRef.current.value == undefined)
+                    showError("Вы не указали почту");
+        else if (!ValidateEmail(emailRef.current.value))
+                showError("Вы неправильно указали почту");
+        else onRegistration();
+    }
+    ///////////////////////////////////////////////
 
     const initCountries = () =>{
         if(countries.length === 0){
@@ -221,7 +298,7 @@ const Header = () => {
                     </div>
                     <div className ="col_center_gap_20">
                     <div className="full_grey_button">
-                        <input type="submit" id="loginsubmit" value="Войти" onClick={onLogin}/>
+                        <input type="submit" id="loginsubmit" value="Войти" onClick={checkLogin}/>
                     </div>
                     <div className="transparent_grey_border_button text">
                         <a className="close">
@@ -278,7 +355,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="full_grey_button">
-                        <input type="submit" id="loginsubmit" value="Зарегистрироваться" onClick={onRegistration}/>
+                        <input type="submit" id="loginsubmit" value="Зарегистрироваться" onClick={checkRegistration}/>
                     </div>
                 </div>
             </Login>

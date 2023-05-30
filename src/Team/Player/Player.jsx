@@ -3,11 +3,15 @@ import "./Player.css"
 import { useState } from "react";
 import Login from "../../Login/Login";
 
+
 function Player(props){
     const player = props.player;
     const [mouseOutCard, setMouseOutCard] = useState(true); //Для ховера игрока
     const [mouseOnCard, setMouseOnCard] = useState(false); //Для ховера игрока
     const isCap = true;
+
+    
+
     const toggleOnMouseOver = () => {
         return(
             mouseOutCard ? 
@@ -69,7 +73,7 @@ function Player(props){
                 </div>
             </div>
             }
-
+        
         <Login active={kickActive} setActive={setkickActive}>
             <div className="header_splash_window">
                 <div className="logo_splash_window"></div>

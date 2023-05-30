@@ -8,6 +8,7 @@ import PlayerTabs from "../components/Tabs/PlayerTabs/PlayerTabs";
 import Editor from "../components/Editor/Editor";
 import Login from "../Login/Login";
 import DateSelector from "../components/MatchHelper/DateSelector";
+import Notification from "../components/Notification/Notification";
 import Team from "../Team/Team";
 import { fillSpaces } from "../components/Helper/Helper";
 import "./Player.css"
@@ -239,7 +240,53 @@ function Player(){
     }
     
     //-------------------------------------------------------------------
+    //_____ Фрагменты, отвечающие за отображение ошибок_________
+    const [errorList, setErrorList] = useState([]); //список появляющихся ошибок
+    function showError(desc){ //"вывести ошибку"
+        let toastProperties = {
+            description: desc,
+            border: "1px solid #FF1E1E"
+        };
+        setErrorList([...errorList, toastProperties]);
+    }
+    
+    // ---------- Проверки в модальных окнах ----------
+    // Проверка выбора даты рождения
+    function checkBirthday(){
+        setAgeEditorActive(!ageEditorActive);
+        if (dateSelected != "Укажите дату рождения")
+            setAgePlayer(diffDate(dateSelected) + " лет");
+        
+    }
 
+    //Проверки при создании команды
+    function checkTeam(){
+        if (teamName.current.value == ""
+            || teamName.current.value == null
+            || teamName.current.value == undefined)
+                showError("Вы не ввели название команды");
+        else if (teamName.current.value.length > 15 )
+            showError("Недопустимое название команды (больше 15 символов)")
+        else if (teamName.current.value.includes("-"))
+            showError("Недопустимое название команды (содержит тире)")
+        else if (teamTag.current.value == ""
+                || teamTag.current.value == null
+                || teamTag.current.value == undefined)
+                    showError("Вы не ввели тэг команды");
+        else if (teamTag.current.value.length > 8 )
+            showError("Недопустимый тэг команды (больше 8 символов)")
+        else if (teamTag.current.value.includes(" ") )
+            showError("Недопустимый тэг команды (содержит пробелы)")
+        else if (countrySelected == "Выберите страну")
+            showError("Вы не выбрали страну");
+        else if (citySelected == "Выберите город")
+            showError("Вы не выбрали город")
+        else {
+            setMakeTeamActive(false);
+            //код создания команды
+        }
+    }
+    ////////////////////////////
     //----------Всё, что связано с селекторами страны и города-----------
     const countries =[ // Данные стран и городов
         {name: "Россия", flagPath: "img/flags/mini/Russia.svg", cities: ["Пугачёв", "Самара", "Саратов", "Сызрань", "Балаково", "Тольятти"]},
@@ -275,8 +322,8 @@ function Player(){
     }
     //--------------------------------------------------------------------
     
-    const teamName = useRef("");
-    const teamTag = useRef("");
+    const teamName = useRef(null);
+    const teamTag = useRef(null);
 
     return(
     <div>
@@ -375,7 +422,7 @@ function Player(){
         online_events={online_events}
         nick={params.id}
         />
-
+        <Notification props={errorList}></Notification>
         {/* Модальное окно "Редактирование ника" */}
         <Login active={nickEditorActive} setActive={setNickEditorActive}>
             <div className="header_splash_window">
@@ -466,7 +513,7 @@ function Player(){
                     <DateSelector toggleDate={toggleDate} dateSelected={dateSelected} valueDate={valueStartDate} dateSelectorActive={dateSelectorActive} setDate={setDateSelected} minDate={getDate("05.01.1990")} maxDate={new Date()}/>
                 </div>
                 <div className="full_grey_button" >
-                    <input type="submit" value="Подвердить" onClick={() => ageEditorActive ? (setAgeEditorActive(!ageEditorActive), setAgePlayer(diffDate(dateSelected) + " лет")) : null} />
+                    <input type="submit" value="Подвердить" onClick={() => checkBirthday()} />
                 </div>
             </div>
         </Login>
@@ -489,7 +536,7 @@ function Player(){
             </div>
         </Login>
 
-        {/* Модально окно "Создание команды" */}
+        {/* Модальное окно "Создание команды" */}
         <Login active={makeTeamActive} setActive={setMakeTeamActive}>
             <div className="header_splash_window">
                 <div className="logo_splash_window"></div>
@@ -550,14 +597,14 @@ function Player(){
                     </div>
                     <div className="small_grey_button"  style={{width: "122px", height: "48px"}}>
                         
-                        <Link to={"/team/" + teamName.current.value + "/description"} 
+                        {/* <Link to={"/team/" + teamName.current.value + "/description"} 
                                 state={{
                                     name: teamName.current.value,
                                     city: citySelected,
                                     country: countrySelected
-                                    }}>
-                            <input type="submit" value="Создать" style={{width: "122px", height: "48px"}} onClick={() => makeTeamActive ? setMakeTeamActive(!makeTeamActive) : null}/>
-                        </Link>
+                                    }}> */}
+                            <input type="submit" value="Создать" style={{width: "122px", height: "48px"}} onClick={() => checkTeam()}/>
+                        {/* </Link> */}
                         
                     </div>
                 </div>

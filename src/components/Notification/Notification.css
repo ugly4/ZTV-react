@@ -1,6 +1,8 @@
 .notification-container{
     box-sizing: border-box;
     position: fixed;
+    margin-top: 84px;
+    z-index: 2;
     
 }
 .notification-toast{
@@ -10,7 +12,7 @@
     width: 246px;
     height: 28px;
     background: #191919;
-    margin-top: 84px;
+    
     margin-bottom: 5px;
     text-align: center;
     align-items: center;
